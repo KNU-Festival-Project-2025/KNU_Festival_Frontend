@@ -59,7 +59,7 @@ const BoothRecommend: React.FC = () => {
         </p>
 
         {/* 안내 문구 */}
-       <p className="mt-[5px] ml-[44px] text-[#3B3B3B] font-hssantokki text-[28.636px] font-normal leading-[31.5px]">
+        <p className="mt-[5px] ml-[44px] text-[#3B3B3B] font-hssantokki text-[28.636px] font-normal leading-[31.5px]">
           {stepTexts[step].map((line, i) => (
             <React.Fragment key={i}>
               {line}
@@ -69,18 +69,18 @@ const BoothRecommend: React.FC = () => {
         </p>
 
         {/* 선택지 버튼 */}
-       <div className="mt-[76px] flex flex-col items-center gap-4">
-        {stepChoices[step].map((choice) => (
-          <button
-            key={choice.id}
-            onClick={() => handleSelect(choice.id)}
-            className="flex justify-center items-center w-[353px] h-[65px] text-[#285100] rounded-[40px] border border-[#285100] bg-[rgba(255,255,255,0.80)] py-2 px-3 font-medium hover:bg-green-200 transition"
+        <div className="mt-[76px] flex flex-col items-center gap-4">
+          {stepChoices[step].map((choice) => (
+            <button
+              key={choice.id}
+              onClick={() => handleSelect(choice.id)}
+              className="flex justify-center items-center w-[353px] h-[65px] text-[#285100] rounded-[40px] border border-[#285100] bg-[rgba(255,255,255,0.80)] py-2 px-3 font-medium hover:bg-green-200 transition"
 
-          >
-            {choice.label}
-          </button>
-        ))}
-      </div>
+            >
+              {choice.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

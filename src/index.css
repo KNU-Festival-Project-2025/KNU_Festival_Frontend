@@ -22,35 +22,35 @@
 
 @font-face {
   font-family: "mbc1961";
-  src: url("./assets/fonts/mbc1961.ttf") format("truetype");
+  src: url("/assets/fonts/mbc1961.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "HS산토끼체";
-  src: url("./assets/fonts/HS-Santokki.ttf") format("truetype");
+  src: url("/assets/fonts/HS-Santokki.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Ownglyph-PDH";
-  src: url("./assets/fonts/Ownglyph-PDH.ttf") format("truetype");
+  src: url("/assets/fonts/Ownglyph-PDH.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "HS-Santokki";
-  src: url("./assets/fonts/HS-Santokki.ttf") format("truetype");
+  src: url("/assets/fonts/HS-Santokki.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "school";
-  src: url("./assets/fonts/HakgyoansimJeomsimsiganB.ttf") format("truetype");
+  src: url("/assets/fonts/HakgyoansimJeomsimsiganB.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

@@ -1,95 +1,86 @@
 import React, { useRef, useState, useEffect } from "react";
 import { HomeCard2 } from "../components/home/HomeCard2";
+import { HomeCard3 } from "../components/home/HomeCard3";
 import { RefButton } from "../components/home/RefButton";
 import { useNavigate } from "react-router-dom";
 
 // 타임테이블 데이터 (Timetable.tsx와 동일)
-const scheduleData = {
-  1: [ // 9월 22일 (월) - 1일차
-    { time: "13:00 ~ 17:00", title: "무대 및 부스 설치", description: "축제 준비 작업" },
-    { time: "17:00 ~", title: "무대 및 부스 설치", description: "축제 준비 작업 (계속)" },
-    { time: "18:00 ~ 20:30", title: "전야제", description: "축제 전야 행사" }
-  ],
-  2: [ // 9월 23일 (화) - 2일차
-    { time: "13:00 ~ 17:00", title: "리허설", description: "공연 리허설" },
-    { time: "17:00 ~", title: "재학생존 입장", description: "학생 전용 구역 입장" },
-    { time: "18:00 ~ 18:30", title: "티저 영상 상영, 개막 선언 및 초청 축하 공연", description: "축제 개막식" },
-    { time: "18:30 ~ 20:30", title: "재학생 무대 공연(KNU Artist)", description: "밴드제 7팀" },
-    { time: "21:00 ~ 21:30", title: "초청 인사 소개 및 말씀", description: "초청 인사 인사말" },
-    { time: "21:30 ~ 22:00", title: "초청 아티스트 공연", description: "초청 아티스트 1팀" }
-  ],
-  3: [ // 9월 24일 (수) - 3일차
-    { time: "13:00 ~ 17:00", title: "리허설", description: "공연 리허설" },
-    { time: "17:00 ~", title: "재학생존 입장", description: "학생 전용 구역 입장" },
-    { time: "18:00 ~ 18:30", title: "보이는 라디오", description: "특별 라디오 프로그램" },
-    { time: "18:30 ~ 20:30", title: "재학생 무대 공연(KNU Artist)", description: "댄스제 3팀" },
-    { time: "21:00 ~ 21:30", title: "초청 아티스트 공연", description: "초청 아티스트 3팀" }
-  ],
-  4: [ // 9월 25일 (목) - 4일차
-    { time: "13:00 ~ 17:00", title: "리허설", description: "공연 리허설" },
-    { time: "17:00 ~", title: "재학생존 입장", description: "학생 전용 구역 입장" },
-    { time: "18:00 ~ 19:30", title: "재학생 무대 공연(KNU Artist)", description: "가요제 8팀" },
-    { time: "19:30 ~ 20:30", title: "총장님 프로그램", description: "총장님 특별 프로그램" },
-    { time: "20:30 ~ 21:00", title: "폐막식", description: "축제 폐막식" },
-    { time: "21:00 ~ 21:30", title: "초청 아티스트 공연", description: "초청 아티스트 2팀" },
-    { time: "22:00 ~ 23:00", title: "축제 스케치 사진 상영회", description: "축제 추억 사진 상영" }
-  ]
-};
+// 날짜 기반 스케줄 데이터
+const scheduleData = [
+  {
+    date: "2025-09-22",
+    events: [
+      { time: "13:00 ~ 17:00", title: "무대 및 부스 설치" },
+      { time: "17:00 ~", title: "무대 및 부스 설치 (계속)" },
+      { time: "18:00 ~ 20:30", title: "전야제" },
+    ],
+  },
+  {
+    date: "2025-09-23",
+    events: [
+      { time: "13:00 ~ 17:00", title: "리허설" },
+      { time: "17:00 ~", title: "재학생존 입장" },
+      { time: "18:00 ~ 18:30", title: "개막식" },
+      { time: "18:30 ~ 20:30", title: "재학생 무대 공연(KNU Artist)" },
+      { time: "21:00 ~ 21:30", title: "초청 인사 소개 및 말씀" },
+      { time: "21:30 ~ 22:00", title: "초청 아티스트 공연" },
+    ],
+  },
+  {
+    date: "2025-09-24",
+    events: [
+      { time: "13:00 ~ 17:00", title: "리허설" },
+      { time: "17:00 ~", title: "재학생존 입장" },
+      { time: "18:00 ~ 18:30", title: "보이는 라디오" },
+      { time: "18:30 ~ 20:30", title: "재학생 무대 공연(KNU Artist)" },
+      { time: "21:00 ~ 21:30", title: "초청 아티스트 공연" },
+    ],
+  },
+  {
+    date: "2025-09-25",
+    events: [
+      { time: "13:00 ~ 17:00", title: "리허설" },
+      { time: "17:00 ~", title: "재학생존 입장" },
+      { time: "18:00 ~ 19:30", title: "재학생 무대 공연(KNU Artist)" },
+      { time: "19:30 ~ 20:30", title: "총장님 프로그램" },
+      { time: "20:30 ~ 21:00", title: "폐막식" },
+      { time: "21:00 ~ 21:30", title: "초청 아티스트 공연" },
+      { time: "22:00 ~ 23:00", title: "축제 스케치 사진 상영회" },
+    ],
+  },
+];
 
-// 현재 이벤트를 표시하는 컴포넌트
 const CurrentEventDisplay: React.FC = () => {
   const [currentEvent, setCurrentEvent] = useState<{ time: string; title: string } | null>(null);
 
-  // 현재 날짜에 맞는 일차 계산
-  const getCurrentDay = (): number => {
-    const now = new Date();
-    const currentDate = now.getDate();
-    const currentMonth = now.getMonth() + 1; // 0-based month
-    
-    // 2024년 9월 22일부터 시작
-    if (currentMonth === 9) {
-      if (currentDate >= 22 && currentDate <= 25) {
-        return currentDate - 21; // 22일 = 1일차, 23일 = 2일차, ...
-      }
-    }
-    
-    // 실제 날짜가 아닌 경우 1일차로 설정
-    return 1;
+  // 오늘 날짜에 맞는 이벤트 가져오기
+  const getTodaySchedule = () => {
+    const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    return scheduleData.find((day) => day.date === todayStr)?.events || [];
   };
 
-  // 현재 시간에 해당하는 이벤트 찾기
-  const getCurrentEvent = (day: number) => {
+  const getCurrentEvent = () => {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
-    const schedule = scheduleData[day as keyof typeof scheduleData];
-    
-    if (!schedule) return null;
+    const events = getTodaySchedule();
 
-    // 시간 문자열을 분으로 변환
-    const timeToMinutes = (timeStr: string): number => {
+    const timeToMinutes = (timeStr: string) => {
       const [time] = timeStr.split(' ~');
       const [hours, minutes] = time.split(':').map(Number);
       return hours * 60 + minutes;
     };
 
-    // 현재 시간에 해당하는 이벤트 찾기
-    for (const event of schedule) {
+    for (const event of events) {
       if (event.time.includes('~')) {
         if (event.time.endsWith('~')) {
-          // "17:00 ~" 형태 - 18:00까지로 제한
-          const startTime = timeToMinutes(event.time);
-          const endTime = 18 * 60; // 18:00 = 1080분
-          if (currentMinutes >= startTime && currentMinutes <= endTime) {
-            return event;
-          }
-        } else if (event.time.includes(' ~ ')) {
-          // "13:00 ~ 17:00" 형태
-          const [start, end] = event.time.split(' ~ ');
-          const startMinutes = timeToMinutes(start);
-          const endMinutes = timeToMinutes(end);
-          if (currentMinutes >= startMinutes && currentMinutes <= endMinutes) {
-            return event;
-          }
+          const start = timeToMinutes(event.time);
+          const end = 24 * 60; // 하루 끝까지
+          if (currentMinutes >= start && currentMinutes <= end) return event;
+        } else {
+          const [startStr, endStr] = event.time.split(' ~ ');
+          const start = timeToMinutes(startStr);
+          const end = timeToMinutes(endStr);
+          if (currentMinutes >= start && currentMinutes <= end) return event;
         }
       }
     }
@@ -97,18 +88,16 @@ const CurrentEventDisplay: React.FC = () => {
     return null;
   };
 
+  
   useEffect(() => {
-    const day = getCurrentDay();
-    const event = getCurrentEvent(day);
-    setCurrentEvent(event);
+    const updateEvent = () => {
+      const event = getCurrentEvent();
+      setCurrentEvent(event);
+    };
 
-    // 1분마다 업데이트
-    const timer = setInterval(() => {
-      const newDay = getCurrentDay();
-      const newEvent = getCurrentEvent(newDay);
-      setCurrentEvent(newEvent);
-    }, 60000);
+    updateEvent();
 
+    const timer = setInterval(updateEvent, 60000); // 1분마다 업데이트
     return () => clearInterval(timer);
   }, []);
 
@@ -133,6 +122,15 @@ const CurrentEventDisplay: React.FC = () => {
 };
 
 const Home: React.FC = () => {
+  const getTodayString = (): string => {
+  const now = new Date();
+  const month = now.getMonth() + 1; // 0-based
+  const date = now.getDate();
+  // "MM.DD" 형식으로 반환
+  return `${month.toString().padStart(2, "0")}.${date
+    .toString()
+    .padStart(2, "0")}`;
+};
   //네비게이터
   const navigate = useNavigate();
 
@@ -275,7 +273,7 @@ const Home: React.FC = () => {
             </p>
 
             <p className="absolute top-[27px] right-[32px] text-white font-[Hahmlet] text-[19.698px] font-semibold leading-normal">
-              09.21
+              {getTodayString()}
             </p>
 
             <CurrentEventDisplay />
@@ -336,134 +334,85 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div
-        ref={scroll2Ref}
-        className="w-full min-h-[932px] pt-[101px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImgT.webp')]"
-      >
-        <img
-          src="/assets/home/commingsoon.webp"
-          alt=""
-          className="mx-auto w-[80%] mt-[120px]"
-        />
 
-        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
-          <img
-            src="/assets/home/circle1.webp"
-            alt=""
-            className="w-full h-full"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-[#2F86E9] font-pretendard text-[17px] font-bold leading-[22px]">
-              DAY 1
-            </div>
-            <div className="text-[#002A59] text-center font-pretendard text-[17px] font-bold leading-[22px]">
-              9.23
-            </div>
-          </div>
-        </div>
-
-        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
-          <img
-            src="/assets/home/circle2.webp"
-            alt=""
-            className="w-full h-full"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-[#2F86E9] font-pretendard text-[17px] font-bold leading-[22px]">
-              DAY 2
-            </div>
-            <div className="text-[#002A59] text-center font-pretendard text-[17px] font-bold leading-[22px]">
-              9.24
-            </div>
-          </div>
-        </div>
-
-        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
-          <img
-            src="/assets/home/circle3.webp"
-            alt=""
-            className="w-full h-full"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-[#2F86E9] font-pretendard text-[17px] font-bold leading-[22px]">
-              DAY 3
-            </div>
-            <div className="text-[#002A59] text-center font-pretendard text-[17px] font-bold leading-[22px]">
-              9.235
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* scroll2 시작 */}
-      {/*
+      
       <div
         ref={scroll2Ref}
         className="w-full min-h-[932px] pt-[101px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center"
       >
-        <HomeCard3
-          logoSrc="/assets/home/lineup/extext.svg"
-          mainImgSrc="/assets/home/lineup/eximg.svg"
+        <div className="relative -top-8">
+          <HomeCard3
+          logoSrc="/assets/home/lineup/name1.webp"
+          mainImgSrc="/assets/home/lineup/idol1.webp"
           dayText="DAY1"
           dateText="9.23"
-          nameText="Kii Kii"
-          imagePosition="left"
+          nameText="JEON SOMI"
+          imagePosition="right"
           number="1"
         />
+        </div>
+        
 
         <HomeCard3
-          logoSrc="/assets/home/lineup/extext.svg"
-          mainImgSrc="/assets/home/lineup/eximg.svg"
-          dayText="DAY1"
-          dateText="9.23"
-          nameText="Kii Kii"
-          imagePosition="right"
+          logoSrc="/assets/home/lineup/name2.webp"
+          mainImgSrc="/assets/home/lineup/idol2.webp"
+          dayText="DAY2"
+          dateText="9.24"
+          nameText="KISS OF LIFE"
+          imagePosition="left"
           number="2"
         />
 
+        <div className="relative -top-6">
         <HomeCard3
-          logoSrc="/assets/home/lineup/extext.svg"
-          mainImgSrc="/assets/home/lineup/eximg.svg"
-          dayText="DAY1"
-          dateText="9.23"
-          nameText="Kii Kii"
-          imagePosition="left"
+          logoSrc="/assets/home/lineup/name3.webp"
+          mainImgSrc="/assets/home/lineup/idol3.webp"
+          dayText="DAY2"
+          dateText="9.24"
+          nameText="PARK HYEWON"
+          imagePosition="right"
           number="3"
         />
+        </div>
       </div>
-
+      
       <div className="w-full min-h-[932px] pt-[50px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center">
+        
+        <div className="relative -top-20">
         <HomeCard3
-          logoSrc="/assets/home/lineup/extext.svg"
-          mainImgSrc="/assets/home/lineup/eximg.svg"
-          dayText="DAY1"
-          dateText="9.23"
-          nameText="Kii Kii"
-          imagePosition="right"
+          logoSrc="/assets/home/lineup/name4.webp"
+          mainImgSrc="/assets/home/lineup/idol4.webp"
+          dayText="DAY2"
+          dateText="9.24"
+          nameText="ASH ISLAND"
+          imagePosition="left"
           number="4"
         />
+        </div>
 
         <HomeCard3
-          logoSrc="/assets/home/lineup/extext.svg"
-          mainImgSrc="/assets/home/lineup/eximg.svg"
-          dayText="DAY1"
-          dateText="9.23"
-          nameText="Kii Kii"
-          imagePosition="left"
+          logoSrc="/assets/home/lineup/name5.webp"
+          mainImgSrc="/assets/home/lineup/idol5.webp"
+          dayText="DAY3"
+          dateText="9.25"
+          nameText="KIIRAS"
+          imagePosition="right"
           number="5"
         />
 
         <HomeCard3
-          logoSrc="/assets/home/lineup/extext.svg"
-          mainImgSrc="/assets/home/lineup/eximg.svg"
-          dayText="DAY1"
-          dateText="9.23"
-          nameText="Kii Kii"
-          imagePosition="right"
+          logoSrc="/assets/home/lineup/name6.webp"
+          mainImgSrc="/assets/home/lineup/idol6.webp"
+          dayText="DAY3"
+          dateText="9.25"
+          nameText="CAR THE GARDEN"
+          imagePosition="left"
           number="6"
         />
 
-        <div className="text-center">
+        <div className="text-center relative z-3">
           <RefButton
             text="축제 지도 보기"
             backgroundColor="#A0C09A"
@@ -482,7 +431,7 @@ const Home: React.FC = () => {
           />
         </div>
       </div>
-           */}
+           
 
       {/* scroll3 시작 */}
       <div

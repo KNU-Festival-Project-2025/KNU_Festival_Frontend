@@ -29,12 +29,10 @@ export default function FAQItem({ question, answer, isOpen, onClick, variant }: 
                     border: "1px solid transparent",
                     borderRadius: autoVariant === "pill" ? "50px" : "20px",
                     background: isOpen
-                        ? "linear-gradient(#FFFFFFFF, #FFFFFFFF) padding-box, linear-gradient(90deg,#83C082,#3E5A3D) border-box" // 열림 → 완전 흰색
-                        : "linear-gradient(#FFFFFFCC, #FFFFFFCC) padding-box, linear-gradient(90deg,#83C082,#3E5A3D) border-box", // 닫힘 → 80% 흰색
+                        ? "linear-gradient(#FFFFFFFF, #FFFFFFFF) padding-box, linear-gradient(90deg,#83C082,#3E5A3D) border-box"
+                        : "linear-gradient(#FFFFFFCC, #FFFFFFCC) padding-box, linear-gradient(90deg,#83C082,#3E5A3D) border-box",
                 }}
             >
-
-
                 {/* 가운데 정렬 컨테이너 */}
                 <div className="flex w-full items-center justify-center relative px-[23px]">
                     <span
@@ -82,19 +80,8 @@ export default function FAQItem({ question, answer, isOpen, onClick, variant }: 
                         padding: "0px 14px",
                     }}
                 >
-                    <p className="mt-[9px] text-[#1B1B1B] text-center font-pretendard font-[300] text-[15px] whitespace-pre-line leading-relaxed">
+                    <p className="mt-[9px] mb-[10px] text-[#1B1B1B] text-center font-pretendard font-[300] text-[15px] whitespace-pre-line leading-relaxed">
                         {answer}
-                    </p>
-                    <p
-                        className="mt-[10px] mb-[10px] text-center font-pretendard"
-                        style={{
-                            color: "rgba(0, 0, 0, 0.50)",
-                            fontSize: "12px",
-                            fontWeight: 500,
-                            lineHeight: "22px",
-                        }}
-                    >
-                        자세한 내용은 @knu_festival 로 문의 부탁드립니다
                     </p>
                 </div>
             )}

@@ -1,577 +1,1231 @@
 [
     {
-    "id": 1,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 1,
-    "category": "promo",
-    "title": "인디드로잉",
-    "desc": "드로잉 감성 낭낭히 담은 끈책갈피, 타투스티커, 팔찌, 키링",
-    "image": "/assets/booth/booth-stadium/indidrawing.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 2,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 2,
-    "category": "promo",
-    "title": "도서관자치위원회",
-    "desc": "기억의 서재에서 당신의 펜팔을 기다립니다.",
-    "image": "/assets/booth/booth-stadium/library.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 3,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 3,
-    "category": "promo",
-    "title": "학생권익위원회",
-    "desc": "재미와 선물이 가득! 도라에몽과 권익을 즐겁게 배워보세요!",
-    "image": "/assets/booth/booth-stadium/rights.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 4,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 4,
-    "category": "food",
-    "title": "아뜨거빙수",
-    "desc": "기계메카 대표 미남들이 열정적으로 만든 뜨거운 팥빙수 드셔보실래요?",
-    "image": "/assets/booth/booth-stadium/mecha-bingsu.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 5,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 5,
-    "category": "food",
-    "title": "푸딩팜(Pudding:Farm)",
-    "desc": "부드럽게 즐기는 수제 블루베리 푸딩",
-    "image": "/assets/booth/booth-stadium/puddingfarm.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 6,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 6,
-    "category": "promo",
-    "title": "KEY",
-    "desc": "타로 한 장, 타투 한 장 어떠세요?",
-    "image": "/assets/booth/booth-stadium/key.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 7,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 7,
-    "category": "promo",
-    "title": "자치기구발전위원회",
-    "desc": "폴라로이드 사진 촬영 및 페이스페인팅",
-    "image": "/assets/booth/booth-stadium/development.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 8,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 8,
-    "category": "promo",
-    "title": "Yours",
-    "desc": "나 예쁜데 귀여운 거 만들었으니까 와라",
-    "image": "/assets/booth/booth-stadium/yours.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 9,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 9,
-    "category": "food",
-    "title": "원예당",
-    "desc": "고당도 프리미엄! 하니원메론 추석선물세트 판매",
-    "image": "/assets/booth/booth-stadium/honeyfarm.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 10,
-    "location": "대운동장",
-    "zone": "A",
-    "boothNumber": 10,
-    "category": "promo",
-    "title": "타로세이",
-    "desc": "구체적이고 자세하게 상담해드립니다.",
-    "image": "/assets/booth/booth-stadium/tarosei.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-
-   {
-    "id": 11,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 0,
-    "category": "promo",
-    "title": "집행위원회",
-    "desc": "고요를 채울, 환희로 피어날",
-    "image": "/assets/booth/booth-stadium/imagenone.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 12,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": [1,2],
-    "category": "promo",
-    "title": "스마트원예영농창업특성화사업단",
-    "desc": "영농창업특성화사업단, 우리는 '영특이'입니다!",
-    "image": "/assets/booth/booth-stadium/image10.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-
-  {
-    "id": 14,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 3,
-    "category": "food",
-    "title": "쥬스에 퐁당",
-    "desc": "생과일 착즙 쥬스 판매합니다! 비타민 보충하고 가세요!",
-    "image": "/assets/booth/booth-stadium/image11.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 15,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 4,
-    "category": "food",
-    "title": "JDM",
-    "desc": "‘이번에도 돌아온 떡삼’에서 특별한 소스가 발라진 맛있는 떡삼과 시원한 음료 드시러 오세요!",
-    "image": "/assets/booth/booth-stadium/image12.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 16,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 5,
-    "category": "promo",
-    "title": "W.I.N.G(We Innovate Now, Gangwon)",
-    "desc": "돗자리 타고 궁전으로 날아가는 법 알려드림",
-    "image": "/assets/booth/booth-stadium/image13.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 17,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 6,
-    "category": "promo",
-    "title": "우리다누리",
-    "desc": "글로벌 인싸존, 우리다누리",
-    "image": "/assets/booth/booth-stadium/image14.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 18,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 7,
-    "category": "promo",
-    "title": "온화",
-    "desc": "첫 만남의 설렘, 온화고등학교",
-    "image": "/assets/booth/booth-stadium/image15.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 19,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 8,
-    "category": "promo",
-    "title": "kor (코르)",
-    "desc": "kor는 헝가리어로 원을 뜻합니다. 여러분의 궤도에 ‘kor’가 함께하겠습니다.",
-    "image": "/assets/booth/booth-stadium/image16.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 20,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 9,
-    "category": "promo",
-    "title": "빛길",
-    "desc": "달리기 게임을 즐기고, 특별한 선물도 받아가세요~",
-    "image": "/assets/booth/booth-stadium/image17.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 21,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 10,
-    "category": "promo",
-    "title": "3D Maker",
-    "desc": "밴드 붐은 온다, 음악 & 밴드 덕후라면 놓칠 수 없는 키링 제작소",
-    "image": "/assets/booth/booth-stadium/image18.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 22,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 11,
-    "category": "food",
-    "title": "POME",
-    "desc": "와플이랑 버블티 먹으러 오면 좋겠다..",
-    "image": "/assets/booth/booth-stadium/image19.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 23,
-    "location": "대운동장",
-    "zone": "B",
-    "boothNumber": 12,
-    "category": "food",
-    "title": "5PPORYUNTY",
-    "desc": "당일 구운 따뜻한 감자빵 먹을 사람~",
-    "image": "/assets/booth/booth-stadium/image20.webp",
-    "prices": [
-      { "name": "상품", "price": "8,000원" }
-    ]
-  },
-  {
-    "id": 24,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 1,
-    "category": "promo",
-    "title": "왕희천과 아이들",
-    "desc": "하루쯤은 과감하게, 타투스티커로 도전!",
-    "image": "/assets/booth/booth-stadium/image21.webp",
-    "prices": [ { "name": "상품", "price": "8,000원" }]
-  },
-  {
-    "id": 25,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 2,
-    "category": "food",
-    "title": "무적 해적단",
-    "desc": "맛있어져라~ 모에모에뀽!",
-    "image": "/assets/booth/booth-stadium/image22.webp",
-    "prices": [ { "name": "상품", "price": "8,000원" }]
-  },
-  {
-    "id": 26,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 3,
-    "category": "food",
-    "title": "화석어셈블",
-    "desc": "졸업 직전의 마지막 불꽃! 이런식빵 대동제 상륙하다.",
-    "image": "/assets/booth/booth-stadium/image23.webp",
-    "prices": []
-  },
-  {
-    "id": 27,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 4,
-    "category": "food",
-    "title": "옥수수 좀 하는 집 (강원대학교 4-H회)",
-    "desc": "버터향 가득한 콘치즈&옥수수 버터구이!",
-    "image": "/assets/booth/booth-stadium/image24.webp",
-    "prices": []
-  },
-  {
-    "id": 28,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 5,
-    "category": "promo",
-    "title": "여성가족인권상담센터 한삶",
-    "desc": "춘천에 있는 여성 폭력 피해자 지원시설이 연대해서 부스 운영",
-    "image": "/assets/booth/booth-stadium/image25.webp",
-    "prices": []
-  },
-  {
-    "id": 29,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 6,
-    "category": "food",
-    "title": "웰컴 투 이스탄불",
-    "desc": "터키에서 직접 공수해온 레시피로 제공하는 고등어 케밥",
-    "image": "/assets/booth/booth-stadium/image26.webp",
-    "prices": []
-  },
-  {
-    "id": 30,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 7,
-    "category": "food",
-    "title": "앙금이들",
-    "desc": "먹을래? 말래? 넌 대답만 해, 앙 먹어볼래! 도합 경력 70년 장인들의 수제디저트",
-    "image": "/assets/booth/booth-stadium/image27.webp",
-    "prices": []
-  },
-  {
-    "id": 31,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 8,
-    "category": "food",
-    "title": "헤어지자고?",
-    "desc": "나 지금 비비는 중인데..? 헤어진 애인도 돌아오는 그 맛..!",
-    "image": "/assets/booth/booth-stadium/image28.webp",
-    "prices": []
-  },
-  {
-    "id": 32,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 9,
-    "category": "food",
-    "title": "후문연합",
-    "desc": "후문연합이 준비한 단과대 컬러빙수 맛보러 오세요~!",
-    "image": "/assets/booth/booth-stadium/image29.webp",
-    "prices": []
-  },
-  {
-    "id": 33,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 10,
-    "category": "food",
-    "title": "ALFS",
-    "desc": "펀딩 진행한 식생공 개발 알러지프리디저트",
-    "image": "/assets/booth/booth-stadium/image30.webp",
-    "prices": []
-  },
-  {
-    "id": 34,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 11,
-    "category": "promo",
-    "title": "한마음선교회",
-    "desc": "한마음선교회, 예수님 사랑 실천하는 위그노 정신 공동체",
-    "image": "/assets/booth/booth-stadium/image31.webp",
-    "prices": []
-  },
-  {
-    "id": 35,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 12,
-    "category": "promo",
-    "title": "뭉개구름",
-    "desc": "뭉개구름 부스에서 추억도 만들고, 굿즈도 챙겨가세요!",
-    "image": "/assets/booth/booth-stadium/image32.webp",
-    "prices": []
-  },
-  {
-    "id": 36,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 13,
-    "category": "promo",
-    "title": "OECO",
-    "desc": "매 순간의 전국 자연을 기록해 나갑니다.",
-    "image": "/assets/booth/booth-stadium/image33.webp",
-    "prices": []
-  },
-  {
-    "id": 37,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 14,
-    "category": "craft",
-    "title": "Revine (리바인)",
-    "desc": "직접 만드는 감성 바이오차 테라리움 탈취제",
-    "image": "/assets/booth/booth-stadium/image34.webp",
-    "prices": []
-  },
-  {
-    "id": 38,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 15,
-    "category": "promo",
-    "title": "포뿌리",
-    "desc": "활동 체험하고 즉석사진 찍으세요!",
-    "image": "/assets/booth/booth-stadium/image35.webp",
-    "prices": []
-  },
-  {
-    "id": 39,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 16,
-    "category": "promo",
-    "title": "Aesthetic H",
-    "desc": "옷을 잘 입고싶으신 분들께 상담도 해드립니다. 오셔서 자기만의 스타일 찾아가세요",
-    "image": "/assets/booth/booth-stadium/image36.webp",
-    "prices": []
-  },
-  {
-    "id": 40,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 17,
-    "category": "promo",
-    "title": "학생홍보대사 가온",
-    "desc": "학생홍보대사",
-    "image": "/assets/booth/booth-stadium/image37.webp",
-    "prices": []
-  },
-  {
-    "id": 41,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 18,
-    "category": "craft",
-    "title": "beadsinyou_(비즈인유)",
-    "desc": "감성 가득, 귀여운 버섯 키링 핸드메이드 비즈 키링 판매 부스!",
-    "image": "/assets/booth/booth-stadium/image38.webp",
-    "prices": []
-  },
-  {
-    "id": 42,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 19,
-    "category": "promo",
-    "title": "온담",
-    "desc": "오늘 내 감정 온도는? 내 마음 진단 테스트!",
-    "image": "/assets/booth/booth-stadium/image39.webp",
-    "prices": []
-  },
-  {
-    "id": 43,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 20,
-    "category": "promo",
-    "title": "신세계사주타로",
-    "desc": "진로,취업,연애부분을 중점적으로 상담해드리겠습니다.",
-    "image": "/assets/booth/booth-stadium/image40.webp",
-    "prices": []
-  },
-  {
-    "id": 44,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 21,
-    "category": "promo",
-    "title": "그리너블",
-    "desc": "환경보호 그린(green) + 블(able)의 할 수 있는 이라는 뜻을 합하여 그리너블입니다.",
-    "image": "/assets/booth/booth-stadium/image41.webp",
-    "prices": []
-  },
-  {
-    "id": 45,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 22,
-    "category": "craft",
-    "title": "그린나라 피톤치드",
-    "desc": "향기롭고 건강한 생활, 10종 천연 탈취제",
-    "image": "/assets/booth/booth-stadium/image42.webp",
-    "prices": []
-  },
-  {
-    "id": 46,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 23,
-    "category": "food",
-    "title": "오일장 버거",
-    "desc": "퐁신한 번 + 와규함박패티로 하나만으로 든든하게!!",
-    "image": "/assets/booth/booth-stadium/image43.webp",
-    "prices": []
-  },
-  {
-    "id": 47,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 24,
-    "category": "promo",
-    "title": "슈가베어 스튜디오",
-    "desc": "당신의 모든 순간을 담다",
-    "image": "/assets/booth/booth-stadium/image44.webp",
-    "prices": []
-  },
-  {
-    "id": 48,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 25,
-    "category": "craft",
-    "title": "실몽실",
-    "desc": "실의 따뜻한 감성을 담은 손뜨개 소품샵",
-    "image": "/assets/booth/booth-stadium/image45.webp",
-    "prices": []
-  },
-  {
-    "id": 49,
-    "location": "대운동장",
-    "zone": "C",
-    "boothNumber": 26,
-    "category": "craft",
-    "title": "HESSDOLL",
-    "desc": "정교한 뜨개인형과 실용적인 소품판매",
-    "image": "/assets/booth/booth-stadium/image46.webp",
-    "prices": []
-  }
-  
+        "id": 1,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 1,
+        "category": "promo",
+        "title": "인디드로잉",
+        "desc": "드로잉 감성 낭낭히 담은 끈책갈피, 타투스티커, 팔찌, 키링",
+        "image": "/assets/booth/booth-stadium/indidrawing.webp",
+        "prices": [
+            {
+                "name": "끈책갈피",
+                "price": "8,000원"
+            },
+            {
+                "name": "타투스티커",
+                "price": "1pis 1,000원"
+            },
+               {
+                "name": "타투스티커",
+                "price": "3pis 2,000원"
+            },
+            {
+                "name": "비즈팔찌",
+                "price": "2,000~4,000원"
+            },
+            {
+                "name": "비즈키링",
+                "price": "3,000원"
+            },
+            {
+                "name": "후우링 키링",
+                "price": "5,000원"
+            },
+            {
+                "name": "스티커",
+                "price": "1pis 800원"
+            },
+                        {
+                "name": "스티커",
+                "price": "4종 세트 2,500원"
+            },
+            {
+                "name": "매듭팔찌",
+                "price": "3,500원"
+            },
+            {
+                "name": "슈링클스 단추",
+                "price": "나눔"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 2,
+        "category": "promo",
+        "title": "도서관자치위원회",
+        "desc": "기억의 서재에서 당신의 펜팔을 기다립니다.",
+        "image": "/assets/booth/booth-stadium/library.webp"
+    },
+    {
+        "id": 3,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 3,
+        "category": "promo",
+        "title": "학생권익위원회",
+        "desc": "재미와 선물이 가득! 도라에몽과 권익을 즐겁게 배워보세요!",
+        "image": "/assets/booth/booth-stadium/rights.webp"
+    },
+    {
+        "id": 4,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 4,
+        "category": "food",
+        "title": "아뜨거빙수",
+        "desc": "기계메카 대표 미남들이 열정적으로 만든 뜨거운 팥빙수 드셔보실래요?",
+        "image": "/assets/booth/booth-stadium/mecha-bingsu.webp",
+        "prices": [
+            {
+                "name": "팥빙수",
+                "price": "4,500원"
+            },
+            {
+                "name": "초코빙수",
+                "price": "4,500원"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 5,
+        "category": "food",
+        "title": "푸딩팜(Pudding:Farm)",
+        "desc": "부드럽게 즐기는 수제 블루베리 푸딩",
+        "image": "/assets/booth/booth-stadium/puddingfarm.webp",
+        "prices": [
+            {
+                "name": "블루베리 푸딩",
+                "price": "3,000원"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 6,
+        "category": "promo",
+        "title": "KEY",
+        "desc": "타로 한 장, 타투 한 장 어떠세요?",
+        "image": "/assets/booth/booth-stadium/key.webp",
+        "prices": [
+            {
+                "name": "타투 스티커 미니",
+                "price": "3,000원"
+            },
+            {
+                "name": "타투 스티커 대형",
+                "price": "5,000원"
+            },
+            {
+                "name": "1 card spread (타로)",
+                "price": "3,000원"
+            },
+            {
+                "name": "타투 스티커 패키지",
+                "price": "6,000원"
+            },
+            {
+                "name": "즉석 사진 서비스",
+                "price": "3,000원"
+            },
+            {
+                "name": "타로 사진 패키지",
+                "price": "5,000원"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 7,
+        "category": "promo",
+        "title": "자치기구발전위원회",
+        "desc": "폴라로이드 사진 촬영 및 페이스페인팅",
+        "image": "/assets/booth/booth-stadium/development.webp"
+    },
+    {
+        "id": 8,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 8,
+        "category": "promo",
+        "title": "Yours",
+        "desc": "나 예쁜데 귀여운 거 만들었으니까 와라",
+        "image": "/assets/booth/booth-stadium/yours.webp",
+        "prices": [
+            {
+                "name": "비즈 키링",
+                "price": "5,000원"
+            },
+            {
+                "name": "뜨개 키링",
+                "price": "7,000원"
+            },
+            {
+                "name": "커스텀 비즈 키링",
+                "price": "9,000원"
+            },
+            {
+                "name": "스티커 스쿱",
+                "price": "1,000원"
+            },
+            {
+                "name": "럭키드로우",
+                "price": "4,000원"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 9,
+        "category": "food",
+        "title": "원예당",
+        "desc": "고당도 프리미엄! 하니원메론 추석선물세트 판매",
+        "image": "/assets/booth/booth-stadium/honeyfarm.webp",
+        "prices": [
+            {
+                "name": "메론2수 선물세트",
+                "price": "30,000원"             
+            },
+            {
+                "name": "메론2수 선물세트(예약)",
+                "price": "28,000원"
+            },
+            {
+                "name": "멜론컵",
+                "price": "3,000원"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "location": "대운동장",
+        "zone": "A",
+        "boothNumber": 10,
+        "category": "promo",
+        "title": "타로세이",
+        "desc": "구체적이고 자세하게 상담해드립니다.",
+        "image": "/assets/booth/booth-stadium/tarosei.webp",
+        "prices": [
+            {
+                "name": "타로",
+                "price": "7,000원"
+            },
+            {
+                "name": "커플 타로(2人 궁합)",
+                "price": "20,000원"
+            },
+            {
+                "name": "사주",
+                "price": "10,000원"
+            },
+            {
+                "name": "신년운세(1년운세)",
+                "price": "20,000원"
+            },
+            {
+                "name": "종합사주",
+                "price": "30,000원"
+            },
+            {
+                "name": "사주궁합(2人)",
+                "price": "30,000원"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 0,
+        "category": "promo",
+        "title": "집행위원회",
+        "desc": "고요를 채울, 환희로 피어날",
+        "image": "/assets/booth/hortus.webp"
+    },
+    {
+        "id": 12,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": [
+            1,
+            2
+        ],
+        "category": "promo",
+        "title": "스마트원예영농창업특성화사업단",
+        "desc": "영농창업특성화사업단, 우리는 '영특이'입니다!",
+        "image": "/assets/booth/booth-stadium/image10.webp",
+        "prices": [
+            {
+                "name": "화훼-컵 꽃다발",
+                "price": "10,000원"
+            },
+            {
+                "name": "화훼-꽃 엽서",
+                "price": "4,000원"
+            },
+            {
+                "name": "채소-컵 토마토",
+                "price": "3,500-6,500원"
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 3,
+        "category": "food",
+        "title": "쥬스에 퐁당",
+        "desc": "생과일 착즙 쥬스 판매합니다! 비타민 보충하고 가세요!",
+        "image": "/assets/booth/booth-stadium/image11.webp",
+        "prices": [
+            {
+                "name": "오렌지 착즙 쥬스",
+                "price": "3,500원"
+            },
+            {
+                "name": "망고바",
+                "price": "2,500원"
+            },
+            {
+                "name": "얼음 샤인머스켓",
+                "price": "3,000원"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 4,
+        "category": "food",
+        "title": "JDM",
+        "desc": "‘이번에도 돌아온 떡삼’에서 특별한 소스가 발라진 맛있는 떡삼과 시원한 음료 드시러 오세요!",
+        "image": "/assets/booth/booth-stadium/image12.webp",
+        "prices": [
+            {
+                "name": "떡삼",
+                "price": "3,000원"
+            },
+            {
+                "name": "음료",
+                "price": "1,000원"
+            },
+            {
+                "name": "세트(떡삼2+음료1)",
+                "price": "4,500원"
+            },
+            {
+                "name": "이벤트 음료수",
+                "price": "무료"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 5,
+        "category": "promo",
+        "title": "W.I.N.G(We Innovate Now, Gangwon)",
+        "desc": "돗자리 타고 궁전으로 날아가는 법 알려드림",
+        "image": "/assets/booth/booth-stadium/image13.webp"
+    },
+    {
+        "id": 17,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 6,
+        "category": "promo",
+        "title": "우리다누리",
+        "desc": "글로벌 인싸존, 우리다누리",
+        "image": "/assets/booth/booth-stadium/image14.webp"
+    },
+    {
+        "id": 18,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 7,
+        "category": "promo",
+        "title": "온화",
+        "desc": "첫 만남의 설렘, 온화고등학교",
+        "image": "/assets/booth/booth-stadium/image15.webp"
+    },
+    {
+        "id": 19,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 8,
+        "category": "promo",
+        "title": "kor (코르)",
+        "desc": "kor는 헝가리어로 원을 뜻합니다. 여러분의 궤도에 ‘kor’가 함께하겠습니다.",
+        "image": "/assets/booth/booth-stadium/image16.webp",
+        "prices": [
+            {
+                "name": "팔찌",
+                "price": "10,000원"
+            },
+            {
+                "name": "팔찌",
+                "price": "15,000원"
+            },
+            {
+                "name": "목걸이",
+                "price": "10,000원"
+            },
+            {
+                "name": "목걸이",
+                "price": "15,000원"
+            },
+            {
+                "name": "키링",
+                "price": "10,000원"
+            },
+            {
+                "name": "키링",
+                "price": "15,000원"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 9,
+        "category": "promo",
+        "title": "빛길",
+        "desc": "달리기 게임을 즐기고, 특별한 선물도 받아가세요~",
+        "image": "/assets/booth/booth-stadium/image17.webp"
+    },
+    {
+        "id": 21,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 10,
+        "category": "promo",
+        "title": "3D Maker",
+        "desc": "밴드 붐은 온다, 음악 & 밴드 덕후라면 놓칠 수 없는 키링 제작소",
+        "image": "/assets/booth/booth-stadium/image18.webp",
+        "prices": [
+            {
+                "name": "CD앨범 키링 배치용",
+                "price": "4,500원"
+            },
+            {
+                "name": "CD앨범 키링 커스텀용",
+                "price": "6,000원"
+            },
+            {
+                "name": "고양이 록 밴드 키링",
+                "price": "4,500원"
+            },
+            {
+                "name": "레트로 카세트 키링",
+                "price": "5,500원"
+            },
+            {
+                "name": "일렉기타 키링",
+                "price": "5,500원"
+            },
+            {
+                "name": "일렉기타&엘리멘트 키링",
+                "price": "7,000원"
+            },
+            {
+                "name": "드럼스틱 키링",
+                "price": "7,500원"
+            },
+            {
+                "name": "야구배트&글러브 키링",
+                "price": "9,900원"
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 11,
+        "category": "food",
+        "title": "POME",
+        "desc": "와플이랑 버블티 먹으러 오면 좋겠다..",
+        "image": "/assets/booth/booth-stadium/image19.webp",
+        "prices": [
+            {
+                "name": "버블티",
+                "price": "3,000원"
+            },
+            {
+                "name": "와플",
+                "price": "3,000원"
+            },
+            {
+                "name": "아이스크림 토핑 추가",
+                "price": "500원"
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "location": "대운동장",
+        "zone": "B",
+        "boothNumber": 12,
+        "category": "food",
+        "title": "5PPORYUNTY",
+        "desc": "당일 구운 따뜻한 감자빵 먹을 사람~",
+        "image": "/assets/booth/booth-stadium/image20.webp",
+        "prices": [
+            {
+                "name": "감자빵",
+                "price": "3,500원"
+            },
+            {
+                "name": "감자 핸드크림",
+                "price": "7,800원"
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 1,
+        "category": "promo",
+        "title": "왕희천과 아이들",
+        "desc": "하루쯤은 과감하게, 타투스티커로 도전!",
+        "image": "/assets/booth/booth-stadium/image21.webp",
+        "prices": [
+            {
+                "name": "타투스티커(소)",
+                "price": "2,000원"
+            },
+            {
+                "name": "타투스티커(중)",
+                "price": "5,000원"
+            },
+            {
+                "name": "타투스티커(대)",
+                "price": "8,000원"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 2,
+        "category": "food",
+        "title": "무적 해적단",
+        "desc": "맛있어져라~ 모에모에뀽!",
+        "image": "/assets/booth/booth-stadium/image22.webp",
+        "prices": [
+            {
+                "name": "야끼소바",
+                "price": "6,500원"
+            },
+            {
+                "name": "가라아게",
+                "price": "4,500원"
+            },
+            {
+                "name": "메론 소다",
+                "price": "1,800원"
+            },
+            {
+                "name": "메론 라뗴",
+                "price": "2,300원"
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 3,
+        "category": "food",
+        "title": "화석어셈블",
+        "desc": "졸업 직전의 마지막 불꽃! 이런식빵 대동제 상륙하다.",
+        "image": "/assets/booth/booth-stadium/image23.webp",
+        "prices": [
+            {
+                "name": "누텔라바나나 토스트(풀)",
+                "price": "5,500원"
+            },
+            {
+                "name": "누텔라바나나 토스트(하프)",
+                "price": "3,500원"
+            },
+            {
+                "name": "블루베리크림치즈 토스트(풀)",
+                "price": "5,500원"
+            },
+            {
+                "name": "블루베리크림치즈 토스트(하프)",
+                "price": "3,500원"
+            },
+            {
+                "name": "타투스티커",
+                "price": "무료"
+            },
+            {
+                "name": "뽑기권 이벤트",
+                "price": "무료"
+            },
+            {
+                "name": "키링",
+                "price": "무료"
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 4,
+        "category": "food",
+        "title": "옥수수 좀 하는 집 (강원대학교 4-H회)",
+        "desc": "버터향 가득한 콘치즈&옥수수 버터구이!",
+        "image": "/assets/booth/booth-stadium/image24.webp",
+        "prices": [
+            {
+                "name": "옥수수 버터구이",
+                "price": "3,500원"
+            },
+            {
+                "name": "콘치즈",
+                "price": "2,500원"
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 5,
+        "category": "promo",
+        "title": "여성가족인권상담센터 한삶",
+        "desc": "춘천에 있는 여성 폭력 피해자 지원시설이 연대해서 부스 운영",
+        "image": "/assets/booth/booth-stadium/image25.webp"
+    },
+    {
+        "id": 29,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 6,
+        "category": "food",
+        "title": "웰컴 투 이스탄불",
+        "desc": "터키에서 직접 공수해온 레시피로 제공하는 고등어 케밥",
+        "image": "/assets/booth/booth-stadium/image26.webp",
+        "prices": [
+            {
+                "name": "고등어케밥",
+                "price": "8,000원"
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 7,
+        "category": "food",
+        "title": "앙금이들",
+        "desc": "먹을래? 말래? 넌 대답만 해, 앙 먹어볼래! 도합 경력 70년 장인들의 수제디저트",
+        "image": "/assets/booth/booth-stadium/image27.webp",
+        "prices": [
+            {
+                "name": "앙호떡 빙수(치즈빙수)",
+                "price": "4,000원"
+            },
+            {
+                "name": "기본 팥빙수",
+                "price": "4,500원"
+            },
+            {
+                "name": "물고기 첨벙음료",
+                "price": "3,500원"
+            },
+            {
+                "name": "앙호떡",
+                "price": "800원"
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 8,
+        "category": "food",
+        "title": "헤어지자고?",
+        "desc": "나 지금 비비는 중인데..? 헤어진 애인도 돌아오는 그 맛..!",
+        "image": "/assets/booth/booth-stadium/image28.webp",
+        "prices": [
+            {
+                "name": "비빔면",
+                "price": "4,000원"
+            },
+            {
+                "name": "대패비빔면",
+                "price": "5,500원"
+            },
+            {
+                "name": "메추리알 한 알 추가",
+                "price": "500원"
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 9,
+        "category": "food",
+        "title": "후문연합",
+        "desc": "후문연합이 준비한 단과대 컬러빙수 맛보러 오세요~!",
+        "image": "/assets/booth/booth-stadium/image29.webp",
+        "prices": [
+            {
+                "name": "강원대빙수",
+                "price": "3,500원"
+            },
+            {
+                "name": "경영대빙수",
+                "price": "3,500원"
+            },
+            {
+                "name": "농생대빙수",
+                "price": "3,500원"
+            },
+            {
+                "name": "문예대빙수",
+                "price": "3,500원"
+            },
+            {
+                "name": "사범대빙수",
+                "price": "3,500원"
+            },
+            {
+                "name": "자연대빙수",
+                "price": "3,500원"
+            },
+            {
+                "name": "자전공빙수",
+                "price": "3,500원"
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 10,
+        "category": "food",
+        "title": "ALFS",
+        "desc": "펀딩 진행한 식생공 개발 알러지프리디저트",
+        "image": "/assets/booth/booth-stadium/image30.webp",
+        "prices": [
+            {
+                "name": "초코코코넛쿠키",
+                "price": "1,500원"
+            },
+            {
+                "name": "크랜베리 비스코티",
+                "price": "2,000원"
+            },
+            {
+                "name": "레몬 마들렌",
+                "price": "3,000원"
+            },
+            {
+                "name": "초코 마들렌",
+                "price": "3,000원"
+            },
+            {
+                "name": "말차 마들렌",
+                "price": "3,000원"
+            },
+            {
+                "name": "제휴사 사입 저당 잼",
+                "price": "5,000원 (이내)"
+            },
+            {
+                "name": "제휴사 사입 저당 청",
+                "price": "5,000원 (이내)"
+            },
+            {
+                "name": "수제 밀크티",
+                "price": "3,000원"
+            },
+            {
+                "name": "아이스 아메리카노",
+                "price": "2,000원"
+            }
+        ]
+    },
+    {
+        "id": 34,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 11,
+        "category": "promo",
+        "title": "한마음선교회",
+        "desc": "한마음선교회, 예수님 사랑 실천하는 위그노 정신 공동체",
+        "image": "/assets/booth/booth-stadium/image31.webp",
+        "prices": [
+            {
+                "name": "뿌링/양념 콜팝",
+                "price": "4,000원"
+            },
+            {
+                "name": "소세지",
+                "price": "3,000원"
+            }
+        ]
+    },
+    {
+        "id": 35,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 12,
+        "category": "promo",
+        "title": "뭉개구름",
+        "desc": "뭉개구름 부스에서 추억도 만들고, 굿즈도 챙겨가세요!",
+        "image": "/assets/booth/booth-stadium/image32.webp",
+        "prices": [
+            {
+                "name": "뭉개구름 자체 제작 스티커",
+                "price": "1,500원"
+            },
+            {
+                "name": "뭉개구름 자체 제작 키링",
+                "price": "1,500원"
+            },
+            {
+                "name": "증명사진용 키링 홀더 만들기",
+                "price": "4,000원"
+            },
+            {
+                "name": "슈링클스 키링 만들기",
+                "price": "4,000원"
+            },
+            {
+                "name": "경품용 간식",
+                "price": "0원"
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 13,
+        "category": "promo",
+        "title": "OECO",
+        "desc": "매 순간의 전국 자연을 기록해 나갑니다.",
+        "image": "/assets/booth/booth-stadium/image33.webp",
+        "prices": [
+            {
+                "name": "엽서",
+                "price": "1,500원"
+            },
+            {
+                "name": "판스티커",
+                "price": "3,000원"
+            },
+            {
+                "name": "마스킹테이프",
+                "price": "5,000원"
+            }
+        ]
+    },
+    {
+        "id": 37,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 14,
+        "category": "craft",
+        "title": "Revine (리바인)",
+        "desc": "직접 만드는 감성 바이오차 테라리움 탈취제",
+        "image": "/assets/booth/booth-stadium/image34.webp",
+        "prices": [
+            {
+                "name": "미니 테라리움 키링",
+                "price": "2,000원"
+            },
+            {
+                "name": "미니 테라리움 키링",
+                "price": "경품"
+            },
+            {
+                "name": "테라리움 탈취제(대형)",
+                "price": "6,000원"
+            },
+            {
+                "name": "테라리움 탈취제(소형)",
+                "price": "4,000원"
+            },
+            {
+                "name": "테라리움 탈취제(대형+소형)",
+                "price": "경품"
+            }
+        ]
+    },
+    {
+        "id": 38,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 15,
+        "category": "promo",
+        "title": "포뿌리",
+        "desc": "활동 체험하고 즉석사진 찍으세요!",
+        "image": "/assets/booth/booth-stadium/image35.webp"
+    },
+    {
+        "id": 39,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 16,
+        "category": "promo",
+        "title": "Aesthetic H",
+        "desc": "옷을 잘 입고싶으신 분들께 상담도 해드립니다. 오셔서 자기만의 스타일 찾아가세요",
+        "image": "/assets/booth/booth-stadium/image36.webp",
+        "prices": [
+            {
+                "name": "티셔츠",
+                "price": "0-10,000원"
+            },
+            {
+                "name": "티셔츠",
+                "price": "10,000-20,000원"
+            },
+            {
+                "name": "티셔츠",
+                "price": "20,000-30,000원"
+            },
+            {
+                "name": "바지",
+                "price": "0-20,000원"
+            },
+            {
+                "name": "바지",
+                "price": "20,000-40,000원"
+            },
+            {
+                "name": "바지",
+                "price": "40,000-60,000원"
+            },
+            {
+                "name": "아우터",
+                "price": "20,000-30,000원"
+            },
+            {
+                "name": "아우터",
+                "price": "30,000-50,000원"
+            },
+            {
+                "name": "모자&잡화",
+                "price": "10,000원"
+            },
+            {
+                "name": "모자&잡화",
+                "price": "20,000원"
+            }
+        ]
+    },
+    {
+        "id": 40,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 17,
+        "category": "promo",
+        "title": "학생홍보대사 가온",
+        "desc": "학생홍보대사",
+        "image": "/assets/booth/booth-stadium/image37.webp"
+    },
+    {
+        "id": 41,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 18,
+        "category": "craft",
+        "title": "beadsinyou_(비즈인유)",
+        "desc": "감성 가득, 귀여운 버섯 키링 핸드메이드 비즈 키링 판매 부스!",
+        "image": "/assets/booth/booth-stadium/image38.webp",
+        "prices": [
+            {
+                "name": "비즈 키링 -하양",
+                "price": "3,000원"
+            },
+            {
+                "name": "비즈 키링 -검정",
+                "price": "3,000원"
+            },
+            {
+                "name": "비즈 키링 -연핑크",
+                "price": "3,000원"
+            },
+            {
+                "name": "비즈 키링 -연두",
+                "price": "3,000원"
+            },
+            {
+                "name": "비즈 키링 -하늘",
+                "price": "3,000원"
+            },
+            {
+                "name": "비즈 키링(세트 키링)",
+                "price": "5,000원"
+            },
+            {
+                "name": "비즈 키링(경품 제공)",
+                "price": "0원"
+            }
+        ]
+    },
+    {
+        "id": 42,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 19,
+        "category": "promo",
+        "title": "온담",
+        "desc": "오늘 내 감정 온도는? 내 마음 진단 테스트!",
+        "image": "/assets/booth/booth-stadium/image39.webp"
+    },
+    {
+        "id": 43,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 20,
+        "category": "promo",
+        "title": "신세계사주타로",
+        "desc": "진로,취업,연애부분을 중점적으로 상담해드리겠습니다.",
+        "image": "/assets/booth/booth-stadium/image40.webp",
+        "prices": [
+            {
+                "name": "관상",
+                "price": "5,000원"
+            },
+            {
+                "name": "손금",
+                "price": "5,000원"
+            },
+            {
+                "name": "타로",
+                "price": "5,000원"
+            },
+            {
+                "name": "사주",
+                "price": "10,000원"
+            }
+        ]
+    },
+    {
+        "id": 44,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 21,
+        "category": "promo",
+        "title": "그리너블",
+        "desc": "환경보호 그린(green) + 블(able)의 할 수 있는 이라는 뜻을 합하여 그리너블입니다.",
+        "image": "/assets/booth/booth-stadium/image41.webp",
+        "prices": [
+            {
+                "name": "작은 하트 트레이",
+                "price": "3,500원"
+            },
+            {
+                "name": "육각형 트레이",
+                "price": "6,500원"
+            },
+            {
+                "name": "조개 꽃 트레이",
+                "price": "7,500원"
+            },
+            {
+                "name": "큰 하트 트레이",
+                "price": "8,500원"
+            },
+            {
+                "name": "타원형 트레이",
+                "price": "9,500원"
+            },
+            {
+                "name": "올록볼록 트레이",
+                "price": "9,500원"
+            }
+        ]
+    },
+    {
+        "id": 45,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 22,
+        "category": "craft",
+        "title": "그린나라 피톤치드",
+        "desc": "향기롭고 건강한 생활, 10종 천연 탈취제",
+        "image": "/assets/booth/booth-stadium/image42.webp",
+        "prices": [
+            {
+                "name": "천연룸스프레이(탈취제) 500ml x 1",
+                "price": "9,900원"
+            },
+            {
+                "name": "천연룸스프레이(탈취제) 500ml x 2",
+                "price": "18,800원"
+            },
+            {
+                "name": "천연룸스프레이(탈취제) 500ml x 3",
+                "price": "28,700원"
+            }
+        ]
+    },
+    {
+        "id": 46,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 23,
+        "category": "food",
+        "title": "오일장 버거",
+        "desc": "퐁신한 번 + 와규함박패티로 하나만으로 든든하게!!",
+        "image": "/assets/booth/booth-stadium/image43.webp",
+        "prices": [
+            {
+                "name": "빅오일장버거 단품",
+                "price": "4,000원"
+            },
+            {
+                "name": "빅데리버거 단품",
+                "price": "4,000원"
+            },
+            {
+                "name": "빅 새우버거",
+                "price": "5,000원"
+            },
+            {
+                "name": "빅 더블오일장버거",
+                "price": "6,500원"
+            },
+            {
+                "name": "빅 더블데리버거",
+                "price": "6,500원"
+            },
+            {
+                "name": "빅 더블새우버거",
+                "price": "7,500원"
+            },
+            {
+                "name": "킹 타코야끼 6알",
+                "price": "5,000원"
+            }
+        ]
+    },
+    {
+        "id": 47,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 24,
+        "category": "promo",
+        "title": "슈가베어 스튜디오",
+        "desc": "당신의 모든 순간을 담다",
+        "image": "/assets/booth/booth-stadium/image44.webp"
+    },
+    {
+        "id": 48,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 25,
+        "category": "craft",
+        "title": "실몽실",
+        "desc": "실의 따뜻한 감성을 담은 손뜨개 소품샵",
+        "image": "/assets/booth/booth-stadium/image45.webp",
+        "prices": [
+            {
+                "name": "수세미",
+                "price": "2,000-6,000원"
+            },
+            {
+                "name": "키링(아크릴, 금속, 뜨개제품 등)",
+                "price": "1,000-10,000원"
+            },
+            {
+                "name": "티매트(소잉) 및 기타소품",
+                "price": "2,000-5,000원"
+            },
+            {
+                "name": "카드지갑, 텀블러커버",
+                "price": "5,000-10,000원"
+            },
+            {
+                "name": "뜨개두건",
+                "price": "15,000원"
+            },
+            {
+                "name": "뜨개가방",
+                "price": "15,000-40,000원"
+            }
+        ]
+    },
+    {
+        "id": 49,
+        "location": "대운동장",
+        "zone": "C",
+        "boothNumber": 26,
+        "category": "craft",
+        "title": "HESSDOLL",
+        "desc": "정교한 뜨개인형과 실용적인 소품판매",
+        "image": "/assets/booth/booth-stadium/image46.webp",
+        "prices": [
+            {
+                "name": "메탈그래니 미니백",
+                "price": "30,000원"
+            },
+            {
+                "name": "코튼그래니 토트백",
+                "price": "30,000원"
+            },
+            {
+                "name": "코튼그래니 버킷햇",
+                "price": "25,000원"
+            },
+            {
+                "name": "카피바라 키링",
+                "price": "15,000-40,000원"
+            },
+            {
+                "name": "먼지 키링",
+                "price": "10,000원"
+            },
+            {
+                "name": "팬더 키링",
+                "price": "10,000원"
+            },
+            {
+                "name": "고양이 키링",
+                "price": "8,000원"
+            },
+            {
+                "name": "데이지 팔찌",
+                "price": "7,000원"
+            },
+            {
+                "name": "네잎클로버",
+                "price": "3,000원"
+            }
+        ]
+    }
 ]

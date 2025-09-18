@@ -12,8 +12,8 @@ export type Booth = {
   id: number;
   location: "대운동장" | "함인섭광장" | "60주년" | "미래광장";
   zone?: "A" | "B" | "C" | "D" | "truck" | "coffee" | "pub" | "program";
-  boothNumber: number | number[];
-  category: "all" | "food" | "promo";
+  boothNumber?: number | number[];
+  category: "all" | "food" | "promo" | "pub";
   title: string;
   desc: string;
   notice: string;
@@ -48,9 +48,14 @@ const BoothAndFoodTruck: React.FC = () => {
   };
 
   const currentBooths = boothData[activeLocation] || [];
-  const filteredBooths = currentBooths.filter(
-    (booth) => activeTab === "all" || booth.category === activeTab
-  );
+  const filteredBooths = currentBooths.filter((booth) => {
+    if (activeTab === "all") return true; // 전체 → 모두 포함
+    if (activeTab === "food") {
+      // 먹거리 탭 → food + pub 둘 다 포함
+      return booth.category === "food" || booth.category === "pub";
+    }
+    return booth.category === activeTab; // 나머지 탭은 기존 그대로
+  });
 
   // 페이지네이션
   const itemsPerPage = 10;
@@ -86,10 +91,9 @@ const BoothAndFoodTruck: React.FC = () => {
                 setPage(1);
               }}
               className={`font-pretendard text-[17px] font-[700] leading-[22px]
-                ${
-                  activeTab === "all"
-                    ? "text-[#285100]"
-                    : "text-[rgba(125,149,100,0.63)]"
+                ${activeTab === "all"
+                  ? "text-[#285100]"
+                  : "text-[rgba(125,149,100,0.63)]"
                 }`}
             >
               전체
@@ -101,10 +105,9 @@ const BoothAndFoodTruck: React.FC = () => {
                 setPage(1);
               }}
               className={`font-pretendard text-[17px] font-[700] leading-[22px]
-                ${
-                  activeTab === "food"
-                    ? "text-[#285100]"
-                    : "text-[rgba(125,149,100,0.63)]"
+                ${activeTab === "food"
+                  ? "text-[#285100]"
+                  : "text-[rgba(125,149,100,0.63)]"
                 }`}
             >
               먹거리
@@ -116,10 +119,9 @@ const BoothAndFoodTruck: React.FC = () => {
                 setPage(1);
               }}
               className={`font-pretendard text-[17px] font-[700] leading-[22px]
-                ${
-                  activeTab === "promo"
-                    ? "text-[#285100]"
-                    : "text-[rgba(125,149,100,0.63)]"
+                ${activeTab === "promo"
+                  ? "text-[#285100]"
+                  : "text-[rgba(125,149,100,0.63)]"
                 }`}
             >
               체험 및 홍보
@@ -144,7 +146,7 @@ const BoothAndFoodTruck: React.FC = () => {
             setTouchStartX(null);
           }}
         >
-          <div className="relative w-[353px] h-[251px] flex justify-center items-center rounded-[10px] bg-[rgba(255,255,255,0.8)] shadow-md px-[10px] pt-[12px] pr-[9px] pb-[11px]">
+          <div className="relative w-[353px] h-[200px] flex justify-center items-center rounded-[10px] bg-[rgba(255,255,255,0.8)] shadow-md px-[10px] pt-[12px] pr-[9px] pb-[11px]">
             {/* 좌우 버튼 */}
             <button
               onClick={prevLocation}
@@ -195,10 +197,9 @@ const BoothAndFoodTruck: React.FC = () => {
                 setPage(1);
               }}
               className={`w-[85px] h-[38px] rounded-full text-[15px] font-pretendard font-bold leading-[22px] flex justify-center items-center
-                ${
-                  activeLocation === loc
-                    ? "bg-white text-[#285100]"
-                    : "bg-[#FFFFFFCC] text-[#A3B693]"
+                ${activeLocation === loc
+                  ? "bg-white text-[#285100]"
+                  : "bg-[#FFFFFFCC] text-[#A3B693]"
                 }`}
             >
               {loc}
@@ -255,9 +256,8 @@ const BoothAndFoodTruck: React.FC = () => {
                   onClick={() => setPage(i + 1)}
                 >
                   <img
-                    src={`/assets/booth/icons/${
-                      isActive ? "dot-active.svg" : "dot-inactive.svg"
-                    }`}
+                    src={`/assets/booth/icons/${isActive ? "dot-active.svg" : "dot-inactive.svg"
+                      }`}
                     alt={isActive ? "active" : "inactive"}
                     className="w-[10px] h-[10px]"
                   />

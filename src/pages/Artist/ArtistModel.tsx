@@ -1,74 +1,68 @@
 export const ArtistModel: Record<string, any> = {
   "1": {
-    mainImg: "/assets/artists/promise9.webp",
-    name: "에이핑크 (Apink)",
-    subText: "걸 그룹",
-    intro: "에이핑크(Apink)는 대한민국의 5인조 걸 그룹이다. 2013년 4월에 6인조로 재편되었으며, 2022년 4월에 5인조로 재편되었다. 팬클럽 이름은 'PANDA(판다)'이며, 응원봉은 '판다봉'이다. 공식 색상은 Strawberry Pink(딸기우유색)이다.",
-    songs: ["I'm So Sick", "LUV", "Mr.Chu"],
+    mainImg: "/assets/home/lineup/idol1.webp",
+    name: "전소미 (JEON SOMI)",
+    subText: "가수",
+    intro: "대한민국의 가수이자 영화배우, 방송인 그리고 사업가. 걸그룹 아이오아이 센터 출신의 솔로 가수로 음악, 광고, 패션, 화보, 예능, 연기, MC, 사업 등 다양한 분야에서 활약하고 있다.",
     extraInfo: [
-      { title: "멤버", desc: "5명" },
-      { title: "데뷔", desc: "2011" },
-      { title: "소속사", desc: "플랜에이" }
+      { title: "BIRTHDAY", desc: "2019", img:"/assets/home/lineup/album/idol1_sing1.webp"},
+      { title: "DUMB DUMB", desc: "2021", img:"/assets/home/lineup/album/idol1_sing2.webp"},
+      { title: "Fast Forward", desc: "2023", img:"/assets/home/lineup/album/idol1_sing3.webp"}
     ]
   },
   "2": {
-    mainImg: "/assets/artists/promise9.webp",
-    name: "아이유 (IU)",
-    subText: "솔로 가수",
-    intro: "아이유(IU)는 대한민국의 싱어송라이터 겸 배우이다. 2008년 데뷔하여 독보적인 음악적 색깔과 가창력으로 큰 사랑을 받고 있다.",
-    songs: ["좋은 날", "밤편지", "Blueming"],
+    mainImg: "/assets/home/lineup/idol2.webp",
+    name: "KISS OF LIFE",
+    subText: "걸그룹",
+    intro: "대한민국 4인조 걸그룹으로, 2023년 데뷔와 동시에 뛰어난 실력과 감각적인 음악으로 주목을 받았다.",
     extraInfo: [
-      { title: "생년월일", desc: "1993년 5월 16일" },
-      { title: "데뷔", desc: "2008" },
-      { title: "소속사", desc: "EDAM엔터테인먼트" }
+      { title: "Shhh", desc: "2023", img:"/assets/home/lineup/album/idol2_sing1.webp" },
+      { title: "Midas Touch", desc: "2023", img:"/assets/home/lineup/album/idol2_sing2.webp" },
+      { title: "Bad News", desc: "2024", img:"/assets/home/lineup/album/idol2_sing3.webp" }
     ]
   },
   "3": {
-    mainImg: "/assets/artists/promise9.webp",
-    name: "방탄소년단",
-    subText: "보이 그룹",
-    intro: "BTS는 대한민국의 7인조 보이 그룹으로, 전 세계적으로 큰 인기를 얻고 있다. 뛰어난 퍼포먼스와 음악적 완성도로 사랑받는다.",
-    songs: ["Dynamite", "Butter", "Permission to Dance"],
+    mainImg: "/assets/home/lineup/idol3.webp",
+    name: "박혜원 (HYNN)",
+    subText: "가수",
+    intro: "폭발적인 고음과 섬세한 감성으로 사랑받는 대한민국의 발라드 가수. 오디션 프로그램 출신으로 데뷔 후 꾸준히 명품 발라드를 발표하며 '차세대 발라드 여왕'으로 불리고 있다.",
     extraInfo: [
-      { title: "멤버", desc: "7명" },
-      { title: "데뷔", desc: "2013" },
-      { title: "소속사", desc: "빅히트" }
+      { title: "시든 꽃에 물을 주듯", desc: "2019", img:"/assets/home/lineup/album/idol3_sing1+2.webp" },
+      { title: "차가워진 이 바람엔 우리가 써있어", desc: "2020", img:"/assets/home/lineup/album/idol3_sing1+2.webp" },
+      { title: "막차", desc: "2022", img:"/assets/home/lineup/album/idol3_sing3.webp" }
     ]
   },
   "4": {
-    mainImg: "/assets/artists/promise9.webp",
-    name: "블랙핑크",
-    subText: "걸 그룹",
-    intro: "BLACKPINK는 YG엔터테인먼트 소속의 4인조 걸 그룹으로, 글로벌 팬층을 보유하고 있다.",
-    songs: ["DDU-DU DDU-DU", "Kill This Love", "How You Like That"],
+    mainImg: "/assets/home/lineup/idol4.webp",
+    name: "ASH ISLAND",
+    subText: "래퍼",
+    intro: "독특한 음색과 감각적인 멜로디로 힙합씬에서 주목받는 대한민국의 래퍼. 2018년 '고등래퍼 2'를 통해 이름을 알렸으며, 메가 히트곡으로 젊은 세대에게 큰 사랑을 받고 있다.",
     extraInfo: [
-      { title: "멤버", desc: "4명" },
-      { title: "데뷔", desc: "2016" },
-      { title: "소속사", desc: "YG엔터테인먼트" }
+      { title: "Paranoid", desc: "2019", img:"/assets/home/lineup/album/idol4_sing1.webp" },
+      { title: "멜로디 (feat. JUSTHIS)", desc: "2020", img:"/assets/home/lineup/album/idol4_sing2.webp" },
+      { title: "작별인사", desc: "2023", img:"/assets/home/lineup/album/idol4_sing3.webp" }
     ]
   },
   "5": {
-    mainImg: "/assets/artists/promise9.webp",
-    name: "세븐틴",
-    subText: "보이 그룹",
-    intro: "SEVENTEEN은 자체 제작 아이돌로 유명하며, 다채로운 음악과 퍼포먼스로 사랑받고 있다.",
-    songs: ["HOME;RUN", "Don't Wanna Cry", "Left & Right"],
+    mainImg: "/assets/home/lineup/idol5.webp",
+    name: "KIIRAS",
+    subText: "아이돌",
+    intro: "에너제틱한 사운드와 중독되는 사운드로 주목받는 린브랜딩 소속 6인조 걸그룹 ",
     extraInfo: [
-      { title: "멤버", desc: "13명" },
-      { title: "데뷔", desc: "2015" },
-      { title: "소속사", desc: "Pledis엔터테인먼트" }
+      { title: "KILL MA BO$$", desc: "2025", img:"/assets/home/lineup/album/idol5_sing1+2.webp" },
+      { title: "ZILLER!", desc: "2025", img:"/assets/home/lineup/album/idol5_sing1+2.webp" },
+      { title: "", desc: "" }
     ]
   },
   "6": {
-    mainImg: "/assets/artists/promise9.webp",
-    name: "레드벨벳",
-    subText: "걸 그룹",
-    intro: "Red Velvet은 다양한 음악 장르를 소화하는 5인조 걸 그룹으로, 밝고 개성 있는 콘셉트로 인기를 끌고 있다.",
-    songs: ["Red Flavor", "Psycho", "Bad Boy"],
+    mainImg: "/assets/home/lineup/idol6.webp",
+    name: "카더가든",
+    subText: "싱어송라이터",
+    intro: "따뜻하고 서정적인 음색으로 많은 사랑을 받는 대한민국의 싱어송라이터. 발라드와 인디 감성을 아우르는 음악으로 대중과 소통하고 있다.",
     extraInfo: [
-      { title: "멤버", desc: "5명" },
-      { title: "데뷔", desc: "2014" },
-      { title: "소속사", desc: "SM엔터테인먼트" }
+      { title: "Home Sweet Home", desc: "2017", img:"/assets/home/lineup/album/idol6_sing1.webp" },
+      { title: "나무", desc: "2019", img:"/assets/home/lineup/album/idol6_sing2.webp" },
+      { title: "우리의 밤을 외워요", desc: "2019", img:"/assets/home/lineup/album/idol6_sing3.webp"  }
     ]
   }
 };

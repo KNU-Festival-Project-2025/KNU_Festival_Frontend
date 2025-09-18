@@ -67,13 +67,14 @@ export default function BoothModal({ booth, onClose }: BoothModalProps) {
                             className="text-[14px] leading-[20px] font-ownglyph"
                             style={{ color: textColors.location }}
                         >
-                            {booth.location}{" "}
-                            {Array.isArray(booth.boothNumber)
-                                ? booth.boothNumber.join(",")
-                                : booth.boothNumber}
-                            번 부스
+                            {booth.location}
+                            {booth.boothNumber &&
+                                (Array.isArray(booth.boothNumber)
+                                    ? ` ${booth.boothNumber.join(",")}번 부스`
+                                    : ` ${booth.boothNumber}번 부스`)}
                         </span>
                     </div>
+
 
                     {/* 닫기 버튼 */}
                     <button

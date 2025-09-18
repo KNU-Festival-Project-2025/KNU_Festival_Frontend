@@ -2,63 +2,78 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TabNav from "../components/TabNav";
 import FAQItem from "../components/FAQItem";
+import api from "../utils/api";
 
 // FAQ 데이터
 const FAQ_DATA = [
   {
+    q: "HORTUS는 어떤 의미인가요?",
+    a: "HORTUS는 라틴어로 '정원'을 의미하며, 슬로건 '고요를 채울, 환희로 피어날'은 학우 여러분이 함께 어우러져 축제를 완성한다는 의미를 담고 있습니다."
+  },
+  {
+    q: "베스트 포토 이벤트 참여 방법은 무엇인가요?",
+    a: "축제 기간 촬영한 사진을 공식 웹사이트에 업로드 후, 선정된 사진은 축제 스케치 사진 상영회에서 방영됩니다."
+  },
+  {
     q: "공연 당일 우천 시에도 공연이 진행되나요?",
-    a: `인류의 앞이 풀이 꽃이 속에 그들의 사막이다. 따뜻한 방황하여도, 눈이 설산에서 생명을 밥을 구할 뿐이다. 날카로우나 그림자는 든 거친 원대하고, 별과 아니다. 그림자는 풀이 가슴에 용기가 이는 소담스러운 위하여서. 끝에 이상 방지하는 이성은 꽃이 이것이다.`,
+    a: "대부분 공연은 예정대로 진행되지만, 안전을 위해 일부 프로그램은 변경 또는 취소될 수 있습니다. 현장 안내를 확인해주세요."
   },
   {
-    q: "대동제 주점은 몇시까지 하나요?",
-    a: "인류의 앞이 풀이 꽃이 속에 그들의 사막이다. 따뜻한 방황하여도, 눈이 설산에서 생명을 밥을 구할 뿐이다. 날카로우나 그림자는 든 거친 원대하고, 별과 아니다. 그림자는 풀이 가슴에 용기가 이는 소담스러운 위하여서. 끝에 이상 방지하는 이성은 꽃이 이것이다.",
+    q: "대동제 주점은 몇 시까지 운영되나요?",
+    a: "60주년 기념관 및 미래광장 주점 모두 18:00~24:00 운영되며, 주류 판매는 23:30까지입니다."
   },
   {
-    q: "주문은 미리 예약하고 들어가나요?",
-    a: "일부 부스는 사전예약 운영. 부스별 안내 확인.",
+    q: "주문은 미리 예약하고 들어가야 하나요?",
+    a: "일부 부스는 사전 예약이 필요할 수 있습니다. 참여 전 부스별 안내를 확인해주세요."
   },
   {
-    q: `주점은 미리 예약하고 들어가야하나요?
-주점예약 안되어있으면 어디로 연락하죠?`,
-    a: "인류의 앞이 풀이 꽃이 속에 그들의 사막이다. 따뜻한 방황하여도, 눈이 설산에서 생명을 밥을 구할 뿐이다. 날카로우나 그림자는 든 거친 원대하고, 별과 아니다. 그림자는 풀이 가슴에 용기가 이는 소담스러운 위하여서. 끝에 이상 방지하는 이성은 꽃이 이것이다.",
+    q: "주점은 미리 예약해야 하나요? 예약 안 되어 있으면 어디로 연락하나요?",
+    a: "주점은 일반적으로 예약 없이 이용 가능합니다. 예약 관련 문의는 집행위원회 공식 연락처를 통해 안내받으실 수 있습니다."
   },
+  {
+    q: "부스 참여 혜택이 있나요?",
+    a: "체험 부스 참여 후 판매 부스 상품권을 받을 수 있으며, 현수막 키워드 찾기, 베스트 포토, 부스플래닛 등 다양한 참여 이벤트가 준비되어 있습니다."
+  },
+  {
+    q: "푸드트럭은 어디서 운영되나요?",
+    a: "푸드트럭은 60주년 기념관과 미래광장에 운영될 예정이며, 메뉴와 가격은 현장 안내를 확인해주세요."
+  },
+  {
+    q: "재학생 무대에 참여하고 싶다면 어떻게 하나요?",
+    a: "KNU Artist 프로그램(가요제, 밴드제, 댄스제)에 참여하려면 중앙동아리 소속이거나 집행위원회에 문의해야 합니다."
+  },
+  {
+    q: "사진 촬영과 SNS 공유가 가능한가요?",
+    a: "네, 가능하며 베스트 포토 이벤트 참여 시 공식 웹사이트에 사진 업로드 후 선정될 수 있습니다."
+  },
+  {
+    q: "전야제는 누구나 참여할 수 있나요?",
+    a: "재학생뿐 아니라 방문객 누구나 참여 가능합니다."
+  },
+  {
+    q: "부스 상품권 이벤트 참여 방법은 무엇인가요?",
+    a: "체험 부스 참여 후 상품권을 수령하며, 판매 부스에서 현금처럼 사용 가능합니다. 선착순 200명 대상입니다."
+  },
+
 ];
 
-// 방명록 데이터
-const GUESTBOOK_DATA = [
-  {
-    id: 1,
-    author: "익명1",
-    date: "9월 18일 09:41",
-    content: "우는 별들을 이름자 어머니 가을 있습니다.",
-    avatar: "👤",
-  },
-  {
-    id: 2,
-    author: "익명2",
-    date: "9월 18일 09:41",
-    content: "우는 별들을 이름자 어머니 가을 있습니다.",
-    avatar: "👤",
-  },
-  {
-    id: 3,
-    author: "익명3",
-    date: "9월 17일 14:30",
-    content: "축제가 정말 기대됩니다!",
-    avatar: "👤",
-  },
-];
+interface GuestbookItem {
+  guestbookId: number;
+  nickname: string;
+  content: string;
+  createdAt: string;
+}
 
 const FAQAndGuestbook: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"faq" | "guestbook">("faq");
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // ✅ 추가: FAQ 아코디언 상태
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // URL에 따라 탭 설정 (URL 변경 시에도 업데이트)
+  // 서버에서 가져온 방명록
+  const [guestbooks, setGuestbooks] = useState<GuestbookItem[]>([]);
+
+  // URL에 따라 탭 설정
   useEffect(() => {
     if (location.pathname === "/guestbook") {
       setActiveTab("guestbook");
@@ -67,6 +82,29 @@ const FAQAndGuestbook: React.FC = () => {
     }
   }, [location.pathname]);
 
+  // 서버에서 방명록 목록 가져오기
+  // 서버에서 방명록 목록 가져오기
+  useEffect(() => {
+    if (activeTab !== "guestbook") return;
+
+    const fetchGuestbooks = async () => {
+      try {
+        const res = await api.get("/api/guestbooks"); // accessToken 자동 첨부
+        if (res.data.code === 0) {
+          setGuestbooks(res.data.data);
+        } else {
+          alert(res.data.message || "방명록 불러오기 실패");
+        }
+      } catch (err: any) {
+        console.error("방명록 조회 오류:", err);
+        // 401 처리 등은 api.ts에서 자동
+        alert("방명록 불러오기 실패 또는 로그인 필요");
+        navigate("/login");
+      }
+    };
+
+    fetchGuestbooks();
+  }, [activeTab, navigate]);
   const handleTabChange = (tab: "faq" | "guestbook") => {
     setActiveTab(tab);
   };
@@ -78,7 +116,6 @@ const FAQAndGuestbook: React.FC = () => {
   return (
     <div className="w-full min-h-screen">
       <main className="relative w-full min-h-screen">
-        {/* 상단 spacer */}
         <div className="h-[40px] w-full pointer-events-none" aria-hidden />
 
         {/* TabNav */}
@@ -100,7 +137,6 @@ const FAQAndGuestbook: React.FC = () => {
               방명록 작성하기
             </button>
 
-            {/* 구분선 */}
             <div
               className="mt-[19px]"
               style={{
@@ -128,12 +164,19 @@ const FAQAndGuestbook: React.FC = () => {
                   }
                 />
               ))}
+
+              {/* 안내 문구를 FAQ 탭 맨 아래에만 출력 */}
+              <p className="mt-6 text-center font-pretendard text-white text-[14px] font-bold leading-[22px]">
+                자세한 내용은 @knuch_2025 로 문의 부탁드립니다
+              </p>
+
+
             </div>
           ) : (
             <div className="space-y-4">
-              {GUESTBOOK_DATA.map((comment) => (
+              {guestbooks.map((comment) => (
                 <div
-                  key={comment.id}
+                  key={comment.guestbookId}
                   className="w-full max-w-[353px] mx-auto rounded-[20px] bg-white/80 px-4 py-3 shadow-md"
                 >
                   {/* 작성자 정보 */}
@@ -148,10 +191,15 @@ const FAQAndGuestbook: React.FC = () => {
 
                     <div className="flex-1 flex justify-between items-center">
                       <span className="font-pretendard font-bold text-gray-800 text-sm">
-                        {comment.author}
+                        {comment.nickname}
                       </span>
                       <span className="font-pretendard text-xs text-gray-500">
-                        {comment.date}
+                        {new Date(comment.createdAt).toLocaleString("ko-KR", {
+                          month: "numeric",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </span>
                     </div>
                   </div>
@@ -162,24 +210,6 @@ const FAQAndGuestbook: React.FC = () => {
                   </p>
                 </div>
               ))}
-
-              {/* 페이지네이션 */}
-              <div className="flex justify-center mt-8">
-                <div className="flex items-center justify-center w-[353px] px-[12px] py-[8px] gap-[57px] flex-shrink-0 rounded-[40px] bg-[rgba(255,255,255,0.8)]">
-                  {[1, 2, 3, 4].map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                      className={`font-pretendard font-bold text-[17px] leading-[22px] transition-colors duration-200 ${currentPage === page
-                        ? "text-[#285100]"
-                        : "text-[rgba(125,149,100,0.63)]"
-                        }`}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
           )}
         </section>

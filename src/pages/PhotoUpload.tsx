@@ -1,43 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../utils/api';
+import { setAccessToken } from '../utils/auth';
 
 const PhotoUpload: React.FC = () => {
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState('');
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [content, setContent] = useState('');
-  
+
   // 순차적 필드 표시 상태
-  const [showNickname, setShowNickname] = useState(false);
   const [showImageSelect, setShowImageSelect] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
 
   // 페이지 로드 시 첫 번째 필드 표시
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowNickname(true);
-    }, 300);
+    const timer = setTimeout(() => setShowImageSelect(true), 300);
     return () => clearTimeout(timer);
   }, []);
 
-  // 닉네임 입력 완료 시 다음 필드 표시
-  useEffect(() => {
-    if (nickname.trim().length > 0) {
-      const timer = setTimeout(() => {
-        setShowImageSelect(true);
-      }, 200);
-      return () => clearTimeout(timer);
-    }
-  }, [nickname]);
-
-  // 이미지 선택 완료 시 다음 필드 표시
+  // 이미지 선택 완료 시 내용 입력 표시
   useEffect(() => {
     if (selectedImage) {
-      const timer = setTimeout(() => {
-        setShowContent(true);
-      }, 200);
+      const timer = setTimeout(() => setShowContent(true), 200);
       return () => clearTimeout(timer);
     }
   }, [selectedImage]);
@@ -45,9 +31,7 @@ const PhotoUpload: React.FC = () => {
   // 내용 입력 완료 시 제출 버튼 표시
   useEffect(() => {
     if (content.trim().length > 0) {
-      const timer = setTimeout(() => {
-        setShowSubmit(true);
-      }, 200);
+      const timer = setTimeout(() => setShowSubmit(true), 200);
       return () => clearTimeout(timer);
     }
   }, [content]);
@@ -57,89 +41,63 @@ const PhotoUpload: React.FC = () => {
     if (file) {
       setSelectedImage(file);
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target?.result as string);
-      };
+      reader.onload = (e) => setImagePreview(e.target?.result as string);
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = () => {
-    if (!selectedImage) {
-      alert('사진을 선택해주세요.');
-      return;
+const handleSubmit = async () => {
+  if (!selectedImage) {
+    alert('사진을 선택해주세요.');
+    return;
+  }
+  if (!content.trim()) {
+    alert('내용을 입력해주세요.');
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+
+    // 파일
+    formData.append('file', selectedImage);
+
+    // JSON 요청을 Blob으로 만들어 multipart 안에 추가
+    const jsonBlob = new Blob([JSON.stringify({ content })], { type: 'application/json' });
+    formData.append('request', jsonBlob);
+
+    // axios에서 Content-Type 제거 → 브라우저가 boundary 포함 multipart/form-data 자동 설정
+    const response = await api.post('/api/photo', formData);
+
+    // accessToken 갱신
+    const newAccessToken = response.headers['accesstoken'];
+    if (newAccessToken) setAccessToken(newAccessToken);
+
+    if (response.status === 200 && response.data?.code === 0) {
+      alert(response.data.message || '사진 업로드 성공!');
+      navigate('/photo-festival');
+    } else {
+      alert(response.data?.message || '업로드 실패');
     }
- 
-    // 성공 후 포토페스티벌 페이지로 이동
-    navigate('/photo-festival');
-  };
+  } catch (err: any) {
+    console.error('사진 업로드 오류:', err);
+    if (err.response?.status === 401) {
+      alert('유효하지 않은 토큰입니다. 로그인 후 다시 시도해주세요.');
+    } else {
+      alert('사진 업로드 중 오류가 발생했습니다.');
+    }
+  }
+};
+
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* 배경 패턴 - 잎사귀 */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-16 left-4 w-6 h-6 bg-green-300 rounded-full"></div>
-        <div className="absolute top-24 right-8 w-4 h-4 bg-green-400 rounded-full"></div>
-        <div className="absolute top-40 left-12 w-3 h-3 bg-green-200 rounded-full"></div>
-        <div className="absolute top-56 right-16 w-5 h-5 bg-green-300 rounded-full"></div>
-        <div className="absolute bottom-32 left-8 w-4 h-4 bg-green-400 rounded-full"></div>
-        <div className="absolute bottom-20 right-12 w-6 h-6 bg-green-200 rounded-full"></div>
-      </div>
-
-      {/* 나비 아이콘들 */}
-      <div className="absolute top-24 left-8 w-6 h-6 text-white opacity-70">
-        <svg fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div className="absolute top-56 right-12 w-5 h-5 text-white opacity-50">
-        <svg fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-
-      {/* 하단 장식 - 정원 테마 */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-green-200 to-transparent">
-        <div className="absolute bottom-2 left-6 w-8 h-8 bg-green-300 rounded-full opacity-60"></div>
-        <div className="absolute bottom-4 right-10 w-6 h-6 bg-green-400 rounded-full opacity-50"></div>
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-5 h-5 bg-green-200 rounded-full opacity-40"></div>
-        <div className="absolute bottom-8 right-6 w-4 h-4 bg-green-300 rounded-full opacity-30"></div>
-      </div>
-      
-      {/* HORTUS 로고 */}
-      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-green-300 text-xs opacity-70 font-light">
-        HORTUS
-      </div>
-
       <div className="relative z-10 pt-20 px-6 pb-8">
-        {/* 닉네임 입력 */}
+        {/* 이미지 선택 */}
         <div className={`mb-6 transition-all duration-700 ease-out ${
-          showNickname 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-4'
+          showImageSelect ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
-          <label className="block text-green-800 font-semibold mb-2 text-sm">
-            닉네임
-          </label>
-          <input
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="5글자 내로 입력"
-            maxLength={5}
-            className="w-full px-4 py-3 bg-white/60 rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 text-sm"
-          />
-        </div>
-
-        {/* 사진 선택 */}
-        <div className={`mb-6 transition-all duration-700 ease-out ${
-          showImageSelect 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-4'
-        }`}>
-          <label className="block text-green-800 font-semibold mb-2 text-sm">
-            사진 선택
-          </label>
+          <label className="block text-green-800 font-semibold mb-2 text-sm">사진 선택</label>
           <div className="relative">
             <input
               type="file"
@@ -162,13 +120,9 @@ const PhotoUpload: React.FC = () => {
 
         {/* 내용 입력 */}
         <div className={`mb-8 transition-all duration-700 ease-out ${
-          showContent 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-4'
+          showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
-          <label className="block text-green-800 font-semibold mb-2 text-sm">
-            내용
-          </label>
+          <label className="block text-green-800 font-semibold mb-2 text-sm">내용</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -181,9 +135,7 @@ const PhotoUpload: React.FC = () => {
 
         {/* 등록 버튼 */}
         <div className={`transition-all duration-700 ease-out ${
-          showSubmit 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-4'
+          showSubmit ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
           <button
             onClick={handleSubmit}

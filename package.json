@@ -19,17 +19,20 @@
     "@fontsource/pretendard": "^5.2.5",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/vite": "^4.1.12",
+    "axios": "^1.12.2",
     "clsx": "^2.1.1",
     "lucide-react": "^0.542.0",
     "pretendard": "^1.3.9",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-masonry-css": "^1.0.16",
-    "react-router-dom": "^7.9.1"
+    "react-router-dom": "^7.9.1",
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^24.5.1",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
@@ -47,6 +50,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
+    "vite-plugin-radar": "^0.10.1",
     "vite-plugin-svgr": "^4.5.0"
   }
 }

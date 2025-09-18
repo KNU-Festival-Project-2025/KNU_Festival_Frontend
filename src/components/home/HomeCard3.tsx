@@ -23,53 +23,50 @@ export const HomeCard3: React.FC<HomeCard3Props> = ({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // number 값에 따라 /celebrity/숫자 형태로 이동
     navigate(`/artist/${number}`);
   };
 
   const textBlock = (
-    <div className="ml-[20px]">
-      <p className="mt-[45px] text-[#2F86E9] font-Pretendard text-[17px] font-bold leading-[22px]">
-        {dayText}
-      </p>
-      <p className="text-black font-Pretendard text-[17px] font-bold leading-[20px]">
-        {dateText}
-      </p>
-      <p className="text-black font-Pretendard text-[17px] font-bold leading-[22px]">
-        {nameText}
-      </p>
-      <img src="assets/home/ArrowMove.svg" alt="" className="mt-[10px]" />
+    <div className="flex flex-col justify-center min-w-[30%]">
+      <p className="text-[#2F86E9] font-Pretendard font-bold text-[1.1em] leading-[1.3em]">{dayText}</p>
+      <p className="text-black font-Pretendard font-bold text-[1.1em] leading-[1.2em]">{dateText}</p>
+      <p className="text-black font-Pretendard font-bold text-[1.1em] leading-[1.3em]">{nameText}</p>
+      <img src="assets/home/ArrowMove.svg" alt="" className="mt-[2%] w-[20%] h-auto" />
     </div>
   );
 
-  const imageBlock = (
-    <img
-      src={mainImgSrc}
-      alt=""
-      className="ml-[10px] w-[239px] h-[187px]"
-    />
-  );
-
   return (
-    <div 
-      className="w-[330px] h-[255px] ml-[21px] cursor-pointer"
-      onClick={handleClick}  // 클릭 시 navigate
-    >
+    <div className="w-full max-w-[330px] mx-auto cursor-pointer relative" onClick={handleClick}>
+      {/* 로고 */}
       <img
         src={logoSrc}
         alt=""
-        className="w-[141px] h-[47px] ml-[142px] rotate-[12.796deg]"
+        className={`absolute top-[5%] w-[35%] ${
+          imagePosition === 'left'
+            ? 'left-[50%] -translate-x-1/2 rotate-[12deg]'
+            : 'right-[50%] translate-x-1/2 -rotate-[12deg]'
+        }`}
       />
-      <div className="flex">
+
+      {/* 카드 내용 */}
+      <div className="flex mt-[20%] gap-[5%] items-center">
         {imagePosition === 'left' ? (
           <>
-            {imageBlock}
+            <img
+              src={mainImgSrc}
+              alt=""
+              className="w-[70%] h-auto rounded-lg shadow-md"
+            />
             {textBlock}
           </>
         ) : (
           <>
             {textBlock}
-            {imageBlock}
+            <img
+              src={mainImgSrc}
+              alt=""
+              className="w-[70%] h-auto rounded-lg shadow-md"
+            />
           </>
         )}
       </div>
