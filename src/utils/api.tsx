@@ -63,7 +63,48 @@ api.interceptors.response.use(
 
     return Promise.reject(err);
   }
+);api.interceptors.response.use(
+  (res) => res,
+  async (err) => {
+    const originalRequest = err.config;
+
+    // 로그인 요청이 아니고, 아직 재시도 안 한 경우
+    if (
+      err.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes("/api/auth/login")
+    ) {
+      originalRequest._retry = true;
+
+      try {
+        // 쿠키 기반 refreshToken으로 accessToken 재발급
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}/api/auth/reissue`,
+          {},
+          { withCredentials: true }
+        );
+
+        const newToken = response.data.data.accessToken;
+        if (newToken) {
+          setAccessToken(newToken);
+          originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+          return axios(originalRequest);
+        }
+
+        removeAccessToken();
+        alert("로그인이 필요한 서비스입니다.");
+        return Promise.reject(err);
+      } catch {
+        removeAccessToken();
+        alert("로그인이 필요한 서비스입니다.");
+        return Promise.reject(err);
+      }
+    }
+
+    return Promise.reject(err);
+  }
 );
+
 
 
 export default api;
