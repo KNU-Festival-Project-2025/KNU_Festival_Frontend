@@ -18,6 +18,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* 모바일 브라우저 바 대응을 위한 CSS 변수 */
+  --vh: 1vh;
+  /* JavaScript로 동적 업데이트 */
 }
 
 @font-face {
@@ -154,6 +158,7 @@ html {
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     transform: scale(1);
@@ -165,6 +170,7 @@ html {
 }
 
 @keyframes floating {
+
   0%,
   100% {
     transform: translateY(0px);
@@ -236,15 +242,80 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
   transition: left 0.5s;
 }
 
 .menu-item-hover:hover::before {
   left: 100%;
+}
+
+/* 모바일 브라우저 바 대응을 위한 폴백 클래스 */
+.h-screen-fallback {
+  height: 100vh;
+  /* 기본값 */
+  height: calc(var(--vh, 1vh) * 100);
+  /* JavaScript로 계산된 값 사용 */
+}
+
+.min-h-screen-fallback {
+  min-height: 100vh;
+  /* 기본값 */
+  min-height: calc(var(--vh, 1vh) * 100);
+  /* JavaScript로 계산된 값 사용 */
+}
+
+.max-h-screen-fallback {
+  max-height: 100vh;
+  /* 기본값 */
+  max-height: calc(var(--vh, 1vh) * 100);
+  /* JavaScript로 계산된 값 사용 */
+}
+
+/* 더 강력한 뷰포트 높이 설정 */
+.h-screen-robust {
+  height: 100vh;
+  /* 기본값 */
+  height: 100dvh;
+  /* 동적 뷰포트 높이 (지원하는 브라우저) */
+  height: calc(var(--vh, 1vh) * 100);
+  /* JavaScript 폴백 */
+}
+
+.min-h-screen-robust {
+  min-height: 100vh;
+  /* 기본값 */
+  min-height: 100dvh;
+  /* 동적 뷰포트 높이 (지원하는 브라우저) */
+  min-height: calc(var(--vh, 1vh) * 100);
+  /* JavaScript 폴백 */
+}
+
+/* 932px 이상일 때 최대 높이를 932px로 제한하는 하이브리드 클래스 */
+.h-screen-hybrid {
+  height: 100vh;
+  /* 기본값 */
+  height: 100dvh;
+  /* 동적 뷰포트 높이 (지원하는 브라우저) */
+  height: calc(var(--vh, 1vh) * 100);
+  /* JavaScript 폴백 */
+}
+
+/* 932px 이상일 때 최대 높이 제한 */
+@media (min-height: 932px) {
+  .h-screen-hybrid {
+    height: 932px !important;
+    max-height: 932px !important;
+  }
+}
+
+/* 추가 안전장치: 매우 큰 화면에서도 932px 제한 */
+@media (min-height: 1000px) {
+  .h-screen-hybrid {
+    height: 932px !important;
+    max-height: 932px !important;
+  }
 }

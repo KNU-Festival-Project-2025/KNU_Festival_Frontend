@@ -230,6 +230,29 @@ const Home: React.FC = () => {
     };
   }, []);
 
+  // 뷰포트 높이 계산 및 업데이트 (모바일 브라우저 바 대응)
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      // 실제 뷰포트 높이 계산 (모바일 브라우저 바 고려)
+      const vh = window.innerHeight * 0.01;
+      
+      // CSS 변수로 설정 (폴백용)
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    // 초기 설정
+    updateViewportHeight();
+
+    // 리사이즈 이벤트 리스너
+    window.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('orientationchange', updateViewportHeight);
+
+    return () => {
+      window.removeEventListener('resize', updateViewportHeight);
+      window.removeEventListener('orientationchange', updateViewportHeight);
+    };
+  }, []);
+
   // 스크롤 이벤트 리스너
   useEffect(() => {
     const handleScroll = () => {
@@ -353,7 +376,7 @@ const Home: React.FC = () => {
     >
       <div
         ref={scroll1Ref}
-        className="w-full h-screen min-h-[600px] max-h-[932px] flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-center "
+        className="w-full h-screen-hybrid min-h-[600px] flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-center "
       >
         <div
           className={`text-center mt-[95px] transition-all duration-1000 ${
@@ -455,7 +478,7 @@ const Home: React.FC = () => {
         </div>
 
         <div
-          className={`h-[73px] mt-[60px] text-centertransition-all duration-300 ${
+          className={`h-[63px] mt-[60px] text-centertransition-all duration-300 ${
             isVisible.button
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -486,7 +509,7 @@ const Home: React.FC = () => {
       
       <div
         ref={scroll2Ref}
-        className="w-full h-screen min-h-[600px] max-h-[932px] pt-[70px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center relative overflow-hidden"
+        className="w-full h-screen-hybrid min-h-[600px] pt-[70px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center relative overflow-hidden"
       >
         {/* 첫 번째 카드 - 하이브리드 위치 */}
         <div className="absolute top-[8vh] lg:top-[70px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
@@ -606,7 +629,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       
-      <div className="w-full h-screen min-h-[600px] max-h-[932px] pt-[15px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center relative overflow-hidden">
+      <div className="w-full h-screen-hybrid min-h-[600px] pt-[15px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center relative overflow-hidden">
         
         {/* 네 번째 카드 - 하이브리드 위치 */}
         <div className="absolute top-[1vh] lg:top-[10px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
@@ -749,7 +772,7 @@ const Home: React.FC = () => {
       {/* scroll3 시작 */}
       <div
         ref={scroll3Ref}
-        className="w-full h-screen min-h-[600px] max-h-[932px] pt-[90px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-center overflow-hidden"
+        className="w-full h-screen-hybrid min-h-[600px] pt-[90px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-center overflow-hidden"
       >
         <div 
           ref={card60thRef}
@@ -796,7 +819,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full h-screen min-h-[600px] max-h-[932px] pt-[64px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-center overflow-hidden">
+      <div className="w-full h-screen-hybrid min-h-[600px] pt-[64px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-center overflow-hidden">
         <div 
           ref={cardStadiumRef}
           className={`transition-all duration-1000 ${
@@ -863,7 +886,7 @@ const Home: React.FC = () => {
 
       <div
         ref={scroll4Ref}
-        className="w-full h-screen min-h-[600px] max-h-[932px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] flex justify-center items-center overflow-hidden"
+        className="w-full h-screen-hybrid min-h-[600px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] flex justify-center items-center overflow-hidden"
       >
         <div className="flex flex-col w-[343.699px] h-[364px]">
           <div 
