@@ -10,7 +10,10 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = getAccessToken();
   // 로그인/회원가입 요청에는 Authorization 헤더 제외
-  if (token && !config.url?.includes("/login")) {
+  if (token &&
+    !config.url?.includes("/api/auth/login") &&
+    !config.url?.includes("/login")
+) {
     config.headers!["Authorization"] = `Bearer ${token}`;
   }
   return config;
