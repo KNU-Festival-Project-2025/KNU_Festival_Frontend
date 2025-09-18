@@ -1,3 +1,4 @@
+// kakaologin.ts
 import api from "../utils/api";
 
 export interface KakaoLoginBody {
@@ -10,8 +11,10 @@ export interface KakaoLoginResponse {
   accessToken: string;
   nickname?: string;
 }
+
 export const kakaoLogin = async (body: KakaoLoginBody): Promise<KakaoLoginResponse> => {
-  console.log("kakaoLogin 호출, 전송 body:", body);
+  console.group("🔹 kakaoLogin 호출");
+  console.log("전송 body:", body);
 
   try {
     const res = await api.post("/api/auth/login", body);
@@ -28,14 +31,18 @@ export const kakaoLogin = async (body: KakaoLoginBody): Promise<KakaoLoginRespon
     const nickname = res.data?.data?.nickname;
 
     if (res.data.code === 0 && accessToken) {
-      console.log("로그인 성공, accessToken:", accessToken, "nickname:", nickname);
+      console.log("✅ 로그인 성공");
+      console.log("accessToken:", accessToken, "nickname:", nickname);
+      console.groupEnd();
       return { accessToken, nickname };
     }
 
-    console.warn("로그인 실패 조건 충족, message:", res.data.message);
+    console.warn("⚠️ 로그인 실패 조건 충족, message:", res.data.message);
+    console.groupEnd();
     throw new Error(res.data.message || "로그인 실패");
   } catch (err: any) {
-    console.error("kakaoLogin 에러:", err.response?.data || err.message);
+    console.error("❌ kakaoLogin 에러:", err.response?.status, err.response?.data || err.message);
+    console.groupEnd();
     throw err;
   }
 };
