@@ -1,23 +1,19 @@
 // utils/api.ts
 import axios from "axios";
-import { getAccessToken, setAccessToken, removeAccessToken } from "./auth";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
 });
 
-// 🔹 요청 interceptor: 로그인 요청 제외, 로그아웃 포함
-api.interceptors.request.use((config) => {
-  const token = getAccessToken();
-
-  // 로그인 요청에는 Authorization 헤더 제외
-  if (token && !config.url?.includes("/api/auth/login")) {
-    config.headers!["Authorization"] = `Bearer ${token}`;
-  }
-
-  return config;
-});
+// 🔹 요청 interceptor 제거 (헤더 자동 추가 안 함)
+// api.interceptors.request.use((config) => {
+//   const token = getAccessToken();
+//   if (token && !config.url?.includes("/api/auth/login")) {
+//     config.headers!["Authorization"] = `Bearer ${token}`;
+//   }
+//   return config;
+// });
 
 // 🔹 응답 interceptor: 401 처리 (재발급)
 api.interceptors.response.use(
@@ -43,16 +39,14 @@ api.interceptors.response.use(
 
         const newToken = response.data.data.accessToken;
         if (newToken) {
-          setAccessToken(newToken);
+          // setAccessToken(newToken); // 헤더 자동 추가 없으므로 직접 사용 필요
           originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
           return axios(originalRequest);
         }
 
-        removeAccessToken();
         alert("로그인이 필요한 서비스입니다.");
         return Promise.reject(err);
       } catch {
-        removeAccessToken();
         alert("로그인이 필요한 서비스입니다.");
         return Promise.reject(err);
       }

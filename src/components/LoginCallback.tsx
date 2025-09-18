@@ -8,6 +8,8 @@ const LoginCallback: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { setAuth } = useAuth();
+  
+  
 
   useEffect(() => {
   const code = searchParams.get("code");
@@ -22,9 +24,11 @@ const LoginCallback: React.FC = () => {
   const nickname = sessionStorage.getItem("nickname") || undefined;
   const phone = sessionStorage.getItem("phone") || undefined;
   console.log("sessionStorage nickname, phone:", nickname, phone);
+  console.log("kakaoLogin 호출, 전송 body:", { code, nickname, phone });
 
   kakaoLogin({ code, nickname, phone })
     .then((data) => {
+      console.log("kakaoLogin 호출, 전송 body:", { code, nickname, phone });
       console.log("kakaoLogin then 데이터:", data);
       setAuth(data.accessToken, data.nickname);
       console.log('Saved Token:', sessionStorage.getItem('accessToken'));
