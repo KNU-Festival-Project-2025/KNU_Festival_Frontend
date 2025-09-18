@@ -5,6 +5,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        'lg': '932px', // 932px 이상에서 고정 위치 사용
+      },
       fontFamily: {
         pretendard: ["Pretendard", "sans-serif"], // FAQItem 전용
         hssantokki: ["HS산토끼체", "HS-Santokki"],
