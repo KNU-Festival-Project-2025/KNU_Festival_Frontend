@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import TabNav from "../components/TabNav";
 import FAQItem from "../components/FAQItem";
 import api from "../utils/api";
+import { useAuth } from "../utils/AuthContext";
+import LoginModal from "../components/LoginModal";
 
 // FAQ 데이터
 const FAQ_DATA = [
@@ -65,10 +67,12 @@ interface GuestbookItem {
 }
 
 const FAQAndGuestbook: React.FC = () => {
+  const { nickname } = useAuth(); // 로그인 여부 확인
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"faq" | "guestbook">("faq");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [loginOpen, setLoginOpen] = useState(false); // 모달 상태
 
   // 서버에서 가져온 방명록
   const [guestbooks, setGuestbooks] = useState<GuestbookItem[]>([]);
@@ -109,7 +113,12 @@ const FAQAndGuestbook: React.FC = () => {
     setActiveTab(tab);
   };
 
-  const handleWriteGuestbook = () => {
+   const handleWriteGuestbook = () => {
+    if (!nickname) {
+      alert("로그인이 필요한 서비스입니다.");
+      setLoginOpen(true); // 여기서 모달 열기
+      return;
+    }
     navigate("/guestbook/write");
   };
 
@@ -136,6 +145,9 @@ const FAQAndGuestbook: React.FC = () => {
             >
               방명록 작성하기
             </button>
+
+            {/* 로그인 모달 */}
+          <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
 
             <div
               className="mt-[19px]"

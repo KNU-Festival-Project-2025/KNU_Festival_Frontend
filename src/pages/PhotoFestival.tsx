@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import api from "../utils/api";
+import { useAuth } from "../utils/AuthContext";
+import LoginModal from "../components/LoginModal";
 
 interface PhotoPost {
   id: number;
@@ -137,6 +139,9 @@ const PhotoFestival: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [posts, setPosts] = useState<PhotoPost[]>([]);
+  const { nickname } = useAuth(); // 로그인 여부 확인
+  const [loginOpen, setLoginOpen] = useState(false); // 모달 상태
+  
 
   // API 호출
     useEffect(() => {
@@ -155,6 +160,8 @@ const PhotoFestival: React.FC = () => {
             height: 200 + Math.floor(Math.random() * 200),
           }));
           setPosts(mappedPosts);
+        } else if(nickname === "") {
+          setLoginOpen(true); // 여기서 모달 열기
         } else {
           console.error("사진 조회 실패:", data.message);
         }
@@ -321,6 +328,10 @@ const PhotoFestival: React.FC = () => {
           <span className="text-gray-700 font-semibold">사진 업로드하기</span>
         </button>
       </div>
+
+                  {/* 로그인 모달 */}
+      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+
 
       {/* ScrollTop Button */}
       {showScrollTop && (
