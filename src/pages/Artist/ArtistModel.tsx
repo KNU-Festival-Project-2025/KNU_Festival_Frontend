@@ -1,5 +1,3 @@
-import { link } from "fs";
-
 export const ArtistModel: Record<string, any> = {
   "1": {
     mainImg: "/assets/home/lineup/album/rectangle/idolRactangle1.webp",
