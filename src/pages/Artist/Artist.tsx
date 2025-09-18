@@ -20,7 +20,6 @@ const Artist: React.FC = () => {
   className="
     mx-auto 
     w-[90%] max-w-[400px] 
-    h-[80vh]
     sm:w-[90%] md:w-[354px] 
     justify-center items-center
     flex flex-col 
