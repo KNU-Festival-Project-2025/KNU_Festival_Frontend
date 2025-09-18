@@ -1,5 +1,5 @@
-// LoginCallback.tsx (안전 버전)
-import React, { useEffect } from "react";
+// LoginCallback.tsx
+import React, { useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { kakaoLogin } from "./kakaologin";
@@ -10,21 +10,23 @@ const LoginCallback: React.FC = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
 
+  // 🔹 중복 호출 방지용 ref
+  const loginCalledRef = useRef(false);
+
   useEffect(() => {
+    if (loginCalledRef.current) return; // 이미 호출됐으면 중단
+    loginCalledRef.current = true;
+
     const code = searchParams.get("code");
+    console.log("🔹 카카오 로그인 콜백 code:", code);
+
     if (!code) {
       toast.error("로그인 코드가 없습니다.");
       navigate("/");
       return;
     }
 
-    // 중복 호출 방지
-    if (sessionStorage.getItem("kakaoLoginCalled")) {
-      console.warn("⚠️ kakaoLogin 이미 호출됨, skip");
-      return;
-    }
-    sessionStorage.setItem("kakaoLoginCalled", "true");
-
+    // nickname과 phone 가져오기 (optional)
     const nickname = sessionStorage.getItem("nickname") || undefined;
     const phone = sessionStorage.getItem("phone") || undefined;
     console.log("sessionStorage nickname, phone:", nickname, phone);
@@ -34,35 +36,22 @@ const LoginCallback: React.FC = () => {
 
     kakaoLogin(body)
       .then((data) => {
-        if (!data.accessToken) {
-          toast.error("AccessToken이 없습니다. 다시 로그인해주세요.");
-          sessionStorage.removeItem("kakaoLoginCalled");
-          navigate("/login");
-          return;
-        }
-
+        console.log("kakaoLogin then 데이터:", data);
         setAuth(data.accessToken, data.nickname);
-        sessionStorage.setItem("accessToken", data.accessToken);
-        console.log("✅ Saved Token:", sessionStorage.getItem("accessToken"));
 
-        sessionStorage.removeItem("phone");
-        sessionStorage.removeItem("kakaoLoginCalled");
+        // sessionStorage에 저장
+        sessionStorage.setItem("accessToken", data.accessToken);
+        if (data.nickname) sessionStorage.setItem("nickname", data.nickname);
+        if (phone) sessionStorage.setItem("phone", phone);
+
+        console.log("Saved Token:", sessionStorage.getItem("accessToken"));
+        sessionStorage.removeItem("phone"); // 선택적으로 삭제
         toast.success("로그인 성공!");
         navigate("/", { replace: true });
       })
-      .catch((err: any) => {
+      .catch((err) => {
         console.error("Login POST 에러:", err);
-
-        // 카카오 code 만료 또는 유효하지 않은 토큰
-        if (err.response?.status === 401 || err.message.includes("유효하지 않은 토큰")) {
-          toast.error("카카오 로그인 코드가 만료되었습니다. 다시 로그인해주세요.");
-          sessionStorage.removeItem("kakaoLoginCalled");
-          navigate("/login"); // 로그인 페이지 재시도
-          return;
-        }
-
         toast.error("로그인에 실패했습니다.");
-        sessionStorage.removeItem("kakaoLoginCalled");
         navigate("/");
       });
   }, [searchParams, navigate, setAuth]);
