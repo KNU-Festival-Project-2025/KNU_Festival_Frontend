@@ -318,7 +318,14 @@ const PhotoFestival: React.FC = () => {
         isUploadButtonVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}>
         <button
-          onClick={() => navigate('/photo-upload')}
+            onClick={() => {
+              if (!nickname) {
+                alert("로그인이 필요한 서비스입니다.");
+                setLoginOpen(true); // 모달 열기
+                return;
+              }
+              navigate('/photo-upload');
+            }}
           className="w-full bg-white/80 rounded-3xl px-6 py-4 shadow-2xl flex items-center justify-center space-x-3 hover:shadow-3xl transition-all duration-300"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
