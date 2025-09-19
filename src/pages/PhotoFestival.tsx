@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
+//import React, { useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Masonry from 'react-masonry-css';
-import api from "../utils/api";
+//import Masonry from 'react-masonry-css';
+//import api from "../utils/api";
 import { useAuth } from "../utils/AuthContext";
 import LoginModal from "../components/LoginModal";
 
@@ -14,7 +15,7 @@ interface PhotoPost {
   caption: string;
   height: number;
 }
-
+{/*
 interface PhotoCardProps {
   post: PhotoPost;
   isVisible: boolean;
@@ -23,7 +24,8 @@ interface PhotoCardProps {
   showDeleteMenu: number | null;
   onToggleDeleteMenu: (id: number) => void;
 }
-
+*/}
+{/*
 const PhotoCard = memo<PhotoCardProps>(({
   post,
   isVisible,
@@ -125,21 +127,25 @@ const PhotoCard = memo<PhotoCardProps>(({
     </div>
   );
 });
+*/}
 
+{/*
 const fetchPhotos = async () => {
   const res = await api.get("/api/photo"); // interceptors가 자동으로 토큰 붙여줌
   return res.data;
 };
+*/}
 
 const PhotoFestival: React.FC = () => {
   const navigate = useNavigate();
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
-  const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+  const [{/*visibleCards*/}, setVisibleCards] = useState<Set<number>>(new Set());
+  const [{/*isDescriptionVisible*/}, setIsDescriptionVisible] = useState(false);
   const [isUploadButtonVisible, setIsUploadButtonVisible] = useState(false);
   const [showDeleteMenu, setShowDeleteMenu] = useState<number | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [posts, setPosts] = useState<PhotoPost[]>([]);
+  const [posts] = useState<PhotoPost[]>([]);
+  //const [setPosts] = useState<PhotoPost[]>([]);
   const { nickname } = useAuth(); // 로그인 여부 확인
   const [loginOpen, setLoginOpen] = useState(false); // 모달 상태
   
@@ -230,7 +236,7 @@ const PhotoFestival: React.FC = () => {
   }, []);
 
   const scrollToTop = () => scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
-
+{/*
  const handleLike = useCallback(async (id: number) => {
   try {
     const res = await api.post(`/api/photo/like/${id}`);
@@ -253,8 +259,8 @@ const PhotoFestival: React.FC = () => {
     console.error("좋아요 API 에러:", err);
   }
 }, []);
-
-
+*/}
+{/*
   const handleDelete = useCallback(async (id: number) => {
   try {
     const res = await api.delete(`/api/photo/${id}`);
@@ -277,12 +283,12 @@ const PhotoFestival: React.FC = () => {
     }
   }
 }, []);
-
-
+*/}
+{/*}
   const toggleDeleteMenu = useCallback((id: number) => {
     setShowDeleteMenu(prev => (prev === id ? null : id));
   }, []);
-
+*/}
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       {/*   <div className={`px-4 py-4 text-center flex-shrink-0 transition-all duration-800 ease-out ${

@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { HomeCard2 } from "../components/home/HomeCard2";
-import { HomeCard3 } from "../components/home/HomeCard3";
 import { RefButton } from "../components/home/RefButton";
 import { useNavigate } from "react-router-dom";
 
@@ -134,10 +133,11 @@ const Home: React.FC = () => {
   //네비게이터
   const navigate = useNavigate();
 
+  {/*
   const handleArtistClick = (number: string) => {
     navigate(`/artist/${number}`);
   };
-
+*/}
   // 애니메이션 상태
   const [isVisible, setIsVisible] = useState({
     logo: false,
@@ -146,7 +146,7 @@ const Home: React.FC = () => {
   });
 
   // 각 카드의 가시성 상태
-  const [cardVisibility, setCardVisibility] = useState({
+  const [{/*cardVisibility*/}, setCardVisibility] = useState({
     card1: false,
     card2: false,
     card3: false,
