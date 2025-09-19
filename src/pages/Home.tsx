@@ -555,7 +555,7 @@ const Home: React.FC = () => {
               DAY 3
             </div>
             <div className="text-[#002A59] text-center font-pretendard text-[17px] font-bold leading-[22px]">
-              9.235
+              9.25
             </div>
           </div>
         </div>
