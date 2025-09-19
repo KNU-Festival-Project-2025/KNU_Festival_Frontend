@@ -50,6 +50,7 @@ const PhotoCard = memo<PhotoCardProps>(({
     }
   };
 
+
   useEffect(() => {
     if (showDeleteMenu === post.id && shouldShowMenu) {
       const timer = setTimeout(() => setIsMenuAnimating(false), 10);
@@ -142,36 +143,39 @@ const PhotoFestival: React.FC = () => {
   const { nickname } = useAuth(); // 로그인 여부 확인
   const [loginOpen, setLoginOpen] = useState(false); // 모달 상태
   
-
+{/*
   // API 호출
     useEffect(() => {
-    const loadPhotos = async () => {
-      try {
-        const data = await fetchPhotos(); // axios로 데이터 받음
+  const loadPhotos = async () => {
+    try {
+      const data = await fetchPhotos();
 
-        if (data.code === 0) {
-          const mappedPosts: PhotoPost[] = data.data.map((item: any) => ({
-            id: item.id,
-            username: item.nickname,
-            uploadTime: new Date(item.createdAt).toLocaleString(),
-            likes: item.likeCount,
-            image: item.imgUrl,
-            caption: item.content,
-            height: 200 + Math.floor(Math.random() * 200),
-          }));
-          setPosts(mappedPosts);
-        } else if(nickname === "") {
-          setLoginOpen(true); // 여기서 모달 열기
-        } else {
-          console.error("사진 조회 실패:", data.message);
-        }
-      } catch (error) {
-        console.error("사진 API 호출 에러:", error);
+      if (data.code === 0) {
+        const mappedPosts: PhotoPost[] = data.data.map((item: any) => ({
+          id: item.id,
+          username: item.nickname,
+          uploadTime: new Date(item.createdAt).toLocaleString(),
+          likes: item.likeCount,
+          image: item.imgUrl,
+          caption: item.content,
+          height: 200 + Math.floor(Math.random() * 200),
+        }));
+        setPosts(mappedPosts);
+      } else {
+        // 로그인 상태 확인 후 모달 열기
+        if (!nickname) setLoginOpen(true);
+        console.error("사진 조회 실패:", data.message);
       }
-    };
+    } catch (error) {
+      console.error("사진 API 호출 에러:", error);
+      // API 호출 실패 시도 모달 열기
+      if (!nickname) setLoginOpen(true);
+    }
+  };
 
-    loadPhotos();
-  }, []);
+  loadPhotos();
+}, [nickname]); // nickname이 준비될 때마다 재실행
+*/}
 
   // 페이지 로드 애니메이션
   useEffect(() => {
@@ -281,8 +285,7 @@ const PhotoFestival: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
-      {/* Description */}
-      <div className={`px-4 py-4 text-center flex-shrink-0 transition-all duration-800 ease-out ${
+      {/*   <div className={`px-4 py-4 text-center flex-shrink-0 transition-all duration-800 ease-out ${
         isDescriptionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}>
         <p className="text-sm text-gray-700 leading-relaxed">
@@ -291,7 +294,7 @@ const PhotoFestival: React.FC = () => {
         </p>
       </div>
 
-      {/* Masonry Layout */}
+      
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-4 pb-20">
         <Masonry
           breakpointCols={2}
@@ -311,6 +314,24 @@ const PhotoFestival: React.FC = () => {
           ))
           }
         </Masonry>
+      </div>
+      */}
+
+      <div>
+        <p className="mt-[150px] text-[#133858] text-center font-[Binggrae] text-[27.621px] not-italic font-bold leading-[30.383px]">
+          대동제 포토 페스티벌
+        </p>
+
+        <p className="mt-[10px] text-[#3B3B3B] text-center font-[SUIT] text-[16px] not-italic font-light leading-[25px]">
+          대동제의 베스트 포토사진을 올려주세요
+        </p>
+
+        <div>
+          <img src="/assets/photoFestival.webp" alt="" 
+          className=""/>
+        </div>
+
+
       </div>
 
       {/* Upload Button */}

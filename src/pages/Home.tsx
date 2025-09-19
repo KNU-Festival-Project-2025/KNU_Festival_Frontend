@@ -405,12 +405,12 @@ const Home: React.FC = () => {
           </p>
 
           <p className="text-[#0F1D00] font-[Hahmlet] text-[18px] font-normal leading-normal">
-            2025.09.21 - 09.24
+            2025.09.22 - 09.25
           </p>
         </div>
 
         {/*scroll 1 시작*/}
-
+ 
         {/* 1번째 HomeCard */}
         <div
           className={`mt-[30px] w-full h-auto px-4 transition-all duration-1000 ${
@@ -502,16 +502,75 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+    <div
+        ref={scroll2Ref}
+        className="w-full min-h-[932px] pt-[101px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImgT.webp')]"
+      >
+        <img
+          src="/assets/home/commingsoon.webp"
+          alt=""
+          className="mx-auto w-[80%] mt-[120px]"
+        />
+
+        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
+          <img
+            src="/assets/home/circle1.webp"
+            alt=""
+            className="w-full h-full"
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-[#2F86E9] font-pretendard text-[17px] font-bold leading-[22px]">
+              DAY 1
+            </div>
+            <div className="text-[#002A59] text-center font-pretendard text-[17px] font-bold leading-[22px]">
+              9.23
+            </div>
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
+          <img
+            src="/assets/home/circle2.webp"
+            alt=""
+            className="w-full h-full"
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-[#2F86E9] font-pretendard text-[17px] font-bold leading-[22px]">
+              DAY 2
+            </div>
+            <div className="text-[#002A59] text-center font-pretendard text-[17px] font-bold leading-[22px]">
+              9.24
+            </div>
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
+          <img
+            src="/assets/home/circle3.webp"
+            alt=""
+            className="w-full h-full"
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-[#2F86E9] font-pretendard text-[17px] font-bold leading-[22px]">
+              DAY 3
+            </div>
+            <div className="text-[#002A59] text-center font-pretendard text-[17px] font-bold leading-[22px]">
+              9.235
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
-      {/* scroll2 시작 */}
+
+      {/* scroll2 시작 
       
       <div
         ref={scroll2Ref}
         className="w-full h-screen-hybrid min-h-[600px] pt-[70px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center relative overflow-hidden"
       >
-        {/* 첫 번째 카드 - 하이브리드 위치 */}
+         첫 번째 카드 - 하이브리드 위치 
         <div className="absolute top-[8vh] lg:top-[70px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
           <div 
             ref={card1Ref}
@@ -525,7 +584,7 @@ const Home: React.FC = () => {
               mainImgSrc="/assets/home/lineup/1_jeonsomi.webp"
             />
             
-            {/* 다음 버튼 - 첫 번째 카드에만 */}
+            다음 버튼 - 첫 번째 카드에만 
             <div className="absolute bottom-6 left-16 z-10 cursor-pointer" onClick={() => handleArtistClick("1")}>
               <svg width="48" height="48" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.427419" y="0.427419" width="52.1452" height="52.1452" rx="26.0726" fill="white" fillOpacity="0.8"/>
@@ -550,7 +609,7 @@ const Home: React.FC = () => {
           </div>
         </div>
         
-        {/* 두 번째 카드 - 하이브리드 위치 */}
+         두 번째 카드 - 하이브리드 위치 
         <div className="absolute top-[40vh] lg:top-[370px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
           <div 
             ref={card2Ref}
@@ -564,7 +623,7 @@ const Home: React.FC = () => {
               mainImgSrc="/assets/home/lineup/2_kissoflife.webp"
             />
             
-            {/* 다음 버튼 - 두 번째 카드에만 */}
+            다음 버튼 - 두 번째 카드에만 
             <div className="absolute bottom-4 right-12 z-10 cursor-pointer" onClick={() => handleArtistClick("2")}>
               <svg width="48" height="48" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.719412" y="0.864919" width="52.1452" height="52.1452" rx="26.0726" fill="white" fillOpacity="0.8"/>
@@ -589,7 +648,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* 세 번째 카드 - 하이브리드 위치 */}
+        세 번째 카드 - 하이브리드 위치
         <div className="absolute top-[65vh] lg:top-[600px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
           <div 
             ref={card3Ref}
@@ -603,7 +662,7 @@ const Home: React.FC = () => {
               mainImgSrc="/assets/home/lineup/3_parkhyewon.webp"
             />
             
-            {/* 다음 버튼 - 세 번째 카드에만 */}
+            다음 버튼 - 세 번째 카드에만 
             <div className="absolute bottom-10 left-12 z-10 cursor-pointer" onClick={() => handleArtistClick("3")}>
               <svg width="48" height="48" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.427419" y="0.427419" width="52.1452" height="52.1452" rx="26.0726" fill="white" fillOpacity="0.8"/>
@@ -631,7 +690,7 @@ const Home: React.FC = () => {
       
       <div className="w-full h-screen-hybrid min-h-[600px] pt-[15px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center relative overflow-hidden">
         
-        {/* 네 번째 카드 - 하이브리드 위치 */}
+        네 번째 카드 - 하이브리드 위치 
         <div className="absolute top-[1vh] lg:top-[10px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
           <div 
             ref={card4Ref}
@@ -645,7 +704,7 @@ const Home: React.FC = () => {
               mainImgSrc="/assets/home/lineup/4_ash.webp"
             />
             
-            {/* 다음 버튼 - 네 번째 카드에만 */}
+            다음 버튼 - 네 번째 카드에만 
             <div className="absolute  bottom-[80px] right-10 z-10 cursor-pointer" onClick={() => handleArtistClick("4")}>
               <svg width="48" height="48" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.427419" y="0.427419" width="52.1452" height="52.1452" rx="26.0726" fill="white" fillOpacity="0.8"/>
@@ -670,7 +729,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* 다섯 번째 카드 - 하이브리드 위치 */}
+         다섯 번째 카드 - 하이브리드 위치
         <div className="absolute top-[31vh] lg:top-[290px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
           <div 
             ref={card5Ref}
@@ -684,7 +743,7 @@ const Home: React.FC = () => {
               mainImgSrc="/assets/home/lineup/5_kiiras.webp"
             />
             
-            {/* 다음 버튼 - 다섯 번째 카드에만 */}
+            다음 버튼 - 다섯 번째 카드에만 
             <div className="absolute bottom-6 left-16 z-10 cursor-pointer" onClick={() => handleArtistClick("5")}>
               <svg width="48" height="48" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.36052" y="0.618826" width="52.1452" height="52.1452" rx="26.0726" fill="white" fillOpacity="0.8"/>
@@ -708,8 +767,8 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* 여섯 번째 카드 - 하이브리드 위치 */}
+              
+         여섯 번째 카드 - 하이브리드 위치 
         <div className="absolute top-[55vh] lg:top-[500px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
           <div 
             ref={card6Ref}
@@ -723,7 +782,7 @@ const Home: React.FC = () => {
               mainImgSrc="/assets/home/lineup/6_carthegarden.webp"
             />
             
-            {/* 다음 버튼 - 여섯 번째 카드에만 */}
+        다음 버튼 - 여섯 번째 카드에만 
             <div className="absolute bottom-14 right-12 z-10 cursor-pointer" onClick={() => handleArtistClick("6")}>
               <svg width="48" height="48" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.427419" y="0.427419" width="52.1452" height="52.1452" rx="26.0726" fill="white" fillOpacity="0.8"/>
@@ -744,10 +803,13 @@ const Home: React.FC = () => {
                   </filter>
                 </defs>
               </svg>
+              
             </div>
+            
           </div>
+          
         </div>
-
+      
         <div className="absolute top-[93vh] lg:top-[800px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 max-w-[430px]">
           <RefButton
             text="축제 지도 보기"
@@ -767,7 +829,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-           
+            */}
 
       {/* scroll3 시작 */}
       <div

@@ -11,6 +11,7 @@ const ga4Id = process.env.VITE_GA4_MEASUREMENT_ID;
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "./",
   plugins: [
     react(),
     tailwindcss(),

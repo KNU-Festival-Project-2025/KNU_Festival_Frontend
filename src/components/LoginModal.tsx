@@ -30,7 +30,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
   return (
     <div className="fixed inset-0 bg-[#4C4C4C47] z-40 flex items-center justify-center" onClick={onClose}>
       <div
-        className="relative w-[279px] h-[434px] rounded-[15px] border border-gray-300 bg-[#EEF2DAE5] shadow-lg flex flex-col"
+        className="relative w-[279px] h-[434px] rounded-[15px] border border-gray-300 bg-[#D6DBBA] shadow-lg flex flex-col"
         onClick={(e) => e.stopPropagation()}
         style={{ paddingTop: "90px", paddingLeft: "35px", paddingRight: "35px", paddingBottom: "25px" }}
       >

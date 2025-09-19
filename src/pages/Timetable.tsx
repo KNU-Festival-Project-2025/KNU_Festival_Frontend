@@ -136,7 +136,7 @@ const Timetable: React.FC = () => {
                     ? 'font-semibold text-[#285100]' 
                     : 'text-gray-400'
                 }`}>
-                  {day}일차
+                  {day === 1 ? "전야제" : `${day - 1}일차`}
                 </span>
               </button>
             ))}
