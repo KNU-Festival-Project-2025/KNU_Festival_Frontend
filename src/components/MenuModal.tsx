@@ -21,7 +21,7 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, onClose, onLoginClick }) 
     { label: "홈", path: "/" },
     { label: "타임테이블", path: "/timetable" },
     { label: "부스 추천", path: "/boothRecommendLoading" },
-    { label: "사진 페스티벌", path: "/photo-festival" },
+    { label: "포토 페스티벌", path: "/photo-festival" },
     { label: "부스 및 푸드트럭", path: "/booth-foodtruck/대운동장" },
     { label: "FAQ", path: "/faq" },
     { label: "방명록", path: "/guestbook" },
@@ -36,24 +36,24 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, onClose, onLoginClick }) 
     handleClose(() => onLoginClick());
   };
 
-const handleLogoutClick = async () => {
-  console.log("로그아웃 token:", accessToken);
+  const handleLogoutClick = async () => {
+    console.log("로그아웃 token:", accessToken);
 
-  try {
-    await api.post(
-      "/api/auth/logout",
-      {}, // 서버가 body 필요 없으면 빈 객체
-      { headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {} }
-    );
-    console.log("로그아웃 API 호출 완료");
-  } catch (err: any) {
-    console.error("로그아웃 실패:", err.response?.data || err.message);
-  } finally {
-    logout();      // 항상 context + sessionStorage 초기화
-    handleClose(); // 모달 닫기
-    navigate("/"); // 홈 이동
-  }
-};
+    try {
+      await api.post(
+        "/api/auth/logout",
+        {}, // 서버가 body 필요 없으면 빈 객체
+        { headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {} }
+      );
+      console.log("로그아웃 API 호출 완료");
+    } catch (err: any) {
+      console.error("로그아웃 실패:", err.response?.data || err.message);
+    } finally {
+      logout();      // 항상 context + sessionStorage 초기화
+      handleClose(); // 모달 닫기
+      navigate("/"); // 홈 이동
+    }
+  };
 
 
   const handleClose = (callback?: () => void) => {
@@ -66,9 +66,9 @@ const handleLogoutClick = async () => {
     }, 100);
   };
 
-useEffect(() => {
-  if (isOpen) setShouldRender(true);
-}, [isOpen, nickname]);
+  useEffect(() => {
+    if (isOpen) setShouldRender(true);
+  }, [isOpen, nickname]);
 
 
   if (!shouldRender) return null;
@@ -78,9 +78,8 @@ useEffect(() => {
       <div className="fixed inset-0 bg-black/30 z-40" onClick={() => handleClose()} />
       <div
         ref={modalRef}
-        className={`absolute top-12 right-4 w-56 rounded-2xl shadow-lg z-50 border border-gray-200 transform transition-all duration-100 ease-out ${
-          isAnimatingOut ? "opacity-0 scale-95 translate-y-2 pointer-events-none" : "opacity-100 scale-100 translate-y-0 pointer-events-auto"
-        }`}
+        className={`absolute top-12 right-4 w-56 rounded-2xl shadow-lg z-50 border border-gray-200 transform transition-all duration-100 ease-out ${isAnimatingOut ? "opacity-0 scale-95 translate-y-2 pointer-events-none" : "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+          }`}
         style={{ backgroundColor: "#FFFAE0", transformOrigin: "top right", backfaceVisibility: "hidden", perspective: "1000px" }}
       >
         <div className="p-3">

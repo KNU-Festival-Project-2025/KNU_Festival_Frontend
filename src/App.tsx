@@ -75,7 +75,7 @@ function AppContent() {
             <Route path="/guestbook" element={<FAQAndGuestbook />} />
             <Route path="/artist/:number" element={<Artist />} />
             <Route path="/photo-upload" element={<PhotoUpload />} />
-        
+
             <Route path="/login" element={<LoginCallback />} />
           </Routes>
         </div>
@@ -87,9 +87,9 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-    <Router>
-      <AppContent />
-    </Router>
+      <Router>
+        <AppContent />
+      </Router>
     </AuthProvider>
   );
 }
