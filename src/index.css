@@ -494,4 +494,43 @@ html {
 /* 홈 페이지 snap 컨테이너 조정 */
 .snap-container {
   position: relative;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  height: 100vh;
+  -webkit-overflow-scrolling: touch;
+  /* iOS 부드러운 스크롤 */
+}
+
+/* 스냅 섹션 강화 */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* 강제로 섹션에서 멈춤 */
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 스냅 스크롤 강화를 위한 추가 설정 */
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 터치 디바이스에서 스냅 스크롤 강화 */
+@media (hover: none) and (pointer: coarse) {
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
 }

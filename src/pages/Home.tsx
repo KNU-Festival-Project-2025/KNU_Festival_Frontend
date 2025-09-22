@@ -100,20 +100,49 @@ const CurrentEventDisplay: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const isMobile = window.innerWidth <= 375;
+
   return (
     <div
-      className="flex absolute top-[71px] left-1/2 transform -translate-x-1/2 w-[330px] h-[46px] flex-shrink-0 rounded-[20px] border border-[#F6FAEB] 
+        className="flex absolute left-1/2 transform -translate-x-1/2 flex-shrink-0 rounded-[20px] border border-[#F6FAEB]
                         bg-gradient-to-r from-white/0 to-white shadow-[ -2px_3px_5px_0_rgba(105,132,77,0.33) ]"
+        style={{
+          top: isMobile ? '65px' : '71px',
+          width: isMobile ? '260px' : '330px',
+          height: isMobile ? '38px' : '46px'
+        }}
     >
       <img
         src="assets/home/Clock.svg"
-        className="mt-[11px] ml-[11px] w-[24px] h-[24px] p-[2.667px] items-center"
+        className="items-center"
         alt=""
+        style={{
+          marginTop: isMobile ? '7px' : '11px',
+          marginLeft: isMobile ? '7px' : '11px',
+          width: isMobile ? '18px' : '24px',
+          height: isMobile ? '18px' : '24px',
+          padding: isMobile ? '1.5px' : '2.667px'
+        }}
       />
-      <p className="mt-[9.5px] ml-[12px] text-[#39646C] font-[Hahmlet] text-[18px] font-normal leading-normal">
+      <p 
+        className="text-[#39646C] font-[Hahmlet] font-normal leading-normal"
+        style={{
+          marginTop: isMobile ? '7px' : '9.5px',
+          marginLeft: isMobile ? '6px' : '12px',
+          fontSize: isMobile ? '13px' : '18px'
+        }}
+      >
         {currentEvent ? currentEvent.time : "쉬는시간"}
       </p>
-      <p className="mt-[9.5px] ml-auto mr-[20px] text-[#39646C] font-[Hahmlet] text-[18px] font-normal leading-normal">
+      <p 
+        className="text-[#39646C] font-[Hahmlet] font-normal leading-normal"
+        style={{
+          marginTop: isMobile ? '7px' : '9.5px',
+          marginLeft: 'auto',
+          marginRight: isMobile ? '10px' : '20px',
+          fontSize: isMobile ? '13px' : '18px'
+        }}
+      >
         {currentEvent ? currentEvent.title : "다시 돌아올게요~!"}
       </p>
     </div>
@@ -180,6 +209,7 @@ const Home: React.FC = () => {
 
   // 스크롤 상태
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // scroll 영역 ref
   const scroll1Ref = useRef<HTMLDivElement>(null);
@@ -290,16 +320,41 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  // 스크롤 이벤트 리스너
+  // 화면 크기 감지
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      setShowScrollTop(scrollTop > 500); // 500px 이상 스크롤하면 버튼 표시
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 375);
     };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+  // Intersection Observer로 스크롤 상태 감지 (snap scroll 대응)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // 첫 번째 섹션(scroll1Ref)이 보이지 않으면 버튼 표시
+        const firstSection = entries.find(entry => entry.target === scroll1Ref.current);
+        if (firstSection) {
+          setShowScrollTop(!firstSection.isIntersecting);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (scroll1Ref.current) {
+      observer.observe(scroll1Ref.current);
+    }
+
+    return () => {
+      if (scroll1Ref.current) {
+        observer.unobserve(scroll1Ref.current);
+      }
+    };
   }, []);
 
   // 카드 가시성 관찰을 위한 Intersection Observer
@@ -434,45 +489,56 @@ const Home: React.FC = () => {
 
 
   return (
-    <div
-      className="w-full max-w-[430px] bg-contain bg-center bg-no-repeat overflow-hidden -mt-16 snap-container"
-      style={{
-        backgroundSize: "cover",
-        backgroundPosition: "top center",
-        minHeight: "100dvh", // 동적 뷰포트 높이 우선 적용
-      }}
-    >
+      <div
+        className="w-full max-w-[430px] overflow-hidden -mt-16 snap-container"
+        style={{
+          minHeight: "100dvh", // 동적 뷰포트 높이 우선 적용
+        }}
+      >
       <div
         ref={scroll1Ref}
-        className="w-full h-screen-hybrid min-h-[600px] flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-center bg-stable"
+        className="w-full min-h-screen flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-center bg-stable snap-section"
       >
         <div
-          className={`text-center mt-[95px] transition-all duration-1000 ${
+          className={`text-center transition-all duration-1000 ${
             isVisible.logo
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
+          style={{
+            marginTop: window.innerWidth <= 375 ? '70px' : '90px'
+          }}
         >
           <img
             src="/assets/main_logo.webp"
             alt="메인 로고"
             className="
               w-full                /* 부모 너비에 맞게 */
-              max-w-[310px]      /*  최대 크기 제한 */
               aspect-[237.48/78.21] /* 비율 유지 */
               flex-shrink-0
-              mx-auto              
+              mx-auto
             "
             style={{
+              maxWidth: window.innerWidth <= 375 ? '260px' : '310px',
               animation: isVisible.logo ? "fadeInScale 0.8s ease-out" : "none",
             }}
           />
 
-          <p className="mt-[-18px] text-[#5C6C00] font-[Hahmlet] text-[15px] font-normal leading-normal">
+          <p 
+            className="mt-[-15px] text-[#5C6C00] font-[Hahmlet] font-normal leading-normal"
+            style={{
+              fontSize: window.innerWidth <= 375 ? '13px' : '15px'
+            }}
+          >
             고요를 채울, 환희로 피어날
           </p>
 
-          <p className="text-[#0F1D00] font-[Hahmlet] text-[18px] font-normal leading-normal">
+          <p 
+            className="text-[#0F1D00] font-[Hahmlet] font-normal leading-normal"
+            style={{
+              fontSize: window.innerWidth <= 375 ? '16px' : '18px'
+            }}
+          >
             2025.09.22 - 09.25
           </p>
         </div>
@@ -481,11 +547,17 @@ const Home: React.FC = () => {
  
         {/* 1번째 HomeCard */}
         <div
-          className={`mt-[30px] w-full h-auto px-4 transition-all duration-1000 ${
+          className={`w-full h-auto mx-auto transition-all duration-1000 ${
             isVisible.cards
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
+          style={{
+            marginTop: window.innerWidth <= 375 ? '20px' : '30px',
+            maxWidth: window.innerWidth <= 375 ? '340px' : '400px',
+            paddingLeft: window.innerWidth <= 375 ? '8px' : '16px',
+            paddingRight: window.innerWidth <= 375 ? '8px' : '16px'
+          }}
         >
           <div
             className="relative w-full h-auto"
@@ -494,22 +566,52 @@ const Home: React.FC = () => {
             <img
               src="/assets/home/LayerFrame1/1LayerFrame1.webp"
               alt=""
-              className="w-full h-auto"
+              className="w-full h-full"
             />
             {/* 이미지 위 글씨 */}
-            <p className="absolute top-[14px] left-[37px] text-white text-2xl font-bold text-white font-[Pretendard] text-[11.89px] font-extralight leading-normal flex-shrink-0">
+            <p 
+              className="absolute text-white font-[Pretendard] font-extralight leading-normal flex-shrink-0"
+              style={{
+                top: window.innerWidth <= 375 ? '12px' : '14px',
+                left: window.innerWidth <= 375 ? '30px' : '37px',
+                fontSize: window.innerWidth <= 375 ? '10px' : '11.89px'
+              }}
+            >
               TIME TABLE
             </p>
 
-            <p className="absolute top-[14px] right-[47px] text-white font-[Hahmlet] text-[10px] font-normal leading-normal">
+            <p 
+              className="absolute text-white font-[Hahmlet] font-normal leading-normal"
+              style={{
+                top: window.innerWidth <= 375 ? '12px' : '14px',
+                right: window.innerWidth <= 375 ? '35px' : '47px',
+                fontSize: window.innerWidth <= 375 ? '9px' : '10px'
+              }}
+            >
               today
             </p>
 
-            <p className="absolute top-[24px] left-[35px] w-[117px] h-[34px] flex-shrink-0 text-white font-[Hahmlet] text-[25px] font-normal leading-normal">
+            <p 
+              className="absolute flex-shrink-0 text-white font-[Hahmlet] font-normal leading-normal"
+              style={{
+                top: window.innerWidth <= 375 ? '22px' : '24px',
+                left: window.innerWidth <= 375 ? '28px' : '35px',
+                width: window.innerWidth <= 375 ? '100px' : '117px',
+                height: window.innerWidth <= 375 ? '30px' : '34px',
+                fontSize: window.innerWidth <= 375 ? '20px' : '25px'
+              }}
+            >
               타임테이블
             </p>
 
-            <p className="absolute top-[27px] right-[32px] text-white font-[Hahmlet] text-[19.698px] font-semibold leading-normal">
+            <p 
+              className="absolute text-white font-[Hahmlet] font-semibold leading-normal"
+              style={{
+                top: window.innerWidth <= 375 ? '25px' : '27px',
+                right: window.innerWidth <= 375 ? '25px' : '32px',
+                fontSize: window.innerWidth <= 375 ? '15px' : '19.698px'
+              }}
+            >
               {getTodayString()}
             </p>
 
@@ -517,7 +619,12 @@ const Home: React.FC = () => {
           </div>
 
           {/* 2번째 HomeCard */}
-          <div className="mt-[4px] mx-auto grid grid-cols-2 gap-[9px]">
+          <div 
+            className="mt-[4px] mx-auto grid grid-cols-2"
+            style={{
+              gap: window.innerWidth <= 375 ? '4px' : '9px'
+            }}
+          >
             <img
               src="/assets/home/LayerFrame1/1LayerFrame2.webp"
               alt=""
@@ -546,7 +653,7 @@ const Home: React.FC = () => {
         </div>
 
         <div
-          className={`h-[63px] mt-[60px] text-centertransition-all duration-300 ${
+          className={`h-[63px] mt-[30px] text-center transition-all duration-300 ${
             isVisible.button
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -559,7 +666,11 @@ const Home: React.FC = () => {
           />
 
           <div
-            className="mt-[9px] w-[37px] h-[37px] flex items-center justify-center mx-auto"
+            className="mt-[9px] flex items-center justify-center mx-auto"
+            style={{
+              width: window.innerWidth <= 375 ? '28px' : '37px',
+              height: window.innerWidth <= 375 ? '28px' : '37px'
+            }}
             onClick={() => scrollToRef(scroll2Ref)}
           >
             <img
@@ -570,28 +681,38 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-    <div
+      
+      <div
         ref={scroll2Ref}
-        className="w-full min-h-[932px] pt-[101px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImgT.webp')]"
+        className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImgT.webp')] snap-section"
+        style={{
+          paddingTop: window.innerWidth <= 375 ? '70px' : window.innerWidth >= 932 ? '101px' : '80px'
+        }}
       >
         <img
           ref={commingsoonRef}
           src="/assets/home/commingsoon.webp"
           alt=""
-          className={`mx-auto w-[80%] mt-[120px] transition-all duration-1000 ${
+          className={`mx-auto w-[80%] transition-all duration-1000 ${
             scroll2Visibility.commingsoon
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
+          style={{
+            marginTop: window.innerWidth <= 375 ? '60px' : window.innerWidth >= 932 ? '120px' : '80px'
+          }}
         />
 
         <div 
           ref={day1Ref}
-          className={`relative mx-auto w-[100px] h-[100px] mt-[63px] transition-all duration-1000 ${
+          className={`relative mx-auto w-[100px] h-[100px] transition-all duration-1000 ${
             scroll2Visibility.day1
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
+          style={{
+            marginTop: window.innerWidth <= 375 ? '40px' : window.innerWidth >= 932 ? '63px' : '50px'
+          }}
         >
           <img
             src="/assets/home/circle1.webp"
@@ -610,11 +731,14 @@ const Home: React.FC = () => {
 
         <div 
           ref={day2Ref}
-          className={`relative mx-auto w-[100px] h-[100px] mt-[63px] transition-all duration-1000 ${
+          className={`relative mx-auto w-[100px] h-[100px] transition-all duration-1000 ${
             scroll2Visibility.day2
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
+          style={{
+            marginTop: window.innerWidth <= 375 ? '40px' : window.innerWidth >= 932 ? '63px' : '50px'
+          }}
         >
           <img
             src="/assets/home/circle2.webp"
@@ -633,11 +757,14 @@ const Home: React.FC = () => {
 
         <div 
           ref={day3Ref}
-          className={`relative mx-auto w-[100px] h-[100px] mt-[63px] transition-all duration-1000 ${
+          className={`relative mx-auto w-[100px] h-[100px] transition-all duration-1000 ${
             scroll2Visibility.day3
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
+          style={{
+            marginTop: window.innerWidth <= 375 ? '40px' : window.innerWidth >= 932 ? '63px' : '50px'
+          }}
         >
           <img
             src="/assets/home/circle3.webp"
@@ -662,10 +789,15 @@ const Home: React.FC = () => {
       
       <div
         ref={scroll2Ref}
-        className="w-full h-screen-hybrid min-h-[600px] pt-[70px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center bg-stable relative overflow-hidden"
+        className="w-full h-screen-hybrid min-h-[600px] pt-[70px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center bg-stable relative overflow-hidden snap-section"
       >
          첫 번째 카드 - 하이브리드 위치 
-        <div className="absolute top-[8vh] lg:top-[70px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
+        <div 
+          className="absolute top-[8vh] lg:top-[70px] left-1/2 transform -translate-x-1/2 w-full"
+          style={{
+            maxWidth: window.innerWidth <= 375 ? '375px' : '430px'
+          }}
+        >
           <div 
             ref={card1Ref}
             className={`relative transition-all duration-1000 ${
@@ -704,7 +836,12 @@ const Home: React.FC = () => {
         </div>
         
          두 번째 카드 - 하이브리드 위치 
-        <div className="absolute top-[40vh] lg:top-[370px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
+        <div 
+          className="absolute top-[40vh] lg:top-[370px] left-1/2 transform -translate-x-1/2 w-full"
+          style={{
+            maxWidth: window.innerWidth <= 375 ? '375px' : '430px'
+          }}
+        >
           <div 
             ref={card2Ref}
             className={`relative transition-all duration-1000 ${
@@ -743,7 +880,12 @@ const Home: React.FC = () => {
         </div>
 
         세 번째 카드 - 하이브리드 위치
-        <div className="absolute top-[65vh] lg:top-[600px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
+        <div 
+          className="absolute top-[65vh] lg:top-[600px] left-1/2 transform -translate-x-1/2 w-full"
+          style={{
+            maxWidth: window.innerWidth <= 375 ? '375px' : '430px'
+          }}
+        >
           <div 
             ref={card3Ref}
             className={`relative transition-all duration-1000 ${
@@ -785,7 +927,12 @@ const Home: React.FC = () => {
       <div className="w-full h-screen-hybrid min-h-[600px] pt-[15px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center bg-stable relative overflow-hidden">
         
         네 번째 카드 - 하이브리드 위치 
-        <div className="absolute top-[1vh] lg:top-[10px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
+        <div 
+          className="absolute top-[1vh] lg:top-[10px] left-1/2 transform -translate-x-1/2 w-full"
+          style={{
+            maxWidth: window.innerWidth <= 375 ? '375px' : '430px'
+          }}
+        >
           <div 
             ref={card4Ref}
             className={`relative transition-all duration-1000 ${
@@ -824,7 +971,12 @@ const Home: React.FC = () => {
         </div>
 
          다섯 번째 카드 - 하이브리드 위치
-        <div className="absolute top-[31vh] lg:top-[290px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
+        <div 
+          className="absolute top-[31vh] lg:top-[290px] left-1/2 transform -translate-x-1/2 w-full"
+          style={{
+            maxWidth: window.innerWidth <= 375 ? '375px' : '430px'
+          }}
+        >
           <div 
             ref={card5Ref}
             className={`relative transition-all duration-1000 ${
@@ -863,7 +1015,12 @@ const Home: React.FC = () => {
         </div>
               
          여섯 번째 카드 - 하이브리드 위치 
-        <div className="absolute top-[55vh] lg:top-[500px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
+        <div 
+          className="absolute top-[55vh] lg:top-[500px] left-1/2 transform -translate-x-1/2 w-full"
+          style={{
+            maxWidth: window.innerWidth <= 375 ? '375px' : '430px'
+          }}
+        >
           <div 
             ref={card6Ref}
             className={`relative transition-all duration-1000 ${
@@ -904,7 +1061,12 @@ const Home: React.FC = () => {
           
         </div>
       
-        <div className="absolute top-[93vh] lg:top-[800px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 max-w-[430px]">
+        <div 
+          className="absolute top-[93vh] lg:top-[800px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+          style={{
+            maxWidth: window.innerWidth <= 375 ? '375px' : '430px'
+          }}
+        >
           <RefButton
             text="축제 지도 보기"
             backgroundColor="#A0C09A"
@@ -928,7 +1090,7 @@ const Home: React.FC = () => {
       {/* scroll3 시작 */}
       <div
         ref={scroll3Ref}
-        className="w-full h-screen-hybrid min-h-[600px] pt-[90px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-center bg-stable overflow-hidden"
+        className="w-full min-h-screen pt-[90px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-center bg-stable overflow-hidden snap-section"
       >
         <div 
           ref={card60thRef}
@@ -975,7 +1137,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full h-screen-hybrid min-h-[600px] pt-[64px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-center bg-stable overflow-hidden">
+      <div className="w-full min-h-screen pt-[64px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-center bg-stable overflow-hidden">
         <div 
           ref={cardStadiumRef}
           className={`transition-all duration-1000 ${
@@ -1000,7 +1162,7 @@ const Home: React.FC = () => {
 
         <div 
           ref={cardHaminRef}
-          className={`transition-all duration-1000 ${
+          className={`z-10 mt-[-100px] transition-all duration-1000 ${
             homeCard2Visibility['homecard2-cardHamin']
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -1020,7 +1182,7 @@ const Home: React.FC = () => {
         />
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="z-50 text-center">
           <RefButton
             text="개발자 및 디자이너"
             backgroundColor="#E5BEEF"
@@ -1042,7 +1204,7 @@ const Home: React.FC = () => {
 
       <div
         ref={scroll4Ref}
-        className="w-full h-screen-hybrid min-h-[600px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] bg-cover bg-center bg-stable flex justify-center items-center overflow-hidden"
+        className="w-full min-h-screen bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] bg-cover bg-center bg-stable flex justify-center items-center overflow-hidden snap-section"
       >
         <div className="flex flex-col w-[343.699px] h-[364px]">
           <div 
@@ -1123,21 +1285,24 @@ const Home: React.FC = () => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 z-50 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all duration-300 hover:scale-110"
+          className="fixed bottom-6 z-50 bg-gradient-to-br from-white to-gray-50 backdrop-blur-md rounded-full shadow-2xl flex items-center justify-center hover:from-gray-50 hover:to-white transition-all duration-300 hover:scale-110 hover:shadow-3xl border border-white/20 group"
           style={{
             right: "max(20px, calc(50% - 215px + 45px))", // 최소 20px 여백 보장
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
+            width: isMobile ? '40px' : '56px',
+            height: isMobile ? '40px' : '56px',
           }}
         >
           <svg
-            className="w-6 h-6 text-gray-600"
+            className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors duration-300"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            strokeWidth={2.5}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
               d="M5 10l7-7m0 0l7 7m-7-7v18"
             />
           </svg>
