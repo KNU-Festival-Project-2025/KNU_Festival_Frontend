@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
 import Header from "./components/Header";
 import MenuModal from "./components/MenuModal"; // ✅ 메뉴 모달 import
@@ -19,8 +19,8 @@ import LoginCallback from "./components/LoginCallback";
 import { AuthProvider } from "./utils/AuthContext";
 
 function AppContent() {
-  //const location = useLocation();
-  //const isHome = location.pathname === '/';
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   // ✅ 상태 관리
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,12 +31,18 @@ function AppContent() {
     <div className="flex justify-center">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <div
-        className="w-full sm:max-w-[402px] shadow-lg relative bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/assets/home/BGimg/BackImg1.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-        }}
+        className={`w-full max-w-[430px] shadow-lg relative ${
+          !isHome ? 'bg-cover bg-center bg-no-repeat' : ''
+        }`}
+        style={
+          !isHome
+            ? {
+                backgroundImage: "url('/assets/home/BGimg/BackImg1.webp')",
+                backgroundSize: "cover",
+                backgroundPosition: "center top",
+              }
+            : {}
+        }
       >
         {/* ✅ Header: 버튼 참조 + 메뉴 열기 핸들러 전달 */}
         <Header buttonRef={buttonRef} onMenuClick={() => setMenuOpen(true)} />

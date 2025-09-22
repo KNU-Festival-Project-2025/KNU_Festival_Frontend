@@ -1,5 +1,5 @@
 // src/components/home/HomeCard2.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface HomeCard2Props {
@@ -24,6 +24,18 @@ export const HomeCard2: React.FC<HomeCard2Props> = ({
   link,
 }) => {
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 375);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const handleClick = () => {
     if (link) {
@@ -35,12 +47,15 @@ export const HomeCard2: React.FC<HomeCard2Props> = ({
   return (
     <div
       className="w-full relative overflow-hidden flex items-center justify-start mx-0 cursor-pointer"
-      style={{ marginBottom }}
+      style={{ 
+        marginBottom,
+        marginTop: isMobile ? '-50px' : '0px'
+      }}
       onClick={handleClick}
     >
       {/* 이미지가 왼쪽에 있는 경우 */}
       {imagePosition === 'left' && imageSrc && (
-        <div className="flex-shrink-0 relative">
+        <div className="flex-shrink-0 relative ">
           <img  
             src={imageSrc} 
             className="w-48 h-[320px] object-contain" 
