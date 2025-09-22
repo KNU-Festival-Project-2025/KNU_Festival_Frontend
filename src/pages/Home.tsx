@@ -504,7 +504,7 @@ const Home: React.FC = () => {
       >
       <div
         ref={scroll1Ref}
-        className="w-full h-auto flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-stable snap-section"
+        className="w-full min-h-[667px] flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-stable snap-section"
         style={{
           backgroundPosition: "top center"
         }}
@@ -558,20 +558,20 @@ const Home: React.FC = () => {
  
         {/* 1번째 HomeCard */}
         <div
-          className={`h-auto mx-auto transition-all duration-1000 ${
+          className={`h-auto mx-auto  transition-all duration-1000 ${
             isVisible.cards
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
           style={{
-            marginTop: window.innerWidth <= 375 ? '20px' : '30px',
+            marginTop: window.innerWidth <= 375 ? '10px' : '20px',
             maxWidth: window.innerWidth <= 375 ? '340px' : '380px',
             paddingLeft: window.innerWidth <= 375 ? '8px' : '16px',
             paddingRight: window.innerWidth <= 375 ? '8px' : '16px'
           }}
         >
           <div
-            className="relative w-[310px] h-auto"
+            className="relative  w-[340px] h-auto"
             onClick={() => navigate("/timetable")}
           >
             <img
@@ -609,7 +609,7 @@ const Home: React.FC = () => {
                 left: window.innerWidth <= 375 ? '28px' : '35px',
                 width: window.innerWidth <= 375 ? '100px' : '117px',
                 height: window.innerWidth <= 375 ? '30px' : '34px',
-                fontSize: window.innerWidth <= 375 ? '20px' : '25px'
+                fontSize: window.innerWidth <= 375 ? '20px' : '22px'
               }}
             >
               타임테이블
@@ -631,7 +631,7 @@ const Home: React.FC = () => {
 
           {/* 2번째 HomeCard */}
           <div 
-            className="mt-[4px] mx-auto grid grid-cols-2"
+            className="mt-[4px] mx-auto grid grid-cols-2 justify-items-center"
             style={{
               gap: window.innerWidth <= 375 ? '4px' : '9px'
             }}
@@ -639,32 +639,32 @@ const Home: React.FC = () => {
             <img
               src="/assets/home/LayerFrame1/1LayerFrame2.webp"
               alt=""
-              className="w-auto h-[100px]"
+              className="w-auto h-[110px]"
               onClick={() => navigate("/booth-foodtruck/대운동장")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame3.webp"
               alt=""
-              className="w-auto h-[100px]"
+              className="w-auto h-[110px]"
               onClick={() => navigate("/photo-festival")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame4.webp"
               alt=""
-              className="w-auto h-[100px]"
+              className="w-auto h-[110px]"
               onClick={() => navigate("/boothRecommendLoading")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame5.webp"
               alt=""
-              className="w-auto h-[100px]"
+              className="w-auto h-[110px]"
               onClick={() => navigate("/faq")}
             />
           </div>
         </div>
 
         <div
-          className={`h-[63px] mt-[10px] text-center transition-all duration-300 ${
+          className={`h-[63px] mt-[15px] text-center transition-all duration-300 ${
             isVisible.button
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
