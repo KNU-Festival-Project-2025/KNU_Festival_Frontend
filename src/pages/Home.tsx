@@ -497,7 +497,7 @@ const Home: React.FC = () => {
 
   return (
       <div
-        className="w-full max-w-[430px] overflow-hidden -mt-16 snap-container"
+        className="w-full max-w-[430px] overflow-hidden -mt-16 mb-2 snap-container"
         style={{
           minHeight: "100dvh", // 동적 뷰포트 높이 우선 적용
         }}
@@ -664,7 +664,7 @@ const Home: React.FC = () => {
         </div>
 
         <div
-          className={`h-[63px] mt-[15px] text-center transition-all duration-300 ${
+          className={`h-[63px] mt-[15px] mb-[15px] text-center transition-all duration-300 ${
             isVisible.button
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
