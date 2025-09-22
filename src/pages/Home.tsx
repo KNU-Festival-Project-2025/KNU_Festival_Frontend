@@ -249,7 +249,14 @@ const Home: React.FC = () => {
 
   // 최상단으로 스크롤
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // snap scroll 컨테이너를 찾아서 스크롤
+    const snapContainer = document.querySelector('.snap-container');
+    if (snapContainer) {
+      snapContainer.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // fallback: window 스크롤
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   // 페이지 로드 시 순차적 애니메이션
@@ -1284,13 +1291,19 @@ const Home: React.FC = () => {
       {/* 최상단으로 이동 버튼 */}
       {showScrollTop && (
         <button
-          onClick={scrollToTop}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            scrollToTop();
+          }}
           className="fixed bottom-6 z-50 bg-gradient-to-br from-white to-gray-50 backdrop-blur-md rounded-full shadow-2xl flex items-center justify-center hover:from-gray-50 hover:to-white transition-all duration-300 hover:scale-110 hover:shadow-3xl border border-white/20 group"
           style={{
             right: "max(20px, calc(50% - 215px + 45px))", // 최소 20px 여백 보장
             boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
             width: isMobile ? '40px' : '56px',
             height: isMobile ? '40px' : '56px',
+            cursor: 'pointer',
+            pointerEvents: 'auto'
           }}
         >
           <svg
