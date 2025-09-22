@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, type FC } from "react";
 
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY as string;
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI as string;
@@ -6,19 +6,19 @@ const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI as string;
 interface LoginModalProps {
   open: boolean;
   onClose: () => void;
+  forceRegister?: boolean; 
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, forceRegister  }) => {
   const [nickname, setNickname] = useState("");
   const [phone, setPhone] = useState("");
 
   if (!open) return null;
 
-  const handleKakaoLogin = () => {
-    if (nickname) sessionStorage.setItem("nickname", nickname);
+  //회원 가입
+  const handleKakaoRegistar = () => {
+  if (nickname) sessionStorage.setItem("nickname", nickname);
   if (phone) sessionStorage.setItem("phone", phone);
-
-
 
     sessionStorage.setItem("nickname", nickname);
     sessionStorage.setItem("phone", phone);
@@ -27,7 +27,36 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
     window.location.assign(kakaoAuthUrl);
   };
 
-  return (
+  //로그인 
+  const handleKakaoLogin = () => {
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    window.location.assign(kakaoAuthUrl);
+  }
+
+  const loginModal2 = () => (
+    <div className="fixed inset-0 bg-[#4C4C4C47] z-40 flex items-center justify-center" onClick={onClose}>
+      <div
+        className="relative w-[279px] h-[200px] rounded-[15px] border border-gray-300 bg-[#D6DBBA] shadow-lg flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+        style={{ paddingTop: "90px", paddingLeft: "35px", paddingRight: "35px", paddingBottom: "25px" }}
+      >
+        <button onClick={onClose} className="absolute top-3 right-3 text-lg font-bold text-[rgba(68,98,64,0.60)] hover:text-[#446240]">✕</button>
+        <h2 className="absolute top-6 left-1/2 -translate-x-1/2 font-pretendard font-semibold text-[20px] leading-[32px] text-black">
+          로그인하기
+        </h2>
+
+        <button
+          onClick={handleKakaoLogin}
+          className="flex w-[209px] h-[48px] justify-center items-center rounded-[20px] bg-[#F6E550] font-pretendard font-bold text-[15px] text-black shadow"
+        >
+          카카오계정 로그인
+        </button>
+    
+      </div>
+    </div>
+);
+
+  const registerModal = (
     <div className="fixed inset-0 bg-[#4C4C4C47] z-40 flex items-center justify-center" onClick={onClose}>
       <div
         className="relative w-[279px] h-[434px] rounded-[15px] border border-gray-300 bg-[#D6DBBA] shadow-lg flex flex-col"
@@ -70,7 +99,13 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
         
       </div>
     </div>
-  );
+  )
+
+  return forceRegister ? registerModal : loginModal2();
+  
 };
 
 export default LoginModal;
+
+
+

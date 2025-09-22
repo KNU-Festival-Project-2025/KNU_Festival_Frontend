@@ -15,12 +15,12 @@ export const ArtistModel: Record<string, any> = {
   },
   "2": {
     mainImg: "/assets/home/lineup/album/rectangle/idolRactangle2.webp",
-    name: "KISS OF LIFE", 
+    name: "KISS OF LIFE (키스오브라이프)", 
     imgWidth: "264.5px", 
     imgHeight: "214.5px", 
     subText: "키스 오브 라이프 ",
     performanceDate: "9/24",
-    intro: "KISS OF LIFE는 대한민국의 4인조 걸그룹으로, 2023년 데뷔와 동시에 뛰어난 실력과 감각적인 음악으로 주목받았습니다. 그룹명 'KISS OF LIFE'는 영어로 '인공호흡'이라는 뜻을 담고 있으며, 음악과 퍼포먼스를 통해 K-POP 씬에 새로운 활력을 불어넣겠다는 큰 포부를 담고 있습니다. 멤버 각자의 개성과 매력을 살린 화려한 보컬과 퍼포먼스는 팬들에게 깊은 인상을 남기며, 다양한 장르를 아우르는 곡들로 글로벌 팬층을 확보하고 있습니다. 또한 음악적 완성도뿐 아니라 스타일링, 뮤직비디오, 콘셉트 연출까지 세심하게 참여하는 아티스트입니다.",
+    intro: "KISS OF LIFE (키스오브라이프)는 대한민국의 4인조 걸그룹으로, 2023년 데뷔와 동시에 뛰어난 실력과 감각적인 음악으로 주목받았습니다. 그룹명 'KISS OF LIFE (키스오브라이프)'는 영어로 '인공호흡'이라는 뜻을 담고 있으며, 음악과 퍼포먼스를 통해 K-POP 씬에 새로운 활력을 불어넣겠다는 큰 포부를 담고 있습니다. 멤버 각자의 개성과 매력을 살린 화려한 보컬과 퍼포먼스는 팬들에게 깊은 인상을 남기며, 다양한 장르를 아우르는 곡들로 글로벌 팬층을 확보하고 있습니다. 또한 음악적 완성도뿐 아니라 스타일링, 뮤직비디오, 콘셉트 연출까지 세심하게 참여하는 아티스트입니다.",
     extraInfo: [
       { title: "Shhh", desc: "KISS IF LIFE", img:"/assets/home/lineup/album/idol2_sing1.webp", link: "https://www.youtube.com/watch?v=mIfpVrYIhvM&list=RDmIfpVrYIhvM&start_radio=1"},
       { title: "Midas Touch", desc: "Midas Touch", img:"/assets/home/lineup/album/idol2_sing2.webp", link:"https://www.youtube.com/watch?v=oKVYm8mIUdo&list=RDoKVYm8mIUdo&start_radio=1"},
