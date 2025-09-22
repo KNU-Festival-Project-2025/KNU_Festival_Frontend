@@ -35,12 +35,31 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, forceRegister })
 
   // 회원가입
   const handleKakaoRegister = () => {
-    if (nickname) sessionStorage.setItem("nickname", nickname);
-    if (phone) sessionStorage.setItem("phone", phone);
+  // 닉네임 체크
+  if (!nickname.trim()) {
+    alert("닉네임을 입력해주세요.");
+    return;
+  }
 
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-    window.location.assign(kakaoAuthUrl);
-  };
+  // 전화번호 체크
+  const phonePattern = /^010\d{8}$/; // 010xxxxxxxx
+  if (!phone.trim()) {
+    alert("전화번호를 입력해주세요.");
+    return;
+  } else if (!phonePattern.test(phone)) {
+    alert("전화번호 형식이 올바르지 않습니다. 예: 01012345678");
+    return;
+  }
+
+  // 저장
+  sessionStorage.setItem("nickname", nickname);
+  sessionStorage.setItem("phone", phone);
+
+  // 카카오 인증 URL 이동
+  const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  window.location.assign(kakaoAuthUrl);
+};
+
 
   // 로그인
   const handleKakaoLogin = () => {
@@ -86,7 +105,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, forceRegister })
     >
       <div
         ref={modalRef}
-        className={`relative w-[279px] h-[434px] rounded-[15px] border border-gray-300 bg-[#D6DBBA] shadow-lg flex flex-col transform transition-all duration-200 ease-out ${
+        className={`relative w-[279px] h-[434px] rounded-[15px] border border-gray-300 bg-[#eef2da] flex flex-col transform transition-all duration-200 ease-out ${
           isAnimatingOut
             ? "opacity-0 scale-95 translate-y-2 pointer-events-none"
             : "opacity-100 scale-100 translate-y-0 pointer-events-auto"
@@ -101,7 +120,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, forceRegister })
       >
         <button
           onClick={handleClose}
-          className="absolute top-3 right-3 text-lg font-bold text-[rgba(68,98,64,0.60)] hover:text-[#446240]"
+          className="absolute top-3 right-3 text-lg font-bold text-[rgba(208, 247, 203, 0.6)] hover:text-[#446240]"
         >
           ✕
         </button>
@@ -109,13 +128,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, forceRegister })
           회원가입
         </h2>
 
+        <div className="mt-[-20px] text-gray-400 text-sm text-center">회원가입이 필요합니다. </div>
+
         <label className="text-[17px] font-bold mb-2 text-[#285100]">닉네임</label>
         <input
           type="text"
           maxLength={5}
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
-          className="flex h-[48px] w-full px-5 py-4 rounded-[20px] border border-gray-300 mb-4"
+          className="placeholder-gray-400 text-[black] flex bg-white h-[48px] w-full px-5 py-4 rounded-[20px] border border-gray-300 mb-4"
           placeholder="5글자 내로 입력"
         />
 
@@ -124,7 +145,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, forceRegister })
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="flex h-[48px] w-full px-5 py-4 rounded-[20px] border border-gray-300 mb-6"
+          className="placeholder-gray-400 text-[black] bg-white flex h-[48px] w-full px-5 py-4 rounded-[20px] border border-gray-300 mb-6"
+          placeholder="010xxxxxxxx"
         />
 
         <button
