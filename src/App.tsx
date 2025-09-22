@@ -26,6 +26,7 @@ function AppContent() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [forceRegister, setForceRegister] = useState(false);
 
   return (
     <div className="flex justify-center">
@@ -51,12 +52,15 @@ function AppContent() {
         <MenuModal
           isOpen={menuOpen}
           onClose={() => setMenuOpen(false)}
-          onLoginClick={() => setLoginOpen(true)}
+          onLoginClick={() => {
+            setForceRegister(false); // 로그인 버튼 눌렀을 때는 기본 로그인 모달
+            setLoginOpen(true);
+        }}
         />
 
 
         {/* ✅ 로그인 모달 */}
-        <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+        <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} forceRegister={forceRegister}/>
 
         <div className="pt-16">
           <Routes>
@@ -82,7 +86,11 @@ function AppContent() {
             <Route path="/artist/:number" element={<Artist />} />
             <Route path="/photo-upload" element={<PhotoUpload />} />
         
-            <Route path="/login" element={<LoginCallback />} />
+            <Route path="/login" element={<LoginCallback onRequireRegister={() => {
+                // 회원가입 모달 열도록 상태 업데이트
+                setForceRegister(true);
+                setLoginOpen(true);
+              }}/>} />
           </Routes>
         </div>
       </div>
