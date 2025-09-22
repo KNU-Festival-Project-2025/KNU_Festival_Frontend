@@ -16,7 +16,7 @@ const LoginCallback: React.FC<{ onRequireRegister?: () => void }> = ({ onRequire
     loginCalledRef.current = true;
 
     const code = searchParams.get("code");
-    console.log("🔹 카카오 로그인 콜백 code:", code);
+    //console.log("🔹 카카오 로그인 콜백 code:", code);
 
     if (!code) {
       toast.error("로그인 코드가 없습니다.");
@@ -28,11 +28,11 @@ const LoginCallback: React.FC<{ onRequireRegister?: () => void }> = ({ onRequire
     const phone = sessionStorage.getItem("phone") || undefined;
 
     const body = { code, nickname, phone };
-    console.log("kakaoLogin 호출, 전송 body:", body);
+    //console.log("kakaoLogin 호출, 전송 body:", body);
 
     kakaoLogin(body)
       .then((data) => {
-        console.log("kakaoLogin then 데이터:", data);
+        //console.log("kakaoLogin then 데이터:", data);
         setAuth(data.accessToken, data.nickname);
 
         sessionStorage.setItem("accessToken", data.accessToken);
@@ -46,7 +46,7 @@ const LoginCallback: React.FC<{ onRequireRegister?: () => void }> = ({ onRequire
       .catch((err) => {
         const code = err.response?.data?.code;
         const message = err.response?.data?.message || "로그인에 실패했습니다.";
-        console.error("Login POST 에러:", code, message);
+        //console.error("Login POST 에러:", code, message);
 
         if (code === 40001) {
           toast.error("이미 사용 중인 닉네임입니다.");

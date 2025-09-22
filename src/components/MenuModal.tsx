@@ -37,7 +37,7 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, onClose, onLoginClick }) 
   };
 
   const handleLogoutClick = async () => {
-    console.log("로그아웃 token:", accessToken);
+    //console.log("로그아웃 token:", accessToken);
 
     try {
       await api.post(
@@ -45,7 +45,7 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, onClose, onLoginClick }) 
         {}, // 서버가 body 필요 없으면 빈 객체
         { headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {} }
       );
-      console.log("로그아웃 API 호출 완료");
+      //console.log("로그아웃 API 호출 완료");
     } catch (err: any) {
       console.error("로그아웃 실패:", err.response?.data || err.message);
     } finally {
