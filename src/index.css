@@ -71,15 +71,58 @@
   font-family: "school", "HakgyoansimJeomsimsiganB", sans-serif !important;
 }
 
-/* 스크롤바 숨기기 (스크롤 기능은 유지) */
+/* 스크롤바 완전히 숨기기 (스크롤 기능은 유지) */
+/* Webkit 기반 브라우저 (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
   width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+::-webkit-scrollbar-corner {
   background: transparent;
 }
 
 /* Firefox에서 스크롤바 숨기기 */
 * {
   scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* 모든 요소에 스크롤바 숨기기 적용 */
+html,
+body,
+div,
+section,
+main,
+article,
+aside,
+nav,
+header,
+footer {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar,
+section::-webkit-scrollbar,
+main::-webkit-scrollbar,
+article::-webkit-scrollbar,
+aside::-webkit-scrollbar,
+nav::-webkit-scrollbar,
+header::-webkit-scrollbar,
+footer::-webkit-scrollbar {
+  display: none;
 }
 
 /* 스냅 스크롤을 위한 기본 설정 */
@@ -205,6 +248,30 @@ html {
   }
 }
 
+@keyframes modalSlideIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalSlideOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+}
+
 @keyframes fadeInSlide {
   0% {
     opacity: 0;
@@ -296,12 +363,32 @@ html {
 
 /* 932px 이상일 때 최대 높이를 932px로 제한하는 하이브리드 클래스 */
 .h-screen-hybrid {
+  /* 1. 초기 고정값 설정 (모든 브라우저 지원) */
+  min-height: 100vh;
   height: 100vh;
-  /* 기본값 */
+
+  /* 2. 동적 뷰포트 높이 (최신 브라우저 지원) - 모바일 브라우저 바 대응 */
+  min-height: 100dvh;
   height: 100dvh;
-  /* 동적 뷰포트 높이 (지원하는 브라우저) */
-  height: calc(var(--vh, 1vh) * 100);
-  /* JavaScript 폴백 */
+
+  /* 3. 구형 브라우저를 위한 대체 동적 뷰포트 */
+  min-height: -webkit-fill-available;
+  height: -webkit-fill-available;
+
+  /* 4. JavaScript 폴백 (CSS 변수 사용) */
+  min-height: calc(var(--vh, 1vh) * 100);
+
+  /* 배경 이미지 안정화를 위한 추가 설정 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* 모바일 환경에서 안정성 강화 */
+@supports (height: 100dvh) {
+  .h-screen-hybrid {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
 }
 
 /* 932px 이상일 때 최대 높이 제한 */
@@ -309,13 +396,141 @@ html {
   .h-screen-hybrid {
     height: 932px !important;
     max-height: 932px !important;
+    min-height: 932px !important;
   }
 }
 
-/* 추가 안전장치: 매우 큰 화면에서도 932px 제한 */
-@media (min-height: 1000px) {
+/* iOS Safari 특별 처리 */
+@supports (-webkit-touch-callout: none) {
   .h-screen-hybrid {
-    height: 932px !important;
-    max-height: 932px !important;
+    height: -webkit-fill-available;
+    min-height: -webkit-fill-available;
+  }
+
+  @media (min-height: 932px) {
+    .h-screen-hybrid {
+      height: 932px !important;
+      min-height: 932px !important;
+    }
+  }
+}
+
+/* 배경 이미지 섹션 안정화 클래스 */
+.bg-stable {
+  background-attachment: scroll;
+  /* fixed 대신 scroll로 더 안정적 */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  will-change: auto;
+  /* 불필요한 재렌더링 방지 */
+  transform: translateZ(0);
+  /* GPU 가속 활용 */
+  backface-visibility: hidden;
+  /* 깜빡임 방지 */
+}
+
+/* 모바일 환경에서 배경 고정 */
+@media (max-width: 768px) {
+  .bg-stable {
+    background-attachment: scroll !important;
+  }
+}
+
+/* ===== SNAP SCROLL STYLES ===== */
+/* 메인 컨테이너에 snap 스크롤 적용 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Snap 스크롤 컨테이너 */
+.snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+  height: 100dvh;
+  /* 스크롤바 완전히 숨기기 */
+  scrollbar-width: none !important;
+  /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+}
+
+/* 각 섹션에 snap 정렬 적용 - 직접 자식 요소들 */
+.snap-container>div {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* 모바일에서 더 유연한 snap */
+@media (max-width: 768px) {
+  .snap-container {
+    scroll-snap-type: y proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 데스크톱에서 강한 snap */
+@media (min-width: 769px) {
+  .snap-container {
+    scroll-snap-type: y mandatory;
+  }
+}
+
+/* snap-container 스크롤바 완전히 숨기기 */
+.snap-container::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 터치 디바이스 최적화 */
+@media (hover: none) and (pointer: coarse) {
+  .snap-container {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* 홈 페이지 snap 컨테이너 조정 */
+.snap-container {
+  position: relative;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  height: 100vh;
+  -webkit-overflow-scrolling: touch;
+  /* iOS 부드러운 스크롤 */
+}
+
+/* 스냅 섹션 강화 */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* 강제로 섹션에서 멈춤 */
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 스냅 스크롤 강화를 위한 추가 설정 */
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 터치 디바이스에서 스냅 스크롤 강화 */
+@media (hover: none) and (pointer: coarse) {
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }

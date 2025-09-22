@@ -4,10 +4,15 @@ import lineClamp from "@tailwindcss/line-clamp";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      'ise': '376px', // iPhone SE (376px) 초과
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
-      screens: {
-        'lg': '932px', // 932px 이상에서 고정 위치 사용
-      },
       height: {
         'screen-dynamic': '100dvh', // 동적 뷰포트 높이
         'screen-safe': '100svh', // 안전한 뷰포트 높이
