@@ -170,6 +170,14 @@ const Home: React.FC = () => {
     backend: false,
   });
 
+  // scroll2 섹션의 가시성 상태
+  const [scroll2Visibility, setScroll2Visibility] = useState({
+    commingsoon: false,
+    day1: false,
+    day2: false,
+    day3: false,
+  });
+
   // 스크롤 상태
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -195,6 +203,12 @@ const Home: React.FC = () => {
 
   // 개발자 정보 refs
   const designerRef = useRef<HTMLDivElement>(null);
+
+  // scroll2 refs
+  const commingsoonRef = useRef<HTMLImageElement>(null);
+  const day1Ref = useRef<HTMLDivElement>(null);
+  const day2Ref = useRef<HTMLDivElement>(null);
+  const day3Ref = useRef<HTMLDivElement>(null);
 
   // 스크롤 이동 함수
   const scrollToRef = (ref: React.RefObject<HTMLDivElement | null>) => {
@@ -232,23 +246,46 @@ const Home: React.FC = () => {
 
   // 뷰포트 높이 계산 및 업데이트 (모바일 브라우저 바 대응)
   useEffect(() => {
+    let resizeTimer: NodeJS.Timeout;
+
     const updateViewportHeight = () => {
       // 실제 뷰포트 높이 계산 (모바일 브라우저 바 고려)
       const vh = window.innerHeight * 0.01;
-      
+
       // CSS 변수로 설정 (폴백용)
       document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+      // 모바일 환경에서 최소 높이 보장
+      const minHeight = Math.min(window.innerHeight, 932); // 최대 932px로 제한
+      document.documentElement.style.setProperty('--vh-stable', `${minHeight}px`);
+    };
+
+    // 디바운스를 적용한 리사이즈 핸들러
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        updateViewportHeight();
+      }, 100); // 100ms 디바운스로 안정성 향상
     };
 
     // 초기 설정
     updateViewportHeight();
 
     // 리사이즈 이벤트 리스너
-    window.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('resize', handleResize);
     window.addEventListener('orientationchange', updateViewportHeight);
 
+    // 모바일 브라우저 주소창 변화 감지 (보다 정확한 감지)
+    window.addEventListener('scroll', () => {
+      if (window.scrollY === 0) {
+        // 스크롤이 최상단일 때만 업데이트
+        requestAnimationFrame(updateViewportHeight);
+      }
+    }, { passive: true });
+
     return () => {
-      window.removeEventListener('resize', updateViewportHeight);
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('orientationchange', updateViewportHeight);
     };
   }, []);
@@ -302,6 +339,17 @@ const Home: React.FC = () => {
                   setDeveloperVisibility(prev => ({ ...prev, backend: true }));
                 }, 1200);
               }
+            } else if (cardId.startsWith('scroll2')) {
+              // scroll2 섹션 애니메이션
+              if (cardId === 'scroll2-commingsoon') {
+                setScroll2Visibility(prev => ({ ...prev, commingsoon: true }));
+              } else if (cardId === 'scroll2-day1') {
+                setScroll2Visibility(prev => ({ ...prev, day1: true }));
+              } else if (cardId === 'scroll2-day2') {
+                setScroll2Visibility(prev => ({ ...prev, day2: true }));
+              } else if (cardId === 'scroll2-day3') {
+                setScroll2Visibility(prev => ({ ...prev, day3: true }));
+              }
             }
           }
         }
@@ -344,6 +392,21 @@ const Home: React.FC = () => {
       }
     });
 
+    // scroll2 관찰 시작
+    const scroll2Refs = [
+      { ref: commingsoonRef, id: 'scroll2-commingsoon' },
+      { ref: day1Ref, id: 'scroll2-day1' },
+      { ref: day2Ref, id: 'scroll2-day2' },
+      { ref: day3Ref, id: 'scroll2-day3' }
+    ];
+    
+    scroll2Refs.forEach(({ ref, id }) => {
+      if (ref.current) {
+        ref.current.setAttribute('data-card-id', id);
+        observer.observe(ref.current);
+      }
+    });
+
 
     return () => {
       cardRefs.forEach(ref => {
@@ -361,22 +424,27 @@ const Home: React.FC = () => {
           observer.unobserve(ref.current);
         }
       });
+      scroll2Refs.forEach(({ ref }) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
     };
   }, []);
 
 
   return (
     <div
-      className="w-full max-w-[430px] bg-contain bg-center bg-no-repeat overflow-x-hidden -mt-16"
+      className="w-full max-w-[430px] bg-contain bg-center bg-no-repeat overflow-hidden -mt-16 snap-container"
       style={{
         backgroundSize: "cover",
         backgroundPosition: "top center",
-        minHeight: "calc(300vh + 64px)",
+        minHeight: "100dvh", // 동적 뷰포트 높이 우선 적용
       }}
     >
       <div
         ref={scroll1Ref}
-        className="w-full h-screen-hybrid min-h-[600px] flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-center "
+        className="w-full h-screen-hybrid min-h-[600px] flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-center bg-stable"
       >
         <div
           className={`text-center mt-[95px] transition-all duration-1000 ${
@@ -507,12 +575,24 @@ const Home: React.FC = () => {
         className="w-full min-h-[932px] pt-[101px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImgT.webp')]"
       >
         <img
+          ref={commingsoonRef}
           src="/assets/home/commingsoon.webp"
           alt=""
-          className="mx-auto w-[80%] mt-[120px]"
+          className={`mx-auto w-[80%] mt-[120px] transition-all duration-1000 ${
+            scroll2Visibility.commingsoon
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
         />
 
-        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
+        <div 
+          ref={day1Ref}
+          className={`relative mx-auto w-[100px] h-[100px] mt-[63px] transition-all duration-1000 ${
+            scroll2Visibility.day1
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
+        >
           <img
             src="/assets/home/circle1.webp"
             alt=""
@@ -528,7 +608,14 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
+        <div 
+          ref={day2Ref}
+          className={`relative mx-auto w-[100px] h-[100px] mt-[63px] transition-all duration-1000 ${
+            scroll2Visibility.day2
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
+        >
           <img
             src="/assets/home/circle2.webp"
             alt=""
@@ -544,7 +631,14 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative mx-auto w-[100px] h-[100px] mt-[63px]">
+        <div 
+          ref={day3Ref}
+          className={`relative mx-auto w-[100px] h-[100px] mt-[63px] transition-all duration-1000 ${
+            scroll2Visibility.day3
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
+        >
           <img
             src="/assets/home/circle3.webp"
             alt=""
@@ -568,7 +662,7 @@ const Home: React.FC = () => {
       
       <div
         ref={scroll2Ref}
-        className="w-full h-screen-hybrid min-h-[600px] pt-[70px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center relative overflow-hidden"
+        className="w-full h-screen-hybrid min-h-[600px] pt-[70px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center bg-stable relative overflow-hidden"
       >
          첫 번째 카드 - 하이브리드 위치 
         <div className="absolute top-[8vh] lg:top-[70px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
@@ -688,7 +782,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       
-      <div className="w-full h-screen-hybrid min-h-[600px] pt-[15px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center relative overflow-hidden">
+      <div className="w-full h-screen-hybrid min-h-[600px] pt-[15px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center bg-stable relative overflow-hidden">
         
         네 번째 카드 - 하이브리드 위치 
         <div className="absolute top-[1vh] lg:top-[10px] left-1/2 transform -translate-x-1/2 w-full max-w-[430px]">
@@ -834,7 +928,7 @@ const Home: React.FC = () => {
       {/* scroll3 시작 */}
       <div
         ref={scroll3Ref}
-        className="w-full h-screen-hybrid min-h-[600px] pt-[90px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-center overflow-hidden"
+        className="w-full h-screen-hybrid min-h-[600px] pt-[90px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-center bg-stable overflow-hidden"
       >
         <div 
           ref={card60thRef}
@@ -881,7 +975,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full h-screen-hybrid min-h-[600px] pt-[64px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-center overflow-hidden">
+      <div className="w-full h-screen-hybrid min-h-[600px] pt-[64px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-center bg-stable overflow-hidden">
         <div 
           ref={cardStadiumRef}
           className={`transition-all duration-1000 ${
@@ -948,7 +1042,7 @@ const Home: React.FC = () => {
 
       <div
         ref={scroll4Ref}
-        className="w-full h-screen-hybrid min-h-[600px] bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] flex justify-center items-center overflow-hidden"
+        className="w-full h-screen-hybrid min-h-[600px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] bg-cover bg-center bg-stable flex justify-center items-center overflow-hidden"
       >
         <div className="flex flex-col w-[343.699px] h-[364px]">
           <div 
