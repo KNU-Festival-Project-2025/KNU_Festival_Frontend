@@ -504,7 +504,10 @@ const Home: React.FC = () => {
       >
       <div
         ref={scroll1Ref}
-        className="w-full min-h-screen flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-center bg-stable snap-section"
+        className="w-full h-auto flex flex-col items-center overflow-hidden bg-[url('/assets/home/BGimg/BackImg1.webp')] bg-cover bg-stable snap-section"
+        style={{
+          backgroundPosition: "top center"
+        }}
       >
         <div
           className={`text-center transition-all duration-1000 ${
@@ -528,6 +531,7 @@ const Home: React.FC = () => {
             style={{
               maxWidth: window.innerWidth <= 375 ? '260px' : '310px',
               animation: isVisible.logo ? "fadeInScale 0.8s ease-out" : "none",
+              marginTop: window.innerWidth <= 375 ? '-20px' : '0px',
             }}
           />
 
@@ -691,8 +695,9 @@ const Home: React.FC = () => {
       
       <div
         ref={scroll2Ref}
-        className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-[url('/assets/home/BGimg/BackImgT.webp')] snap-section"
+        className="w-full h-auto bg-cover bg-no-repeat bg-[url('/assets/home/BGimg/BackImgT.webp')] snap-section"
         style={{
+          backgroundPosition: "top center",
           paddingTop: window.innerWidth <= 375 ? '70px' : window.innerWidth >= 932 ? '101px' : '80px'
         }}
       >
@@ -796,7 +801,10 @@ const Home: React.FC = () => {
       
       <div
         ref={scroll2Ref}
-        className="w-full h-screen-hybrid min-h-[600px] pt-[70px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-center bg-stable relative overflow-hidden snap-section"
+        className="w-full h-auto pt-[70px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg2.webp')] bg-cover bg-stable relative overflow-hidden snap-section"
+        style={{
+          backgroundPosition: "top center"
+        }}
       >
          첫 번째 카드 - 하이브리드 위치 
         <div 
@@ -931,7 +939,10 @@ const Home: React.FC = () => {
         </div>
       </div>
       
-      <div className="w-full h-screen-hybrid min-h-[600px] pt-[15px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-center bg-stable relative overflow-hidden">
+      <div className="w-full h-auto pt-[15px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg3.webp')] bg-cover bg-stable relative overflow-hidden"
+        style={{
+          backgroundPosition: "top center"
+        }}>
         
         네 번째 카드 - 하이브리드 위치 
         <div 
@@ -1097,7 +1108,10 @@ const Home: React.FC = () => {
       {/* scroll3 시작 */}
       <div
         ref={scroll3Ref}
-        className="w-full min-h-screen pt-[90px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-center bg-stable overflow-hidden snap-section"
+        className="w-full h-auto pt-[90px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg4.webp')] bg-cover bg-stable overflow-hidden snap-section"
+        style={{
+          backgroundPosition: "top center"
+        }}
       >
         <div 
           ref={card60thRef}
@@ -1144,7 +1158,10 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full min-h-screen pt-[64px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-center bg-stable overflow-hidden">
+      <div className="w-full min-h-screen pt-[64px] bg-no-repeat bg-[url('/assets/home/BGimg/BackImg5.webp')] bg-cover bg-stable overflow-hidden"
+        style={{
+          backgroundPosition: "top center"
+        }}>
         <div 
           ref={cardStadiumRef}
           className={`transition-all duration-1000 ${
@@ -1169,7 +1186,7 @@ const Home: React.FC = () => {
 
         <div 
           ref={cardHaminRef}
-          className={`z-10 mt-[-100px] transition-all duration-1000 ${
+          className={`z-10 mt-[-130px] transition-all duration-1000 ${
             homeCard2Visibility['homecard2-cardHamin']
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -1189,7 +1206,7 @@ const Home: React.FC = () => {
         />
         </div>
 
-        <div className="z-50 text-center">
+        <div className="z-100 mt-2 text-center">
           <RefButton
             text="개발자 및 디자이너"
             backgroundColor="#E5BEEF"
@@ -1211,7 +1228,10 @@ const Home: React.FC = () => {
 
       <div
         ref={scroll4Ref}
-        className="w-full min-h-screen bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] bg-cover bg-center bg-stable flex justify-center items-center overflow-hidden snap-section"
+        className="w-full h-auto bg-no-repeat bg-[url('/assets/home/BGimg/BackImg6.webp')] bg-cover bg-stable flex justify-center items-center overflow-hidden snap-section"
+        style={{
+          backgroundPosition: "top center"
+        }}
       >
         <div className="flex flex-col w-[343.699px] h-[364px]">
           <div 
