@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ buttonRef, onMenuClick }) => {
       case location.pathname.startsWith("/booth-foodtruck"):
         return "부스 & 푸드트럭";
       case location.pathname === "/photo-festival":
-        return "사진 페스티벌";
+        return "포토 페스티벌";
       case location.pathname === "/timetable":
         return "타임 테이블";
       case location.pathname.startsWith("/faq"):

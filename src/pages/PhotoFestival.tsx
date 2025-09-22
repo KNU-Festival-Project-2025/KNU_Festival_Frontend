@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 //import React, { useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 //import Masonry from 'react-masonry-css';
@@ -138,8 +138,8 @@ const fetchPhotos = async () => {
 
 const PhotoFestival: React.FC = () => {
   const navigate = useNavigate();
-  const [{/*visibleCards*/}, setVisibleCards] = useState<Set<number>>(new Set());
-  const [{/*isDescriptionVisible*/}, setIsDescriptionVisible] = useState(false);
+  const [{/*visibleCards*/ }, setVisibleCards] = useState<Set<number>>(new Set());
+  const [{/*isDescriptionVisible*/ }, setIsDescriptionVisible] = useState(false);
   const [isUploadButtonVisible, setIsUploadButtonVisible] = useState(false);
   const [showDeleteMenu, setShowDeleteMenu] = useState<number | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -148,8 +148,8 @@ const PhotoFestival: React.FC = () => {
   //const [setPosts] = useState<PhotoPost[]>([]);
   const { nickname } = useAuth(); // 로그인 여부 확인
   const [loginOpen, setLoginOpen] = useState(false); // 모달 상태
-  
-{/*
+
+  {/*
   // API 호출
     useEffect(() => {
   const loadPhotos = async () => {
@@ -236,7 +236,7 @@ const PhotoFestival: React.FC = () => {
   }, []);
 
   const scrollToTop = () => scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
-{/*
+  {/*
  const handleLike = useCallback(async (id: number) => {
   try {
     const res = await api.post(`/api/photo/like/${id}`);
@@ -260,7 +260,7 @@ const PhotoFestival: React.FC = () => {
   }
 }, []);
 */}
-{/*
+  {/*
   const handleDelete = useCallback(async (id: number) => {
   try {
     const res = await api.delete(`/api/photo/${id}`);
@@ -284,7 +284,7 @@ const PhotoFestival: React.FC = () => {
   }
 }, []);
 */}
-{/*}
+  {/*}
   const toggleDeleteMenu = useCallback((id: number) => {
     setShowDeleteMenu(prev => (prev === id ? null : id));
   }, []);
@@ -324,7 +324,7 @@ const PhotoFestival: React.FC = () => {
       */}
 
       <div>
-        <p className="mt-[150px] text-[#133858] text-center font-[Binggrae] text-[27.621px] not-italic font-bold leading-[30.383px]">
+        <p className="mt-[130px] text-[#133858] text-center font-[Binggrae] text-[27.621px] not-italic font-bold leading-[30.383px]">
           대동제 포토 페스티벌
         </p>
 
@@ -333,37 +333,38 @@ const PhotoFestival: React.FC = () => {
         </p>
 
         <div>
-          <img src="/assets/photoFestival.webp" alt="" 
-          className=""/>
+          <img src="/assets/photoFestival.webp" alt=""
+            className="" />
         </div>
 
-
+        <p className="text-center text-sm text-gray-500">
+          업로드된 사진은 총학생회 영상 제작에 활용될 수 있습니다.
+        </p>
       </div>
 
       {/* Upload Button */}
-      <div className={`fixed bottom-6 left-1/2 transform -translate-x-1/2 z-20 w-[80%] max-w-[344px] transition-all duration-700 ease-out ${
-        isUploadButtonVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}>
+      <div className={`fixed bottom-6 left-1/2 transform -translate-x-1/2 z-20 w-[80%] max-w-[344px] transition-all duration-700 ease-out ${isUploadButtonVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}>
         <button
-            onClick={() => {
-              if (!nickname) {
-                alert("로그인이 필요한 서비스입니다.");
-                setLoginOpen(true); // 모달 열기
-                return;
-              }
-              navigate('/photo-upload');
-            }}
+          onClick={() => {
+            if (!nickname) {
+              alert("로그인이 필요한 서비스입니다.");
+              setLoginOpen(true); // 모달 열기
+              return;
+            }
+            navigate('/photo-upload');
+          }}
           className="w-full bg-white/80 rounded-3xl px-6 py-4 shadow-2xl flex items-center justify-center space-x-3 hover:shadow-3xl transition-all duration-300"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
           <span className="text-gray-700 font-semibold">사진 업로드하기</span>
         </button>
       </div>
 
-                  {/* 로그인 모달 */}
+      {/* 로그인 모달 */}
       <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
 
 
@@ -374,7 +375,7 @@ const PhotoFestival: React.FC = () => {
           className="fixed bottom-25 right-6 z-50 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all duration-300 hover:scale-110"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
         </button>
       )}

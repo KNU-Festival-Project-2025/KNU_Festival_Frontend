@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BoothCard from "../components/Booth/BoothCard";
 import BoothModal from "../components/Booth/BoothModal";
@@ -30,6 +30,9 @@ const BoothAndFoodTruck: React.FC = () => {
 
   // 스와이프
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  // 스크롤 ref
+  const listRef = useRef<HTMLDivElement>(null);
 
   const locations = ["대운동장", "함인섭광장", "60주년", "미래광장"];
 
@@ -64,6 +67,13 @@ const BoothAndFoodTruck: React.FC = () => {
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
+
+  // page 변경될 때 스크롤 맨 위로
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = 0;
+    }
+  }, [page, activeLocation, activeTab]);
 
   // 지도 넘기기
   const prevLocation = () => {
@@ -138,9 +148,9 @@ const BoothAndFoodTruck: React.FC = () => {
             const diffX = e.changedTouches[0].clientX - touchStartX;
 
             if (diffX > 50) {
-              prevLocation(); // 오른쪽 → 왼쪽 스와이프
+              prevLocation();
             } else if (diffX < -50) {
-              nextLocation(); // 왼쪽 → 오른쪽 스와이프
+              nextLocation();
             }
 
             setTouchStartX(null);
@@ -208,8 +218,11 @@ const BoothAndFoodTruck: React.FC = () => {
         </div>
       </div>
 
-      {/* 부스 카드 리스트 및 페이지네이션을 스크롤 영역으로 분리 */}
-      <div className="max-h-[calc(100vh-420px)] overflow-y-auto px-4 mt-4">
+      {/* 부스 카드 리스트 및 페이지네이션 */}
+      <div
+        ref={listRef}
+        className="max-h-[calc(100vh-420px)] overflow-y-auto px-4 mt-4"
+      >
         <div className="flex justify-center">
           <div className="w-full max-w-[353px] flex flex-col gap-4">
             {paginatedBooths.length > 0 ? (
@@ -232,7 +245,6 @@ const BoothAndFoodTruck: React.FC = () => {
 
         {/* 페이지네비게이션 */}
         <div className="flex justify-center items-center gap-[22px] mt-[25px] pb-8">
-          {/* 이전 버튼 */}
           <button
             disabled={page === 1}
             onClick={() => setPage(page - 1)}
@@ -245,7 +257,6 @@ const BoothAndFoodTruck: React.FC = () => {
             />
           </button>
 
-          {/* 페이지 점 + 숫자 */}
           <div className="flex items-center gap-6">
             {[...Array(totalPages)].map((_, i) => {
               const isActive = page === i + 1;
@@ -261,7 +272,7 @@ const BoothAndFoodTruck: React.FC = () => {
                     alt={isActive ? "active" : "inactive"}
                     className="w-[10px] h-[10px]"
                   />
-                  <span className="text-[14px] font-pretendard text-white">
+                  <span className="text-[14px] font-pretendard text-[#285100]">
                     {i + 1}
                   </span>
                 </div>
@@ -269,7 +280,6 @@ const BoothAndFoodTruck: React.FC = () => {
             })}
           </div>
 
-          {/* 다음 버튼 */}
           <button
             disabled={page === totalPages}
             onClick={() => setPage(page + 1)}
@@ -282,6 +292,7 @@ const BoothAndFoodTruck: React.FC = () => {
             />
           </button>
         </div>
+
       </div>
 
       {/* 모달 */}
