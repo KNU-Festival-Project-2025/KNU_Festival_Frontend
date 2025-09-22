@@ -108,8 +108,8 @@ const CurrentEventDisplay: React.FC = () => {
                         bg-gradient-to-r from-white/0 to-white shadow-[ -2px_3px_5px_0_rgba(105,132,77,0.33) ]"
         style={{
           top: isMobile ? '65px' : '71px',
-          width: isMobile ? '260px' : '330px',
-          height: isMobile ? '38px' : '46px'
+          width: isMobile ? '260px' : '290px',
+          height: isMobile ? '38px' : '43px'
         }}
     >
       <img
@@ -129,7 +129,7 @@ const CurrentEventDisplay: React.FC = () => {
         style={{
           marginTop: isMobile ? '7px' : '9.5px',
           marginLeft: isMobile ? '6px' : '12px',
-          fontSize: isMobile ? '13px' : '18px'
+          fontSize: isMobile ? '13px' : '15px'
         }}
       >
         {currentEvent ? currentEvent.time : "쉬는시간"}
@@ -140,7 +140,7 @@ const CurrentEventDisplay: React.FC = () => {
           marginTop: isMobile ? '7px' : '9.5px',
           marginLeft: 'auto',
           marginRight: isMobile ? '10px' : '20px',
-          fontSize: isMobile ? '13px' : '18px'
+          fontSize: isMobile ? '13px' : '15px'
         }}
       >
         {currentEvent ? currentEvent.title : "다시 돌아올게요~!"}
@@ -558,20 +558,20 @@ const Home: React.FC = () => {
  
         {/* 1번째 HomeCard */}
         <div
-          className={`w-full h-auto mx-auto transition-all duration-1000 ${
+          className={`h-auto mx-auto transition-all duration-1000 ${
             isVisible.cards
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
           }`}
           style={{
             marginTop: window.innerWidth <= 375 ? '20px' : '30px',
-            maxWidth: window.innerWidth <= 375 ? '340px' : '400px',
+            maxWidth: window.innerWidth <= 375 ? '340px' : '380px',
             paddingLeft: window.innerWidth <= 375 ? '8px' : '16px',
             paddingRight: window.innerWidth <= 375 ? '8px' : '16px'
           }}
         >
           <div
-            className="relative w-full h-auto"
+            className="relative w-full h-[120px]"
             onClick={() => navigate("/timetable")}
           >
             <img
@@ -639,32 +639,32 @@ const Home: React.FC = () => {
             <img
               src="/assets/home/LayerFrame1/1LayerFrame2.webp"
               alt=""
-              className="w-full h-full"
+              className="w-full h-[100px]"
               onClick={() => navigate("/booth-foodtruck/대운동장")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame3.webp"
               alt=""
-              className="w-full h-full"
+              className="w-full h-[100px]"
               onClick={() => navigate("/photo-festival")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame4.webp"
               alt=""
-              className="w-full h-full"
+              className="w-full h-[100px]"
               onClick={() => navigate("/boothRecommendLoading")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame5.webp"
               alt=""
-              className="w-full h-full"
+              className="w-full h-[100px]"
               onClick={() => navigate("/faq")}
             />
           </div>
         </div>
 
         <div
-          className={`h-[63px] mt-[30px] text-center transition-all duration-300 ${
+          className={`h-[63px] mt-[20px] text-center transition-all duration-300 ${
             isVisible.button
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -1137,7 +1137,7 @@ const Home: React.FC = () => {
 
         <div 
           ref={cardFutureRef}
-          className={`transition-all duration-1000 ${
+          className={`z-10 mt-[-50px] transition-all duration-1000 ${
             homeCard2Visibility['homecard2-cardFuture']
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
