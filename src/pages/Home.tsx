@@ -571,7 +571,7 @@ const Home: React.FC = () => {
           }}
         >
           <div
-            className="relative w-full h-[120px]"
+            className="relative w-[310px] h-auto"
             onClick={() => navigate("/timetable")}
           >
             <img
@@ -639,32 +639,32 @@ const Home: React.FC = () => {
             <img
               src="/assets/home/LayerFrame1/1LayerFrame2.webp"
               alt=""
-              className="w-full h-[100px]"
+              className="w-auto h-[100px]"
               onClick={() => navigate("/booth-foodtruck/대운동장")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame3.webp"
               alt=""
-              className="w-full h-[100px]"
+              className="w-auto h-[100px]"
               onClick={() => navigate("/photo-festival")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame4.webp"
               alt=""
-              className="w-full h-[100px]"
+              className="w-auto h-[100px]"
               onClick={() => navigate("/boothRecommendLoading")}
             />
             <img
               src="/assets/home/LayerFrame1/1LayerFrame5.webp"
               alt=""
-              className="w-full h-[100px]"
+              className="w-auto h-[100px]"
               onClick={() => navigate("/faq")}
             />
           </div>
         </div>
 
         <div
-          className={`h-[63px] mt-[20px] text-center transition-all duration-300 ${
+          className={`h-[63px] mt-[10px] text-center transition-all duration-300 ${
             isVisible.button
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
