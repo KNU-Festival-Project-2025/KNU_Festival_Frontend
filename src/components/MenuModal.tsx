@@ -63,7 +63,7 @@ const handleLogoutClick = async () => {
       setIsAnimatingOut(false);
       onClose();
       if (callback) callback();
-    }, 100);
+    }, 300); // 애니메이션 시간을 300ms로 증가
   };
 
 useEffect(() => {
@@ -75,34 +75,77 @@ useEffect(() => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/30 z-40" onClick={() => handleClose()} />
+      <div 
+        className={`fixed inset-0 z-40 transition-all duration-300 ease-out ${
+          isAnimatingOut ? "bg-black/0" : "bg-black/30"
+        }`} 
+        onClick={() => handleClose()} 
+      />
       <div
         ref={modalRef}
-        className={`absolute top-12 right-4 w-56 rounded-2xl shadow-lg z-50 border border-gray-200 transform transition-all duration-100 ease-out ${
-          isAnimatingOut ? "opacity-0 scale-95 translate-y-2 pointer-events-none" : "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+        className={`absolute top-12 right-4 w-56 rounded-2xl shadow-lg z-50 border border-gray-200 transform transition-all duration-200 ease-out ${
+          isAnimatingOut 
+            ? "opacity-0 scale-95 translate-y-2 pointer-events-none" 
+            : "opacity-100 scale-100 translate-y-0 pointer-events-auto"
         }`}
-        style={{ backgroundColor: "#FFFAE0", transformOrigin: "top right", backfaceVisibility: "hidden", perspective: "1000px" }}
+        style={{ 
+          backgroundColor: "#FFFAE0", 
+          transformOrigin: "top right", 
+          backfaceVisibility: "hidden", 
+          perspective: "1000px",
+          animation: shouldRender && !isAnimatingOut 
+            ? 'modalSlideIn 0.3s ease-out forwards' 
+            : isAnimatingOut 
+            ? 'modalSlideOut 0.2s ease-in forwards'
+            : 'none'
+        }}
       >
         <div className="p-3">
           <div className="space-y-1">
             {menuItems.map((item, index) => (
-              <button key={index} onClick={() => handleMenuItemClick(item.path)} className="w-full text-center text-black text-base font-normal py-3 rounded-lg hover:bg-[#9CAA2CB8]">
+              <button 
+                key={index} 
+                onClick={() => handleMenuItemClick(item.path)} 
+                className="w-full text-center text-black text-base font-normal py-3 rounded-lg transition-all duration-200 ease-out hover:bg-[#9CAA2CB8] hover:scale-105 active:scale-95 active:bg-[#8A9A2A]"
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                  animation: shouldRender && !isAnimatingOut ? 'slideInFromRight 0.3s ease-out forwards' : 'none'
+                }}
+              >
                 {item.label}
               </button>
             ))}
-            <div className="w-full h-px bg-gray-300 my-4" />
-            <div className="flex flex-col items-center space-y-4">
-              <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
+            <div 
+              className="w-full h-px bg-gray-300 my-4 transition-all duration-300 ease-out"
+              style={{
+                animationDelay: '200ms',
+                animation: shouldRender && !isAnimatingOut ? 'fadeInUp 0.4s ease-out forwards' : 'none'
+              }}
+            />
+            <div 
+              className="flex flex-col items-center space-y-4 transition-all duration-300 ease-out"
+              style={{
+                animationDelay: '250ms',
+                animation: shouldRender && !isAnimatingOut ? 'fadeInUp 0.4s ease-out forwards' : 'none'
+              }}
+            >
+              <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center transition-all duration-200 ease-out hover:scale-110 hover:bg-gray-400">
                 <span className="text-gray-500 text-2xl">👤</span>
               </div>
               <div className="text-center space-y-1">
                 <div className="text-black text-base font-normal">{nickname || "게스트"}</div>
                 {nickname ? (
-                  <button onClick={handleLogoutClick} className="text-black text-sm hover:text-[#285100]">
+                  <button 
+                    onClick={handleLogoutClick} 
+                    className="text-black text-sm transition-all duration-200 ease-out hover:text-[#285100] hover:scale-105 active:scale-95"
+                  >
                     로그아웃
                   </button>
                 ) : (
-                  <button onClick={handleLoginClick} className="text-black text-sm hover:text-[#285100]">
+                  <button 
+                    onClick={handleLoginClick} 
+                    className="text-black text-sm transition-all duration-200 ease-out hover:text-[#285100] hover:scale-105 active:scale-95"
+                  >
                     로그인
                   </button>
                 )}
